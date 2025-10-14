@@ -840,7 +840,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23, 0, -159)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, -36)
 
 [node name="BigTree" parent="NavigationRegion3D" instance=ExtResource("3_i8b8k")]
-transform = Transform3D(0.241922, 0.970296, 0, -0.970296, 0.241922, 0, 0, 0, 1, 40, 0, -109)
+transform = Transform3D(1.0000002, 0, 0, 0, 1.0000002, 0, 0, 0, 1, 40, 0, -109)
 
 [node name="Boundary" type="StaticBody3D" parent="NavigationRegion3D"]
 
