@@ -1,0 +1,17 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://chjp4rqvqyq1k"]
+
+[resource]
+transparency = 1
+albedo_color = Color(0.0509804, 0.733333, 0.741176, 0.0823529)
+roughness = 0.0
+emission = Color(6.06447e-06, 0.993163, 0.62237, 1)
+emission_energy_multiplier = 0.05
+rim_tint = 0.53
+clearcoat = 0.85
+clearcoat_roughness = 0.1
+anisotropy = -1.0
+ao_light_affect = 0.2
+ao_texture_channel = 3
+subsurf_scatter_strength = 0.65
+backlight = Color(1, 1, 1, 1)
+proximity_fade_distance = 0.01

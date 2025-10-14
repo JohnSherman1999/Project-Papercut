@@ -1,0 +1,67 @@
+[gd_scene load_steps=4 format=3 uid="uid://cblxobj8a42yj"]
+
+[ext_resource type="Script" uid="uid://bvf5f0th0g8su" path="res://Scripts/MenuScripts/main_menu.gd" id="1_kkueb"]
+[ext_resource type="Texture2D" uid="uid://3apsp8a10arl" path="res://Assets/UI/paper2.jpg" id="2_n53t7"]
+[ext_resource type="FontFile" uid="uid://cd7h4g57f0ihg" path="res://Assets/UI/ShadowsIntoLight-Regular.ttf" id="3_akhsr"]
+
+[node name="Main menu" type="Node2D"]
+script = ExtResource("1_kkueb")
+
+[node name="Paper2" type="Sprite2D" parent="."]
+position = Vector2(576, 272)
+scale = Vector2(4.18909, 4.10929)
+texture = ExtResource("2_n53t7")
+
+[node name="button Mnager" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+
+[node name="Play" type="Button" parent="button Mnager"]
+modulate = Color(0.233411, 0.579805, 0.39075, 1)
+layout_mode = 0
+offset_left = 328.0
+offset_top = 176.0
+offset_right = 832.0
+offset_bottom = 328.0
+theme_override_font_sizes/font_size = 105
+text = "Play"
+flat = true
+
+[node name="Options" type="Button" parent="button Mnager"]
+modulate = Color(0.662942, 0.662121, 0, 1)
+layout_mode = 0
+offset_left = 376.0
+offset_top = 304.0
+offset_right = 785.0
+offset_bottom = 456.0
+theme_override_font_sizes/font_size = 105
+text = "Options"
+flat = true
+
+[node name="Quit" type="Button" parent="button Mnager"]
+modulate = Color(1, 0.2, 0.235294, 1)
+layout_mode = 0
+offset_left = 456.0
+offset_top = 440.0
+offset_right = 684.0
+offset_bottom = 592.0
+theme_override_font_sizes/font_size = 105
+text = "Quit"
+flat = true
+
+[node name="Label" type="Label" parent="."]
+modulate = Color(0.000113828, 0.000113828, 0.000113828, 1)
+offset_left = 40.0
+offset_top = -56.0
+offset_right = 1087.0
+offset_bottom = 266.0
+theme_override_fonts/font = ExtResource("3_akhsr")
+theme_override_font_sizes/font_size = 200
+text = "Paper Cuts"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="button Mnager/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="button Mnager/Quit" to="." method="_on_quit_pressed"]
