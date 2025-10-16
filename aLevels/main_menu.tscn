@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://cblxobj8a42yj"]
+[gd_scene load_steps=5 format=3 uid="uid://cblxobj8a42yj"]
 
 [ext_resource type="Script" uid="uid://bvf5f0th0g8su" path="res://Scripts/MenuScripts/main_menu.gd" id="1_kkueb"]
 [ext_resource type="Texture2D" uid="uid://3apsp8a10arl" path="res://Assets/UI/paper2.jpg" id="2_n53t7"]
 [ext_resource type="FontFile" uid="uid://cd7h4g57f0ihg" path="res://Assets/UI/ShadowsIntoLight-Regular.ttf" id="3_akhsr"]
+[ext_resource type="AudioStream" uid="uid://bt61c301pqyf1" path="res://Scenes/Music/PauseMenu - Jasper Byrne .mp3" id="4_n53t7"]
 
 [node name="Main menu" type="Node2D"]
 script = ExtResource("1_kkueb")
@@ -62,6 +63,10 @@ theme_override_font_sizes/font_size = 200
 text = "Paper Cuts"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Menu Music" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_n53t7")
+autoplay = true
 
 [connection signal="pressed" from="button Mnager/Play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="button Mnager/Quit" to="." method="_on_quit_pressed"]
