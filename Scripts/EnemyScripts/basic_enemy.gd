@@ -73,10 +73,12 @@ func update_path_to_player() -> void:
 func take_damage(amount: float) -> void:
 	health -= amount
 	if health <= 0:
+		
 		die()
 
 func die() -> void:
 	queue_free()
+
 
 func apply_knockback(dir: Vector3, force: float) -> void:
 	knockback_velocity = dir * force
@@ -88,6 +90,8 @@ func _on_detection_area_body_entered(body: Node3D) -> void:
 		await get_tree().physics_frame  # Ensure physics/nav sync
 		update_path_to_player()
 		animation_player.play("Run")
+		$"Wolf walk".play()
+		$"Wolf Growl".play()
 
 func _on_detection_area_body_exited(body: Node3D) -> void:
 	if body == player:

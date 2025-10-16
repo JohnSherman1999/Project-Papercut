@@ -1,6 +1,9 @@
-[gd_scene load_steps=11 format=4 uid="uid://bm5isa31p30f"]
+[gd_scene load_steps=14 format=4 uid="uid://bm5isa31p30f"]
 
 [ext_resource type="Script" uid="uid://bjef1mca215lk" path="res://Scripts/EnemyScripts/basic_enemy.gd" id="1_rjn58"]
+[ext_resource type="AudioStream" uid="uid://fsn5qoju48a1" path="res://Assets/Sounds player/Walking.mp3" id="2_ec5py"]
+[ext_resource type="AudioStream" uid="uid://b4yno343xci8f" path="res://Assets/Sounds Wolf Enemy/growling.mp3" id="3_gp78h"]
+[ext_resource type="AudioStream" uid="uid://b2chk2gnq2x7" path="res://Assets/Sounds Wolf Enemy/hurt wolf.mp3" id="4_ancrs"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_yfw4q"]
 height = 2.2
@@ -1493,6 +1496,15 @@ root_node = NodePath("../Wolf")
 libraries = {
 &"": SubResource("AnimationLibrary_e3r4j")
 }
+
+[node name="Wolf walk" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("2_ec5py")
+
+[node name="Wolf Growl" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("3_gp78h")
+
+[node name="Wolf Hurt" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("4_ancrs")
 
 [connection signal="body_entered" from="detection_area" to="." method="_on_detection_area_body_entered"]
 [connection signal="body_exited" from="detection_area" to="." method="_on_detection_area_body_exited"]

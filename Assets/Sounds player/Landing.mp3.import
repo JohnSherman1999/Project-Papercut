@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dw7ymvqalu2fh"
+path="res://.godot/imported/Landing.mp3-536cbd9035034d3b5616482b2b07bcaf.mp3str"
+
+[deps]
+
+source_file="res://Assets/Sounds player/Landing.mp3"
+dest_files=["res://.godot/imported/Landing.mp3-536cbd9035034d3b5616482b2b07bcaf.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
