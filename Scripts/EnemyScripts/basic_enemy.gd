@@ -71,6 +71,7 @@ func update_path_to_player() -> void:
 		nav_agent.target_position = player.global_position
 
 func take_damage(amount: float) -> void:
+	$"Wolf Hurt".play()
 	health -= amount
 	if health <= 0:
 		
@@ -82,6 +83,7 @@ func die() -> void:
 
 func apply_knockback(dir: Vector3, force: float) -> void:
 	knockback_velocity = dir * force
+	
 
 # Detection signals (connect in editor)
 func _on_detection_area_body_entered(body: Node3D) -> void:
