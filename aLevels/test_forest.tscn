@@ -1,4 +1,4 @@
-[gd_scene load_steps=102 format=3 uid="uid://b5s3qyvojk7f5"]
+[gd_scene load_steps=110 format=3 uid="uid://b5s3qyvojk7f5"]
 
 [ext_resource type="PackedScene" uid="uid://cccvupibs1qf5" path="res://Scenes/PlayerScenes/player.tscn" id="1_2dhm0"]
 [ext_resource type="PackedScene" uid="uid://ka1eu4fn3hru" path="res://Scenes/EnvironmentalScenes/tree_body.tscn" id="1_nvshm"]
@@ -348,6 +348,30 @@ albedo_color = Color(0.282614, 0.175079, 0.0411941, 1)
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_16y1f"]
 points = PackedVector3Array(5, 1, 1, 5, 1, -1, -5, 1, 1, 5, -1, 1, 5, -1, -1, -5, 1, -1, -5, -1, 1, -5, -1, -1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_5rr4u"]
+size = Vector3(1, 20, 40)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_dnbkq"]
+points = PackedVector3Array(-0.5, -10, -20, 0.5, -10, -20, -0.5, -10, 20, -0.5, 10, -20, 0.5, 10, -20, 0.5, -10, 20, -0.5, 10, 20, 0.5, 10, 20)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_fwqni"]
+points = PackedVector3Array(-0.5, -10, -20, 0.5, -10, -20, -0.5, -10, 20, -0.5, 10, -20, 0.5, 10, -20, 0.5, -10, 20, -0.5, 10, 20, 0.5, 10, 20)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_s7owp"]
+points = PackedVector3Array(-0.5, -10, -20, 0.5, -10, -20, -0.5, -10, 20, -0.5, 10, -20, 0.5, 10, -20, 0.5, -10, 20, -0.5, 10, 20, 0.5, 10, 20)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_6evxh"]
+points = PackedVector3Array(-0.5, -10, -20, 0.5, -10, -20, -0.5, -10, 20, -0.5, 10, -20, 0.5, 10, -20, 0.5, -10, 20, -0.5, 10, 20, 0.5, 10, 20)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_qq0hn"]
+points = PackedVector3Array(-0.5, -10, -20, 0.5, -10, -20, -0.5, -10, 20, -0.5, 10, -20, 0.5, 10, -20, 0.5, -10, 20, -0.5, 10, 20, 0.5, 10, 20)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_7is3k"]
+points = PackedVector3Array(-0.5, -10, -20, 0.5, -10, -20, -0.5, -10, 20, -0.5, 10, -20, 0.5, 10, -20, 0.5, -10, 20, -0.5, 10, 20, 0.5, 10, 20)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3ket0"]
+size = Vector3(5, 20, 45)
 
 [node name="TestForest" type="Node3D"]
 
@@ -1302,3 +1326,75 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -76, 0, 116)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -90, 0, -16)
 
 [node name="Pickups" type="Node3D" parent="."]
+
+[node name="StageManager" type="Node3D" parent="."]
+
+[node name="StageBorders" type="StaticBody3D" parent="StageManager"]
+
+[node name="BorderWalll1" type="MeshInstance3D" parent="StageManager/StageBorders"]
+transform = Transform3D(0.89664876, 0, 0.44274256, 0, 1, 0, -0.44274256, 0, 0.89664876, 66.394, 10, 120.975)
+material_override = ExtResource("3_lqmmi")
+mesh = SubResource("BoxMesh_5rr4u")
+
+[node name="Col_border1" type="CollisionShape3D" parent="StageManager/StageBorders"]
+transform = Transform3D(0.89664876, 0, 0.44274256, 0, 1, 0, -0.44274256, 0, 0.89664876, 66.394, 10, 120.975)
+shape = SubResource("ConvexPolygonShape3D_dnbkq")
+disabled = true
+
+[node name="BorderWalll2" type="MeshInstance3D" parent="StageManager/StageBorders"]
+transform = Transform3D(0.93866754, 0, -0.3448231, 0, 1, 0, 0.3448231, 0, 0.93866754, -39.821564, 10, 124.256676)
+material_override = ExtResource("3_lqmmi")
+mesh = SubResource("BoxMesh_5rr4u")
+
+[node name="Col_border2" type="CollisionShape3D" parent="StageManager/StageBorders"]
+transform = Transform3D(0.93866754, 0, -0.3448231, 0, 1, 0, 0.3448231, 0, 0.93866754, -39.821564, 10, 124.256676)
+shape = SubResource("ConvexPolygonShape3D_fwqni")
+disabled = true
+
+[node name="BorderWalll3" type="MeshInstance3D" parent="StageManager/StageBorders"]
+transform = Transform3D(-0.11238808, 0, 0.9936641, 0, 1, 0, -0.9936641, 0, -0.11238808, -63.159515, 10, 90.03445)
+material_override = ExtResource("3_lqmmi")
+mesh = SubResource("BoxMesh_5rr4u")
+
+[node name="Col_border3" type="CollisionShape3D" parent="StageManager/StageBorders"]
+transform = Transform3D(-0.11238808, 0, 0.9936641, 0, 1, 0, -0.9936641, 0, -0.11238808, -63.159515, 10, 90.03445)
+shape = SubResource("ConvexPolygonShape3D_s7owp")
+disabled = true
+
+[node name="BorderWalll4" type="MeshInstance3D" parent="StageManager/StageBorders"]
+transform = Transform3D(0.0038222894, 0, 0.9999924, 0, 1, 0, -0.9999924, 0, 0.0038222894, -63.159515, 10, 32.039177)
+material_override = ExtResource("3_lqmmi")
+mesh = SubResource("BoxMesh_5rr4u")
+
+[node name="Col_border4" type="CollisionShape3D" parent="StageManager/StageBorders"]
+transform = Transform3D(0.0038222894, 0, 0.9999924, 0, 1, 0, -0.9999924, 0, 0.0038222894, -63.159515, 10, 32.039177)
+shape = SubResource("ConvexPolygonShape3D_6evxh")
+disabled = true
+
+[node name="BorderWalll5" type="MeshInstance3D" parent="StageManager/StageBorders"]
+transform = Transform3D(0.7767941, 0, 0.6297541, 0, 1, 0, -0.6297541, 0, 0.7767941, -50.33635, 10, -28.238136)
+material_override = ExtResource("3_lqmmi")
+mesh = SubResource("BoxMesh_5rr4u")
+
+[node name="Col_border5" type="CollisionShape3D" parent="StageManager/StageBorders"]
+transform = Transform3D(0.7767941, 0, 0.6297541, 0, 1, 0, -0.6297541, 0, 0.7767941, -50.33635, 10, -28.238136)
+shape = SubResource("ConvexPolygonShape3D_qq0hn")
+disabled = true
+
+[node name="BorderWalll6" type="MeshInstance3D" parent="StageManager/StageBorders"]
+transform = Transform3D(0.7767941, 0, 0.6297541, 0, 1, 0, -0.6297541, 0, 0.7767941, -18.646929, 10, -50.60385)
+material_override = ExtResource("3_lqmmi")
+mesh = SubResource("BoxMesh_5rr4u")
+
+[node name="Col_border6" type="CollisionShape3D" parent="StageManager/StageBorders"]
+transform = Transform3D(0.7767941, 0, 0.6297541, 0, 1, 0, -0.6297541, 0, 0.7767941, -18.646929, 10, -50.60385)
+shape = SubResource("ConvexPolygonShape3D_7is3k")
+disabled = true
+
+[node name="StageMonitor1" type="Area3D" parent="StageManager"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 70.3278, 0, 117.15261)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StageManager/StageMonitor1"]
+transform = Transform3D(0.8958902, 0, 0.4442756, 0, 1, 0, -0.4442756, 0, 0.8958902, 0, 10, 0)
+shape = SubResource("BoxShape3D_3ket0")
+debug_color = Color(0.96980375, 0, 0.46209037, 0.41960785)
