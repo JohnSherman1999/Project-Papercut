@@ -77,10 +77,13 @@ var hit_stop_timer = 0.0
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 
+@onready var pause_menu = $"Pause Menu"
+
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	health = max_health  # Initialize health
 	$Player_Model.hide() #PLACE HOLD FOR NOW (PLAYER MODEL WAS CLIPPING CAMERA)
+	pause_menu.visible = false
 
 # Health function (from John's)
 func add_health(value: float) -> void:
@@ -120,6 +123,11 @@ func _physics_process(delta: float) -> void:
 			velocity.y = -POUND_SPEED  # Lock downward speed
 		else:
 			velocity.y -= gravity * delta
+
+		if Input.is_action_pressed("pause"):
+			print("test")
+			pause_menu.visible = true
+			get_tree().paused = pause_menu.visible
 
 	# Handle pound buffer timer
 	if pound_buffer_timer > 0:
@@ -233,6 +241,9 @@ func _physics_process(delta: float) -> void:
 		camera.v_offset = lerp(camera.v_offset, -0.75, delta * 10.0)
 	else:
 		camera.v_offset = lerp(camera.v_offset, 0.0, delta * 10.0)
+
+
+		
 
 	# Movement lerp (proto style, after slide for no override)
 	if (is_on_floor() or wall_running) and not is_sliding and not is_dashing:

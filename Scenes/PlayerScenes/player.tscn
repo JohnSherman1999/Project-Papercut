@@ -2,11 +2,11 @@
 
 [ext_resource type="Script" uid="uid://dq0cghj0gcpmf" path="res://Scripts/PlayerScripts/movement.gd" id="1_vn1c7"]
 [ext_resource type="Texture2D" uid="uid://w2b2xll5icyq" path="res://Assets/UI/crosshair.png" id="2_44dyf"]
-[ext_resource type="AudioStream" uid="uid://fsn5qoju48a1" path="res://Assets/Sounds/Walking.mp3" id="3_2oab2"]
-[ext_resource type="AudioStream" uid="uid://4daynpqj5gx0" path="res://Assets/Sounds/Jump.mp3" id="4_sn0nf"]
-[ext_resource type="AudioStream" uid="uid://bospx2kusgb5b" path="res://Assets/Sounds/Slide 2.mp3" id="5_c45ss"]
-[ext_resource type="AudioStream" uid="uid://csj6o2eqaq2m7" path="res://Assets/Sounds/Slice dash.mp3" id="6_c45ss"]
-[ext_resource type="AudioStream" uid="uid://btbcnuce17xcj" path="res://Assets/Sounds/Ground Pound.mp3" id="7_acd72"]
+[ext_resource type="AudioStream" uid="uid://fsn5qoju48a1" path="res://Assets/Sounds player/Walking.mp3" id="3_2oab2"]
+[ext_resource type="AudioStream" uid="uid://4daynpqj5gx0" path="res://Assets/Sounds player/Jump.mp3" id="4_sn0nf"]
+[ext_resource type="AudioStream" uid="uid://bospx2kusgb5b" path="res://Assets/Sounds player/Slide 2.mp3" id="5_c45ss"]
+[ext_resource type="AudioStream" uid="uid://csj6o2eqaq2m7" path="res://Assets/Sounds player/Slice dash.mp3" id="6_c45ss"]
+[ext_resource type="AudioStream" uid="uid://btbcnuce17xcj" path="res://Assets/Sounds player/Ground Pound.mp3" id="7_acd72"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_s4odt"]
 
@@ -1477,5 +1477,30 @@ root_node = NodePath("../Player_Model")
 libraries = {
 &"": SubResource("AnimationLibrary_xbqug")
 }
+
+[node name="Pause Menu" type="VBoxContainer" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -576.0
+offset_right = 576.0
+offset_bottom = 509.0
+grow_horizontal = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Resume" type="Button" parent="Pause Menu"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 64
+text = "Resume"
+
+[node name="Quit" type="Button" parent="Pause Menu"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 64
+text = "Quit"
 
 [connection signal="body_entered" from="dash_area" to="." method="_on_dash_area_body_entered"]

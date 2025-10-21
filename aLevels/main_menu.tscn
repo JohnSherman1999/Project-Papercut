@@ -3,9 +3,10 @@
 [ext_resource type="Script" uid="uid://bvf5f0th0g8su" path="res://Scripts/MenuScripts/main_menu.gd" id="1_kkueb"]
 [ext_resource type="Texture2D" uid="uid://3apsp8a10arl" path="res://Assets/UI/paper2.jpg" id="2_n53t7"]
 [ext_resource type="FontFile" uid="uid://cd7h4g57f0ihg" path="res://Assets/UI/ShadowsIntoLight-Regular.ttf" id="3_akhsr"]
-[ext_resource type="AudioStream" uid="uid://bt61c301pqyf1" path="res://Scenes/Music/PauseMenu - Jasper Byrne .mp3" id="4_n53t7"]
+[ext_resource type="AudioStream" uid="uid://dyntg0r1n8y7y" path="res://aLevels/Bastion Soundtrack - Brusher Patrol.mp3" id="4_n53t7"]
 
 [node name="Main menu" type="Node2D"]
+process_mode = 3
 script = ExtResource("1_kkueb")
 
 [node name="Paper2" type="Sprite2D" parent="."]
