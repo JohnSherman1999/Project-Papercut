@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://csof3e6kh7cjx"
+path="res://.godot/imported/Cardio Cyberpunk Game Workout Club Techno by Infraction [No Copyright Music]  Dimensions.mp3-e74664cb74609439ef1ff7b4a48903c4.mp3str"
+
+[deps]
+
+source_file="res://Scenes/Music/Cardio Cyberpunk Game Workout Club Techno by Infraction [No Copyright Music]  Dimensions.mp3"
+dest_files=["res://.godot/imported/Cardio Cyberpunk Game Workout Club Techno by Infraction [No Copyright Music]  Dimensions.mp3-e74664cb74609439ef1ff7b4a48903c4.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

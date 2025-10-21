@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dy7031g7fj7fr"
+path="res://.godot/imported/Sport Trap Dark Beat by Infraction [No Copyright Music]  Brutal Ethnic.mp3-2a6e7e97eb01344cff4e4bfd1824359e.mp3str"
+
+[deps]
+
+source_file="res://Scenes/Music/Sport Trap Dark Beat by Infraction [No Copyright Music]  Brutal Ethnic.mp3"
+dest_files=["res://.godot/imported/Sport Trap Dark Beat by Infraction [No Copyright Music]  Brutal Ethnic.mp3-2a6e7e97eb01344cff4e4bfd1824359e.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

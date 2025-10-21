@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cjqh1o2ql4dda"
+path="res://.godot/imported/Cinematic Synthwave Futuristic by Infraction [No Copyright Music]  Dreamwalker.mp3-d4824dab23de315d36502c12d043eca3.mp3str"
+
+[deps]
+
+source_file="res://Scenes/Music/Cinematic Synthwave Futuristic by Infraction [No Copyright Music]  Dreamwalker.mp3"
+dest_files=["res://.godot/imported/Cinematic Synthwave Futuristic by Infraction [No Copyright Music]  Dreamwalker.mp3-d4824dab23de315d36502c12d043eca3.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

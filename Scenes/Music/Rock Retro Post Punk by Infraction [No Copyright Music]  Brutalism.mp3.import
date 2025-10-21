@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bfp34c3f1stn3"
+path="res://.godot/imported/Rock Retro Post Punk by Infraction [No Copyright Music]  Brutalism.mp3-8a4fd86255bc91f3a3d8d48098e9ff43.mp3str"
+
+[deps]
+
+source_file="res://Scenes/Music/Rock Retro Post Punk by Infraction [No Copyright Music]  Brutalism.mp3"
+dest_files=["res://.godot/imported/Rock Retro Post Punk by Infraction [No Copyright Music]  Brutalism.mp3-8a4fd86255bc91f3a3d8d48098e9ff43.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

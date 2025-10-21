@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bjq4assqtma3u"
+path="res://.godot/imported/Journey Soundtrack (Austin Wintory) - 07. The Road of Trials.mp3-fe4c58524bbc36a35b23e750e5af4e4e.mp3str"
+
+[deps]
+
+source_file="res://Scenes/Music/Journey Soundtrack (Austin Wintory) - 07. The Road of Trials.mp3"
+dest_files=["res://.godot/imported/Journey Soundtrack (Austin Wintory) - 07. The Road of Trials.mp3-fe4c58524bbc36a35b23e750e5af4e4e.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
