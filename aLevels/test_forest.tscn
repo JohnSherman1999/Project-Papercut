@@ -394,6 +394,7 @@ directional_shadow_max_distance = 150.0
 sky_mode = 1
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.115753174, 0, 0.067108154)
 navigation_mesh = SubResource("NavigationMesh_t1usa")
 
 [node name="Floor" type="StaticBody3D" parent="NavigationRegion3D"]
