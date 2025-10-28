@@ -80,7 +80,7 @@ var hit_stop_timer = 0.0
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	health = max_health  # Initialize health
-	$Player_Model.hide() #PLACE HOLD FOR NOW (PLAYER MODEL WAS CLIPPING CAMERA)
+
 
 # Health function (from John's)
 func add_health(value: float) -> void:
@@ -261,6 +261,7 @@ func _physics_process(delta: float) -> void:
 			var collider = target_ray.get_collider()
 			if collider and collider is Enemy:
 				$slice.play()  # Audio from John
+				animation_player.play("Slash")
 				is_dashing = true
 				dash_timer = DASH_DURATION
 				dash_area.monitoring = true

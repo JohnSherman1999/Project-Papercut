@@ -74,7 +74,6 @@ func take_damage(amount: float) -> void:
 	$"Wolf Hurt".play()
 	health -= amount
 	if health <= 0:
-		
 		die()
 
 func die() -> void:

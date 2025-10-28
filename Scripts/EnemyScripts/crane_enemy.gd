@@ -109,6 +109,11 @@ func _on_attack_timer_timeout() -> void:
 		start_attack()
 		animation_player.play("Attack")
 
+func take_damage(amount: float) -> void:
+	health -= amount
+	if health <= 0:
+		die()
+
 func _on_detection_area_body_entered(body: Node3D) -> void:
 	if body == player:
 		player_in_range = true
