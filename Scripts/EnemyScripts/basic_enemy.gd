@@ -57,13 +57,11 @@ func _physics_process(delta: float) -> void:
 	else:
 		velocity.x = 0
 		velocity.z = 0
-   
 	if knockback_velocity.length() > 0.1:
 		velocity += knockback_velocity
 		knockback_velocity *= 0.9
 	else:
 		knockback_velocity = Vector3.ZERO
-   
 	move_and_slide()
 
 func update_path_to_player() -> void:
@@ -74,16 +72,13 @@ func take_damage(amount: float) -> void:
 	$"Wolf Hurt".play()
 	health -= amount
 	if health <= 0:
-		
 		die()
 
 func die() -> void:
 	queue_free()
 
-
 func apply_knockback(dir: Vector3, force: float) -> void:
 	knockback_velocity = dir * force
-	
 
 # Detection signals (connect in editor)
 func _on_detection_area_body_entered(body: Node3D) -> void:
