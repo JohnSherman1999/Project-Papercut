@@ -1402,5 +1402,5 @@ debug_color = Color(0.96980375, 0, 0.46209037, 0.41960785)
 
 [node name="Soundtrack" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("10_chonr")
-volume_db = 29.515
+volume_db = 3.107
 autoplay = true
