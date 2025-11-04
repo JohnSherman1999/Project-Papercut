@@ -1,4 +1,4 @@
-[gd_scene load_steps=111 format=3 uid="uid://b5s3qyvojk7f5"]
+[gd_scene load_steps=112 format=3 uid="uid://c80nr1o3ld0dy"]
 
 [ext_resource type="PackedScene" uid="uid://cccvupibs1qf5" path="res://Scenes/PlayerScenes/player.tscn" id="1_2dhm0"]
 [ext_resource type="PackedScene" uid="uid://ka1eu4fn3hru" path="res://Scenes/EnvironmentalScenes/tree_body.tscn" id="1_nvshm"]
@@ -9,7 +9,7 @@
 [ext_resource type="ArrayMesh" uid="uid://bh5xp164w02ts" path="res://Assets/tree.res" id="6_vwc7n"]
 [ext_resource type="PackedScene" uid="uid://bm5isa31p30f" path="res://Scenes/EnemyScenes/basic_enemy.tscn" id="8_3ket0"]
 [ext_resource type="PackedScene" uid="uid://conx3yh8solmb" path="res://Scenes/EnemyScenes/crane_enemy.tscn" id="9_chonr"]
-[ext_resource type="AudioStream" uid="uid://xh5vllf8r27x" path="res://Scenes/Music/Cyberpunk Stream Music by Infraction [No Copyright Music]  Virtual Reality.mp3" id="10_chonr"]
+[ext_resource type="Script" uid="uid://b1gj5yqker4hd" path="res://Scripts/ManagerScripts/room_manager.gd" id="10_chonr"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_2dhm0"]
 sky_top_color = Color(0.701961, 0, 1, 1)
@@ -350,11 +350,17 @@ albedo_color = Color(0.282614, 0.175079, 0.0411941, 1)
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_16y1f"]
 points = PackedVector3Array(5, 1, 1, 5, 1, -1, -5, 1, 1, 5, -1, 1, 5, -1, -1, -5, 1, -1, -5, -1, 1, -5, -1, -1)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_3ket0"]
+size = Vector3(5, 20, 45)
+
 [sub_resource type="BoxMesh" id="BoxMesh_5rr4u"]
 size = Vector3(1, 20, 40)
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_dnbkq"]
 points = PackedVector3Array(-0.5, -10, -20, 0.5, -10, -20, -0.5, -10, 20, -0.5, 10, -20, 0.5, 10, -20, 0.5, -10, 20, -0.5, 10, 20, 0.5, 10, 20)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_chonr"]
+size = Vector3(10, 1, 10)
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_fwqni"]
 points = PackedVector3Array(-0.5, -10, -20, 0.5, -10, -20, -0.5, -10, 20, -0.5, 10, -20, 0.5, 10, -20, 0.5, -10, 20, -0.5, 10, 20, 0.5, 10, 20)
@@ -370,9 +376,6 @@ points = PackedVector3Array(-0.5, -10, -20, 0.5, -10, -20, -0.5, -10, 20, -0.5, 
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_7is3k"]
 points = PackedVector3Array(-0.5, -10, -20, 0.5, -10, -20, -0.5, -10, 20, -0.5, 10, -20, 0.5, 10, -20, 0.5, -10, 20, -0.5, 10, 20, 0.5, 10, 20)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_3ket0"]
-size = Vector3(5, 20, 45)
 
 [node name="TestForest" type="Node3D"]
 
@@ -391,7 +394,6 @@ directional_shadow_max_distance = 150.0
 sky_mode = 1
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.115753174, 0, 0.067108154)
 navigation_mesh = SubResource("NavigationMesh_t1usa")
 
 [node name="Floor" type="StaticBody3D" parent="NavigationRegion3D"]
@@ -1289,12 +1291,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 0, 138)
 [node name="basic_enemy4" parent="Enemies_Ground" instance=ExtResource("8_3ket0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 62, 0, 120)
 
-[node name="basic_enemy5" parent="Enemies_Ground" instance=ExtResource("8_3ket0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -61, 0, 120)
-
-[node name="basic_enemy6" parent="Enemies_Ground" instance=ExtResource("8_3ket0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -61, 0, 108)
-
 [node name="basic_enemy7" parent="Enemies_Ground" instance=ExtResource("8_3ket0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -61, 0, 58)
 
@@ -1321,87 +1317,187 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 95, 0, 85)
 [node name="crane_enemy4" parent="Enemies_Flying" instance=ExtResource("9_chonr")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 95, 0, 116)
 
-[node name="crane_enemy5" parent="Enemies_Flying" instance=ExtResource("9_chonr")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -76, 0, 116)
-
 [node name="crane_enemy6" parent="Enemies_Flying" instance=ExtResource("9_chonr")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -90, 0, -16)
 
 [node name="Pickups" type="Node3D" parent="."]
 
-[node name="StageManager" type="Node3D" parent="."]
+[node name="RoomManager" type="Node3D" parent="."]
+script = ExtResource("10_chonr")
 
-[node name="StageBorders" type="StaticBody3D" parent="StageManager"]
+[node name="BonusRoom1" type="Node3D" parent="RoomManager"]
 
-[node name="BorderWalll1" type="MeshInstance3D" parent="StageManager/StageBorders"]
-transform = Transform3D(0.89664876, 0, 0.44274256, 0, 1, 0, -0.44274256, 0, 0.89664876, 66.394, 10, 120.975)
-material_override = ExtResource("3_lqmmi")
-mesh = SubResource("BoxMesh_5rr4u")
-
-[node name="Col_border1" type="CollisionShape3D" parent="StageManager/StageBorders"]
-transform = Transform3D(0.89664876, 0, 0.44274256, 0, 1, 0, -0.44274256, 0, 0.89664876, 66.394, 10, 120.975)
-shape = SubResource("ConvexPolygonShape3D_dnbkq")
-disabled = true
-
-[node name="BorderWalll2" type="MeshInstance3D" parent="StageManager/StageBorders"]
-transform = Transform3D(0.93866754, 0, -0.3448231, 0, 1, 0, 0.3448231, 0, 0.93866754, -39.821564, 10, 124.256676)
-material_override = ExtResource("3_lqmmi")
-mesh = SubResource("BoxMesh_5rr4u")
-
-[node name="Col_border2" type="CollisionShape3D" parent="StageManager/StageBorders"]
-transform = Transform3D(0.93866754, 0, -0.3448231, 0, 1, 0, 0.3448231, 0, 0.93866754, -39.821564, 10, 124.256676)
-shape = SubResource("ConvexPolygonShape3D_fwqni")
-disabled = true
-
-[node name="BorderWalll3" type="MeshInstance3D" parent="StageManager/StageBorders"]
-transform = Transform3D(-0.11238808, 0, 0.9936641, 0, 1, 0, -0.9936641, 0, -0.11238808, -63.159515, 10, 90.03445)
-material_override = ExtResource("3_lqmmi")
-mesh = SubResource("BoxMesh_5rr4u")
-
-[node name="Col_border3" type="CollisionShape3D" parent="StageManager/StageBorders"]
-transform = Transform3D(-0.11238808, 0, 0.9936641, 0, 1, 0, -0.9936641, 0, -0.11238808, -63.159515, 10, 90.03445)
-shape = SubResource("ConvexPolygonShape3D_s7owp")
-disabled = true
-
-[node name="BorderWalll4" type="MeshInstance3D" parent="StageManager/StageBorders"]
-transform = Transform3D(0.0038222894, 0, 0.9999924, 0, 1, 0, -0.9999924, 0, 0.0038222894, -63.159515, 10, 32.039177)
-material_override = ExtResource("3_lqmmi")
-mesh = SubResource("BoxMesh_5rr4u")
-
-[node name="Col_border4" type="CollisionShape3D" parent="StageManager/StageBorders"]
-transform = Transform3D(0.0038222894, 0, 0.9999924, 0, 1, 0, -0.9999924, 0, 0.0038222894, -63.159515, 10, 32.039177)
-shape = SubResource("ConvexPolygonShape3D_6evxh")
-disabled = true
-
-[node name="BorderWalll5" type="MeshInstance3D" parent="StageManager/StageBorders"]
-transform = Transform3D(0.7767941, 0, 0.6297541, 0, 1, 0, -0.6297541, 0, 0.7767941, -50.33635, 10, -28.238136)
-material_override = ExtResource("3_lqmmi")
-mesh = SubResource("BoxMesh_5rr4u")
-
-[node name="Col_border5" type="CollisionShape3D" parent="StageManager/StageBorders"]
-transform = Transform3D(0.7767941, 0, 0.6297541, 0, 1, 0, -0.6297541, 0, 0.7767941, -50.33635, 10, -28.238136)
-shape = SubResource("ConvexPolygonShape3D_qq0hn")
-disabled = true
-
-[node name="BorderWalll6" type="MeshInstance3D" parent="StageManager/StageBorders"]
-transform = Transform3D(0.7767941, 0, 0.6297541, 0, 1, 0, -0.6297541, 0, 0.7767941, -18.646929, 10, -50.60385)
-material_override = ExtResource("3_lqmmi")
-mesh = SubResource("BoxMesh_5rr4u")
-
-[node name="Col_border6" type="CollisionShape3D" parent="StageManager/StageBorders"]
-transform = Transform3D(0.7767941, 0, 0.6297541, 0, 1, 0, -0.6297541, 0, 0.7767941, -18.646929, 10, -50.60385)
-shape = SubResource("ConvexPolygonShape3D_7is3k")
-disabled = true
-
-[node name="StageMonitor1" type="Area3D" parent="StageManager"]
+[node name="DetectionArea" type="Area3D" parent="RoomManager/BonusRoom1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 70.3278, 0, 117.15261)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StageManager/StageMonitor1"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RoomManager/BonusRoom1/DetectionArea"]
 transform = Transform3D(0.8958902, 0, 0.4442756, 0, 1, 0, -0.4442756, 0, 0.8958902, 0, 10, 0)
 shape = SubResource("BoxShape3D_3ket0")
 debug_color = Color(0.96980375, 0, 0.46209037, 0.41960785)
 
-[node name="Soundtrack" type="AudioStreamPlayer3D" parent="."]
-stream = ExtResource("10_chonr")
-volume_db = 3.107
-autoplay = true
+[node name="Barrier" type="StaticBody3D" parent="RoomManager/BonusRoom1"]
+
+[node name="BorderWalll1" type="MeshInstance3D" parent="RoomManager/BonusRoom1/Barrier"]
+transform = Transform3D(0.89664876, 0, 0.44274256, 0, 1, 0, -0.44274256, 0, 0.89664876, 66.394, 10, 120.975)
+material_override = ExtResource("3_lqmmi")
+mesh = SubResource("BoxMesh_5rr4u")
+skeleton = NodePath("")
+
+[node name="Col_border1" type="CollisionShape3D" parent="RoomManager/BonusRoom1/Barrier"]
+transform = Transform3D(0.89664876, 0, 0.44274256, 0, 1, 0, -0.44274256, 0, 0.89664876, 66.394, 10, 120.975)
+shape = SubResource("ConvexPolygonShape3D_dnbkq")
+disabled = true
+
+[node name="SpawnPoints" type="Node3D" parent="RoomManager/BonusRoom1"]
+
+[node name="F_SpawnPoint1" type="Marker3D" parent="RoomManager/BonusRoom1/SpawnPoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 94.23261, 0, 84.67254)
+
+[node name="F_SpawnPoint2" type="Marker3D" parent="RoomManager/BonusRoom1/SpawnPoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 72.88032, 0, 84.67254)
+
+[node name="F_SpawnPoint3" type="Marker3D" parent="RoomManager/BonusRoom1/SpawnPoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 94.79943, 0, 114.29935)
+
+[node name="InteractArea" type="Area3D" parent="RoomManager/BonusRoom1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 61.54078, 0, 122.36048)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RoomManager/BonusRoom1/InteractArea"]
+transform = Transform3D(0.88706726, 0, 0.46164024, 0, 1, 0, -0.46164024, 0, 0.88706726, -0.801, 0.5, -0.209)
+shape = SubResource("BoxShape3D_chonr")
+
+[node name="Room1" type="Node3D" parent="RoomManager"]
+
+[node name="DetectionArea" type="Area3D" parent="RoomManager/Room1"]
+transform = Transform3D(0.67113847, 0, -0.7413319, 0, 1, 0, 0.7413319, 0, 0.67113847, -43.579185, 0, 122.19713)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RoomManager/Room1/DetectionArea"]
+transform = Transform3D(0.8958902, 0, 0.4442756, 0, 1, 0, -0.4442756, 0, 0.8958902, 0, 10, 0)
+shape = SubResource("BoxShape3D_3ket0")
+debug_color = Color(0.96980375, 0, 0.46209037, 0.41960785)
+
+[node name="Barrier" type="StaticBody3D" parent="RoomManager/Room1"]
+
+[node name="BorderWalll2" type="MeshInstance3D" parent="RoomManager/Room1/Barrier"]
+transform = Transform3D(0.93866754, 0, -0.3448231, 0, 1, 0, 0.3448231, 0, 0.93866754, -39.821564, 10, 124.256676)
+material_override = ExtResource("3_lqmmi")
+mesh = SubResource("BoxMesh_5rr4u")
+skeleton = NodePath("")
+
+[node name="Col_border2" type="CollisionShape3D" parent="RoomManager/Room1/Barrier"]
+transform = Transform3D(0.93866754, 0, -0.3448231, 0, 1, 0, 0.3448231, 0, 0.93866754, -39.821564, 10, 124.256676)
+shape = SubResource("ConvexPolygonShape3D_fwqni")
+disabled = true
+
+[node name="BorderWalll3" type="MeshInstance3D" parent="RoomManager/Room1/Barrier"]
+transform = Transform3D(-0.11238808, 0, 0.9936641, 0, 1, 0, -0.9936641, 0, -0.11238808, -63.159515, 10, 90.03445)
+material_override = ExtResource("3_lqmmi")
+mesh = SubResource("BoxMesh_5rr4u")
+skeleton = NodePath("")
+
+[node name="Col_border3" type="CollisionShape3D" parent="RoomManager/Room1/Barrier"]
+transform = Transform3D(-0.11238808, 0, 0.9936641, 0, 1, 0, -0.9936641, 0, -0.11238808, -63.159515, 10, 90.03445)
+shape = SubResource("ConvexPolygonShape3D_s7owp")
+disabled = true
+
+[node name="SpawnPoints" type="Node3D" parent="RoomManager/Room1"]
+
+[node name="F_SpawnPoint1" type="Marker3D" parent="RoomManager/Room1/SpawnPoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -75.13258, 0, 116.3277)
+
+[node name="G_SpawnPoint1" type="Marker3D" parent="RoomManager/Room1/SpawnPoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -61.26358, 0, 108.28186)
+
+[node name="G_SpawnPoint2" type="Marker3D" parent="RoomManager/Room1/SpawnPoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -61.873035, 0, 122.617325)
+
+[node name="Room2" type="Node3D" parent="RoomManager"]
+
+[node name="DetectionArea" type="Area3D" parent="RoomManager/Room2"]
+transform = Transform3D(0.43011728, 0, 0.9027729, 0, 1, 0, -0.9027729, 0, 0.43011728, -64.603645, 0, 26.070736)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RoomManager/Room2/DetectionArea"]
+transform = Transform3D(0.8958902, 0, 0.4442756, 0, 1, 0, -0.4442756, 0, 0.8958902, 0, 10, 0)
+shape = SubResource("BoxShape3D_3ket0")
+debug_color = Color(0.96980375, 0, 0.46209037, 0.41960785)
+
+[node name="Barrier" type="StaticBody3D" parent="RoomManager/Room2"]
+
+[node name="BorderWalll4" type="MeshInstance3D" parent="RoomManager/Room2/Barrier"]
+transform = Transform3D(0.0038222894, 0, 0.9999924, 0, 1, 0, -0.9999924, 0, 0.0038222894, -63.159515, 10, 32.039177)
+material_override = ExtResource("3_lqmmi")
+mesh = SubResource("BoxMesh_5rr4u")
+skeleton = NodePath("")
+
+[node name="Col_border4" type="CollisionShape3D" parent="RoomManager/Room2/Barrier"]
+transform = Transform3D(0.0038222894, 0, 0.9999924, 0, 1, 0, -0.9999924, 0, 0.0038222894, -63.159515, 10, 32.039177)
+shape = SubResource("ConvexPolygonShape3D_6evxh")
+disabled = true
+
+[node name="BorderWalll5" type="MeshInstance3D" parent="RoomManager/Room2/Barrier"]
+transform = Transform3D(0.7767941, 0, 0.6297541, 0, 1, 0, -0.6297541, 0, 0.7767941, -50.33635, 10, -28.238136)
+material_override = ExtResource("3_lqmmi")
+mesh = SubResource("BoxMesh_5rr4u")
+skeleton = NodePath("")
+
+[node name="Col_border5" type="CollisionShape3D" parent="RoomManager/Room2/Barrier"]
+transform = Transform3D(0.7767941, 0, 0.6297541, 0, 1, 0, -0.6297541, 0, 0.7767941, -50.33635, 10, -28.238136)
+shape = SubResource("ConvexPolygonShape3D_qq0hn")
+disabled = true
+
+[node name="SpawnPoints" type="Node3D" parent="RoomManager/Room2"]
+
+[node name="F_SpawnPoint1" type="Marker3D" parent="RoomManager/Room2/SpawnPoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -89.793175, 0, -17.246014)
+
+[node name="G_SpawnPoint1" type="Marker3D" parent="RoomManager/Room2/SpawnPoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -61.26358, 0, -26.766647)
+
+[node name="G_SpawnPoint2" type="Marker3D" parent="RoomManager/Room2/SpawnPoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -75.622925, 0, -10.750387)
+
+[node name="G_SpawnPoint3" type="Marker3D" parent="RoomManager/Room2/SpawnPoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -61.329754, 0, 10.50297)
+
+[node name="Room3" type="Node3D" parent="RoomManager"]
+
+[node name="DetectionArea" type="Area3D" parent="RoomManager/Room3"]
+transform = Transform3D(0.96425277, 0, 0.26498383, 0, 1, 0, -0.26498383, 0, 0.96425277, -11.837034, 0, -54.599113)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RoomManager/Room3/DetectionArea"]
+transform = Transform3D(0.8958902, 0, 0.4442756, 0, 1, 0, -0.4442756, 0, 0.8958902, 0, 10, 0)
+shape = SubResource("BoxShape3D_3ket0")
+debug_color = Color(0.96980375, 0, 0.46209037, 0.41960785)
+
+[node name="Barrier" type="StaticBody3D" parent="RoomManager/Room3"]
+
+[node name="BorderWalll6" type="MeshInstance3D" parent="RoomManager/Room3/Barrier"]
+transform = Transform3D(0.7767941, 0, 0.6297541, 0, 1, 0, -0.6297541, 0, 0.7767941, -18.646929, 10, -50.60385)
+material_override = ExtResource("3_lqmmi")
+mesh = SubResource("BoxMesh_5rr4u")
+skeleton = NodePath("")
+
+[node name="Col_border6" type="CollisionShape3D" parent="RoomManager/Room3/Barrier"]
+transform = Transform3D(0.7767941, 0, 0.6297541, 0, 1, 0, -0.6297541, 0, 0.7767941, -18.646929, 10, -50.60385)
+shape = SubResource("ConvexPolygonShape3D_7is3k")
+disabled = true
+
+[node name="InteractUI" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="Label" type="Label" parent="InteractUI"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -56.0
+offset_top = -92.0
+offset_right = 65.0
+offset_bottom = -69.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 24
+text = "Press E to Enter"
+horizontal_alignment = 1
+vertical_alignment = 1
