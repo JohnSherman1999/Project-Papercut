@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bospx2kusgb5b"
+path="res://.godot/imported/Slide 2.mp3-5bdb6f391967a6b4d797ac0eed0a19f7.mp3str"
+
+[deps]
+
+source_file="res://Assets/Sounds/Slide 2.mp3"
+dest_files=["res://.godot/imported/Slide 2.mp3-5bdb6f391967a6b4d797ac0eed0a19f7.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
