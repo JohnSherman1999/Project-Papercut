@@ -35,7 +35,6 @@ glow_blend_mode = 4
 fog_enabled = true
 fog_light_color = Color(5.05373e-07, 0.343259, 0.13521, 1)
 fog_density = 0.001
-fog_aerial_perspective = 0.176
 fog_sky_affect = 0.345
 fog_depth_curve = 3.60501
 fog_depth_begin = 2.5
@@ -383,7 +382,7 @@ points = PackedVector3Array(-0.5, -10, -20, 0.5, -10, -20, -0.5, -10, 20, -0.5, 
 environment = SubResource("Environment_nvshm")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -0.87462, 0.48481, 0, -0.48481, -0.87462, 0, 0, 0)
+transform = Transform3D(1, 0, 0, 0, -0.8746201, 0.48481, 0, -0.48481, -0.8746201, 0, 0, 0)
 light_color = Color(1, 0.641113, 0.355072, 1)
 light_energy = 0.415
 light_angular_distance = 0.2

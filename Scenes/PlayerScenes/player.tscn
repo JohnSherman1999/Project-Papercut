@@ -2,10 +2,10 @@
 
 [ext_resource type="Script" uid="uid://dq0cghj0gcpmf" path="res://Scripts/PlayerScripts/movement.gd" id="1_vn1c7"]
 [ext_resource type="Texture2D" uid="uid://w2b2xll5icyq" path="res://Assets/UI/crosshair.png" id="2_44dyf"]
-[ext_resource type="AudioStream" uid="uid://fsn5qoju48a1" path="res://Assets/Sounds player/Walking.mp3" id="3_2oab2"]
-[ext_resource type="AudioStream" uid="uid://4daynpqj5gx0" path="res://Assets/Sounds player/Jump.mp3" id="4_sn0nf"]
-[ext_resource type="AudioStream" uid="uid://bospx2kusgb5b" path="res://Assets/Sounds player/Slide 2.mp3" id="5_c45ss"]
-[ext_resource type="AudioStream" uid="uid://csj6o2eqaq2m7" path="res://Assets/Sounds player/Slice dash.mp3" id="6_c45ss"]
+[ext_resource type="AudioStream" uid="uid://fsn5qoju48a1" path="res://Assets/Sounds/Walking.mp3" id="3_2oab2"]
+[ext_resource type="AudioStream" uid="uid://4daynpqj5gx0" path="res://Assets/Sounds/Jump.mp3" id="4_sn0nf"]
+[ext_resource type="AudioStream" uid="uid://bospx2kusgb5b" path="res://Assets/Sounds/Slide 2.mp3" id="5_c45ss"]
+[ext_resource type="AudioStream" uid="uid://csj6o2eqaq2m7" path="res://Assets/Sounds/Slice dash.mp3" id="6_c45ss"]
 [ext_resource type="AudioStream" uid="uid://btbcnuce17xcj" path="res://Assets/Sounds player/Ground Pound.mp3" id="7_acd72"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_s4odt"]
