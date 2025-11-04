@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cih4v88w3j262"
+path="res://.godot/imported/Crane attack.mp3-ab0a6746f24b0f255a94e3680b238b1e.mp3str"
+
+[deps]
+
+source_file="res://Assets/Sounds Enemies/Crane attack.mp3"
+dest_files=["res://.godot/imported/Crane attack.mp3-ab0a6746f24b0f255a94e3680b238b1e.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

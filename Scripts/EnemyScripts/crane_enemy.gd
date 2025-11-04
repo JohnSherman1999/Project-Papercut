@@ -108,6 +108,7 @@ func _on_attack_timer_timeout() -> void:
 	if player_in_range and global_position.distance_to(player.global_position) <= stop_distance:
 		start_attack()
 		animation_player.play("Attack")
+		$"crane attack".play()
 
 func take_damage(amount: float) -> void:
 	health -= amount

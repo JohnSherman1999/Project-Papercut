@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=3 uid="uid://c5cbrfm2up367"]
+
+[ext_resource type="Texture2D" uid="uid://bvdw0kv3fpukd" path="res://Assets/Death 2.jpg" id="1_ephvl"]
+
+[node name="Death Screen" type="Node2D"]
+
+[node name="Death2" type="Sprite2D" parent="."]
+position = Vector2(576.5, 326.99997)
+scale = Vector2(3.6634614, 2.9363637)
+texture = ExtResource("1_ephvl")
+
+[node name="Label" type="Label" parent="."]
+offset_left = 224.0
+offset_top = 92.0
+offset_right = 935.0
+offset_bottom = 360.0
+theme_override_colors/font_color = Color(0.69553566, 0.26969296, 0.22301105, 1)
+theme_override_font_sizes/font_size = 131
+text = "Game Over"
