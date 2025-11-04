@@ -114,6 +114,10 @@ func _physics_process(delta: float) -> void:
 	var input_dir = Input.get_vector("left", "right", "forward", "back")
 	direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 
+	#stop walk sound
+	if not is_on_floor():
+		$walking.stop()  # Stop walking sound
+
 	# Handle gravity (modified for wall-run, dash, pound)
 	if not is_on_floor() and not is_dashing:
 		if wall_running:
