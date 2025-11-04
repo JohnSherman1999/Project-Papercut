@@ -1,6 +1,7 @@
-[gd_scene load_steps=13 format=4 uid="uid://conx3yh8solmb"]
+[gd_scene load_steps=15 format=4 uid="uid://conx3yh8solmb"]
 
 [ext_resource type="Script" uid="uid://bxtfblph2xtbd" path="res://Scripts/EnemyScripts/crane_enemy.gd" id="1_x0hfl"]
+[ext_resource type="Texture2D" uid="uid://bm4e7t0vrjmnq" path="res://Assets/Enemies/Crane_model/Crane_PapelOrigami Base Color.png" id="2_vq3ar"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_x0hfl"]
 radius = 1.33766
@@ -15,6 +16,9 @@ radius = 12.0
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_yfw4q"]
 height = 2.2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2v3cu"]
+albedo_texture = ExtResource("2_vq3ar")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8t2jo"]
 resource_name = "PapelOrigami"
@@ -299,6 +303,7 @@ bones/6/rotation = Quaternion(-0.70710677, 0, 0, 0.70710677)
 bones/6/scale = Vector3(1, 1, 1)
 
 [node name="Plane_034_Plane_029" type="MeshInstance3D" parent="Crane/Armature/Skeleton3D"]
+material_override = SubResource("StandardMaterial3D_2v3cu")
 mesh = SubResource("ArrayMesh_30coe")
 skin = SubResource("Skin_e60iu")
 
