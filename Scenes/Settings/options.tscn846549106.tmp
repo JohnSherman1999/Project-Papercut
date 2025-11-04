@@ -1,0 +1,68 @@
+[gd_scene load_steps=5 format=3 uid="uid://bc255rk5akoia"]
+
+[ext_resource type="Script" uid="uid://b00mgi5i5nqry" path="res://Scenes/Settings/options.gd" id="1_c2u1v"]
+[ext_resource type="PackedScene" uid="uid://dw1q54epx1qkh" path="res://Scenes/Settings/colorblind_optionbutton.tscn" id="2_yjkok"]
+[ext_resource type="PackedScene" uid="uid://cbt7xgy42gcrv" path="res://Scenes/Settings/brightnescontrol.tscn" id="3_2iy26"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_yjkok"]
+font_size = 20
+
+[node name="options" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_c2u1v")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.158472, 0.158472, 0.158472, 1)
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 338.0
+offset_top = 536.0
+offset_right = 811.0
+offset_bottom = 628.0
+theme_override_font_sizes/font_size = 50
+text = "Return To Menu"
+
+[node name="Colorblind Options" type="Label" parent="."]
+layout_mode = 0
+offset_left = 108.0
+offset_top = 164.0
+offset_right = 247.0
+offset_bottom = 187.0
+text = "Colorblind Modes"
+label_settings = SubResource("LabelSettings_yjkok")
+
+[node name="ColorBlindOptions" parent="." instance=ExtResource("2_yjkok")]
+layout_mode = 0
+offset_left = 302.0
+offset_top = 164.0
+offset_right = 441.0
+offset_bottom = 195.0
+
+[node name="Brightness" type="Label" parent="."]
+layout_mode = 0
+offset_left = 108.0
+offset_top = 298.0
+offset_right = 278.0
+offset_bottom = 326.0
+text = "Brightness"
+label_settings = SubResource("LabelSettings_yjkok")
+
+[node name="brightnescontrol" parent="." instance=ExtResource("3_2iy26")]
+layout_mode = 1
+offset_right = -1152.0
+offset_bottom = -648.0
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[connection signal="resized" from="Brightness" to="." method="_on_brightness_resized"]

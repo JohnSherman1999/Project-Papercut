@@ -15,9 +15,17 @@ run/main_scene="uid://cblxobj8a42yj"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+GlobalWorldEnvironment="*res://Scenes/EnvironmentalScenes/global_world_environment.tscn"
+
 [display]
 
 window/stretch/mode="canvas_items"
+
+[editor]
+
+version_control/autoload_on_startup=true
 
 [file_customization]
 
