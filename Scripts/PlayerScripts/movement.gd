@@ -77,12 +77,11 @@ var hit_stop_timer = 0.0
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 
-@onready var pause_menu = $"Pause Menu"
+@onready var options_menu = $options
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	health = max_health  # Initialize health
-	pause_menu.visible = false
 
 # Health function (from John's)
 func add_health(value: float) -> void:
@@ -127,10 +126,7 @@ func _physics_process(delta: float) -> void:
 		else:
 			velocity.y -= gravity * delta
 
-		if Input.is_action_pressed("pause"):
-			print("test")
-			pause_menu.visible = true
-			get_tree().paused = pause_menu.visible
+		
 
 	# Handle pound buffer timer
 	if pound_buffer_timer > 0:

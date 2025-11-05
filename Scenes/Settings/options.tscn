@@ -1,18 +1,22 @@
 [gd_scene load_steps=4 format=3 uid="uid://bc255rk5akoia"]
 
-[ext_resource type="Script" uid="uid://b00mgi5i5nqry" path="res://Scenes/Settings/options.gd" id="1_c2u1v"]
-[ext_resource type="PackedScene" uid="uid://c1yb3cl1hc2ch" path="res://Scenes/Settings/brightnescontrol.tscn" id="3_2iy26"]
+[ext_resource type="Script" uid="uid://b00mgi5i5nqry" path="res://Scripts/MenuScripts/options.gd" id="1_c2u1v"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_yjkok"]
 font_size = 20
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3hnfs"]
+bg_color = Color(0.48858464, 0.6692383, 0.1694774, 1)
+
 [node name="options" type="Control"]
+process_mode = 3
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_behavior_recursive = 2
 script = ExtResource("1_c2u1v")
 
 [node name="ColorRect" type="ColorRect" parent="."]
@@ -51,10 +55,18 @@ offset_bottom = 326.0
 text = "Brightness"
 label_settings = SubResource("LabelSettings_yjkok")
 
-[node name="brightnescontrol" parent="." instance=ExtResource("3_2iy26")]
-layout_mode = 1
-offset_right = -1152.0
-offset_bottom = -648.0
+[node name="BrightnessSlider" type="HSlider" parent="."]
+layout_mode = 0
+offset_left = 240.0
+offset_top = 280.0
+offset_right = 448.0
+offset_bottom = 348.0
+theme_override_styles/grabber_area = SubResource("StyleBoxFlat_3hnfs")
+min_value = 0.5
+max_value = 2.0
+step = 0.1
+value = 1.0
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
 [connection signal="resized" from="Brightness" to="." method="_on_brightness_resized"]
+[connection signal="value_changed" from="BrightnessSlider" to="." method="_on_brightness_slider_value_changed"]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://c1yb3cl1hc2ch"]
 
-[ext_resource type="Script" uid="uid://wk0udo4oh7dp" path="res://Scenes/Settings/brightness.gd" id="1_kf8jn"]
+[ext_resource type="Script" uid="uid://wk0udo4oh7dp" path="res://Scripts/MenuScripts/brightness.gd" id="1_kf8jn"]
 
 [node name="brightnescontrol" type="Control"]
 layout_mode = 3

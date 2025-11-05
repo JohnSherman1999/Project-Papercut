@@ -10,7 +10,7 @@ var room1_enemies: Array[Node3D] = []
 var room2_enemies: Array[Node3D] = []
 var room3_enemies: Array[Node3D] = []
 
-@onready var interact_label: Label = $"../InteractUI/Label"  # CanvasLayer/Label child
+@onready var interact_label: Label = $InteractUI/Label  # CanvasLayer/Label child
 
 func _ready():
 	interact_label.visible = false
