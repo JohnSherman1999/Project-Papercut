@@ -1500,3 +1500,9 @@ theme_override_font_sizes/font_size = 24
 text = "Press E to Enter"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="DirectionalLight3D2" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 36, 0)
+light_color = Color(0.44030207, 0.7641055, 0.6495422, 1)
+light_energy = 0.43
+shadow_enabled = true

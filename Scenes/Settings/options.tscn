@@ -1,8 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://bc255rk5akoia"]
+[gd_scene load_steps=4 format=3 uid="uid://bc255rk5akoia"]
 
 [ext_resource type="Script" uid="uid://b00mgi5i5nqry" path="res://Scenes/Settings/options.gd" id="1_c2u1v"]
-[ext_resource type="PackedScene" uid="uid://dw1q54epx1qkh" path="res://Scenes/Settings/colorblind_optionbutton.tscn" id="2_yjkok"]
-[ext_resource type="PackedScene" uid="uid://cbt7xgy42gcrv" path="res://Scenes/Settings/brightnescontrol.tscn" id="3_2iy26"]
+[ext_resource type="PackedScene" uid="uid://c1yb3cl1hc2ch" path="res://Scenes/Settings/brightnescontrol.tscn" id="3_2iy26"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_yjkok"]
 font_size = 20
@@ -42,13 +41,6 @@ offset_right = 247.0
 offset_bottom = 187.0
 text = "Colorblind Modes"
 label_settings = SubResource("LabelSettings_yjkok")
-
-[node name="ColorBlindOptions" parent="." instance=ExtResource("2_yjkok")]
-layout_mode = 0
-offset_left = 302.0
-offset_top = 164.0
-offset_right = 441.0
-offset_bottom = 195.0
 
 [node name="Brightness" type="Label" parent="."]
 layout_mode = 0

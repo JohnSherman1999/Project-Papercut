@@ -1,7 +1,17 @@
-[gd_scene load_steps=2 format=3 uid="uid://4oj5tjluxcsa"]
+[gd_scene load_steps=4 format=3 uid="uid://4oj5tjluxcsa"]
+
+[ext_resource type="Material" uid="uid://dscl7swcrv1o" path="res://Assets/source_files/materials/god_rays.tres" id="1_bmswa"]
+
+[sub_resource type="Sky" id="Sky_5dyos"]
+sky_material = ExtResource("1_bmswa")
 
 [sub_resource type="Environment" id="Environment_elx5p"]
-background_mode = 3
+background_mode = 1
+background_color = Color(0.6271266, 0.7729664, 0.87231123, 1)
+sky = SubResource("Sky_5dyos")
+ambient_light_source = 2
+ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_energy = 0.14
 adjustment_enabled = true
 
 [node name="GlobalWorldEnvironment" type="WorldEnvironment"]
