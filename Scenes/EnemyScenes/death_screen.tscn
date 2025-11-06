@@ -1,14 +1,10 @@
 [gd_scene load_steps=3 format=3 uid="uid://c5cbrfm2up367"]
 
-[ext_resource type="Texture2D" uid="uid://bvdw0kv3fpukd" path="res://Assets/Death 2.jpg" id="1_ephvl"]
+[ext_resource type="Script" uid="uid://b0niq7wynveyx" path="res://Scripts/MenuScripts/death_screen.gd" id="1_eher4"]
 [ext_resource type="FontFile" uid="uid://ph4jv8ham2l5" path="res://Assets/UI/Nosifer-Regular.ttf" id="2_x6kjm"]
 
 [node name="Death Screen" type="Node2D"]
-
-[node name="Death2" type="Sprite2D" parent="."]
-position = Vector2(575.5, 326.99997)
-scale = Vector2(3.6698716, 2.9363637)
-texture = ExtResource("1_ephvl")
+script = ExtResource("1_eher4")
 
 [node name="Label" type="Label" parent="."]
 offset_left = 171.0
@@ -20,22 +16,32 @@ theme_override_fonts/font = ExtResource("2_x6kjm")
 theme_override_font_sizes/font_size = 101
 text = "Game Over"
 
-[node name="Button" type="Button" parent="."]
-offset_left = 241.0
-offset_top = 319.0
-offset_right = 473.0
-offset_bottom = 451.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Restart" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 443.0
+offset_top = 342.0
+offset_right = 675.0
+offset_bottom = 474.0
+theme_override_colors/font_color = Color(0.7444672, 0.05450835, 0, 1)
 theme_override_font_sizes/font_size = 64
 text = "Restart"
 flat = true
 
-[node name="Button2" type="Button" parent="."]
-offset_left = 696.0
-offset_top = 342.0
-offset_right = 906.0
-offset_bottom = 438.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
+[node name="Exit" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 451.0
+offset_top = 507.0
+offset_right = 661.0
+offset_bottom = 603.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 64
-text = "Quit"
+text = "Exit"
 flat = true
+
+[connection signal="pressed" from="Control/Exit" to="." method="_on_exit_pressed"]
