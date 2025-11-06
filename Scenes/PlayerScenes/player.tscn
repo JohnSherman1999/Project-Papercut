@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=4 uid="uid://cccvupibs1qf5"]
+[gd_scene load_steps=51 format=4 uid="uid://cccvupibs1qf5"]
 
 [ext_resource type="Script" uid="uid://dq0cghj0gcpmf" path="res://Scripts/PlayerScripts/movement.gd" id="1_vn1c7"]
 [ext_resource type="Texture2D" uid="uid://w2b2xll5icyq" path="res://Assets/UI/crosshair.png" id="2_44dyf"]
@@ -968,6 +968,9 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_01vnt"]
+size = Vector3(2, 2, 2)
+
 [node name="Player" type="CharacterBody3D" groups=["player"]]
 script = ExtResource("1_vn1c7")
 
@@ -1329,4 +1332,14 @@ skin = SubResource("Skin_aqs28")
 [node name="options" parent="." instance=ExtResource("8_01vnt")]
 visible = false
 
+[node name="Area3D" type="Area3D" parent="."]
+collision_layer = 2
+collision_mask = 2
+monitoring = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -1)
+shape = SubResource("BoxShape3D_01vnt")
+
 [connection signal="body_entered" from="dash_area" to="." method="_on_dash_area_body_entered"]
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]

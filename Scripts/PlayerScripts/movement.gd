@@ -9,6 +9,8 @@ const SLIDE_SPEED = 20.0  # Proto's value for great feel
 @export var JUMP_VELOCITY = 4.5
 const SENSITIVITY = 0.003
 var knockback_velocity: Vector3 = Vector3.ZERO
+var is_attacking := false
+
 
 # Health (from John's)
 var health: float = 100.0
@@ -46,6 +48,7 @@ var wall_normal = Vector3.ZERO
 @export var DASH_END_THRESHOLD = 1.0  # Distance to target to end dash
 var dash_timer = 0.0
 var is_dashing = false
+@export var DAMAGE := 40.0
 @export var DASH_DAMAGE = 30.0  # Damage on hit
 @export var DASH_TARGET_OFFSET = Vector3(0, 0, -2.0)  # Go "through" enemy (adjust based on direction)
 @export var DASH_VERTICAL_OFFSET = 1.0  # Vertical adjustment to aim above enemy's base
@@ -241,9 +244,6 @@ func _physics_process(delta: float) -> void:
 	else:
 		camera.v_offset = lerp(camera.v_offset, 0.0, delta * 10.0)
 
-
-		
-
 	# Movement lerp (proto style, after slide for no override)
 	if (is_on_floor() or wall_running) and not is_sliding and not is_dashing:
 		if direction:
@@ -251,19 +251,32 @@ func _physics_process(delta: float) -> void:
 			velocity.z = direction.z * speed
 			if is_on_floor() and not $walking.playing:
 				$walking.play()  # Audio from John
-				animation_player.play("Run")
+				
+
 		else:
 			velocity.x = lerp(velocity.x, direction.x * speed, delta * 7.0)
 			velocity.z = lerp(velocity.z, direction.z * speed, delta * 7.0)
 			$walking.stop()
-			animation_player.play("Idle")
+			
 	elif not is_on_floor() and not is_sliding and not is_dashing:
 		velocity.x = lerp(velocity.x, direction.x * speed, delta * 4.0)
 		velocity.z = lerp(velocity.z, direction.z * speed, delta * 4.0)
 
+	if is_attacking:
+		animation_player.play("Slash")
+	elif direction:
+		animation_player.play("Run")
+	elif not direction:
+		animation_player.play("Idle")
+
+
 	# Wall stick force
 	if wall_running:
 		velocity += -wall_normal * WALL_STICK_FORCE * delta
+
+	#handle main attack
+	if Input.is_action_just_pressed("attack") && !is_dashing:
+		_attack()
 
 	# Handle dash (with audio from John)
 	if Input.is_action_just_pressed("dash") and not is_dashing:
@@ -342,6 +355,13 @@ func _on_dash_area_body_entered(body: Node3D) -> void:
 		hit_stop_timer = HIT_STOP_DURATION
 		shake_timer = SHAKE_DURATION
 
+func _attack() -> void:
+	is_attacking = true
+	$Area3D.monitoring = true
+	await get_tree().create_timer(0.5).timeout
+	is_attacking = false
+	$Area3D.monitoring = false
+
 # In movement.gd (add at bottom)
 func take_damage(amount: float) -> void:
 	health -= amount
@@ -353,3 +373,9 @@ func take_damage(amount: float) -> void:
 func apply_knockback(dir: Vector3, force: float) -> void:
 	knockback_velocity += dir * force  # Simple add to current vel
 	print("Player knocked back")
+
+
+func _on_area_3d_body_entered(body: Node3D) -> void:
+	if body is Enemy:
+		body.take_damage(DAMAGE)
+	print(body)

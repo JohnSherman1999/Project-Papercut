@@ -1192,7 +1192,7 @@ _data = {
 &"Run": SubResource("Animation_c8a6n")
 }
 
-[node name="basic_enemy" type="CharacterBody3D"]
+[node name="basic_enemy" type="CharacterBody3D" groups=["Enemy"]]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
 collision_layer = 2
 collision_mask = 3
