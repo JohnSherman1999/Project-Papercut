@@ -7,10 +7,10 @@
 script = ExtResource("1_eher4")
 
 [node name="Label" type="Label" parent="."]
-offset_left = 171.0
-offset_top = 145.0
-offset_right = 1199.0
-offset_bottom = 413.0
+offset_left = 150.0
+offset_top = 17.0
+offset_right = 1178.0
+offset_bottom = 285.0
 theme_override_colors/font_color = Color(0.7294118, 0, 0.13725491, 1)
 theme_override_fonts/font = ExtResource("2_x6kjm")
 theme_override_font_sizes/font_size = 101
@@ -24,22 +24,22 @@ offset_bottom = 40.0
 
 [node name="Restart" type="Button" parent="Control"]
 layout_mode = 0
-offset_left = 443.0
-offset_top = 342.0
-offset_right = 675.0
-offset_bottom = 474.0
-theme_override_colors/font_color = Color(0.7444672, 0.05450835, 0, 1)
+offset_left = 449.0
+offset_top = 183.0
+offset_right = 681.0
+offset_bottom = 315.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 64
 text = "Restart"
 flat = true
 
 [node name="Exit" type="Button" parent="Control"]
 layout_mode = 0
-offset_left = 451.0
-offset_top = 507.0
-offset_right = 661.0
-offset_bottom = 603.0
-theme_override_colors/font_color = Color(1, 1, 1, 1)
+offset_left = 464.0
+offset_top = 337.0
+offset_right = 674.0
+offset_bottom = 433.0
+theme_override_colors/font_color = Color(0.86327165, 0, 0.022440962, 1)
 theme_override_font_sizes/font_size = 64
 text = "Exit"
 flat = true
