@@ -10,10 +10,4 @@ func _on_brightness_slider_value_changed(value: float) -> void:
 	playerCam.attributes.exposure_multiplier = value
 
 func _ready():
-	if playerCam:
-		print("cam ready")
-	if get_tree().current_scene.name == "menu_options":
-		visible = true
-	else:
-		visible = false
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
