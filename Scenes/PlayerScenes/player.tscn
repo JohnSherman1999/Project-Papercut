@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=4 uid="uid://cccvupibs1qf5"]
+[gd_scene load_steps=50 format=4 uid="uid://cccvupibs1qf5"]
 
 [ext_resource type="Script" uid="uid://dq0cghj0gcpmf" path="res://Scripts/PlayerScripts/movement.gd" id="1_vn1c7"]
 [ext_resource type="Texture2D" uid="uid://w2b2xll5icyq" path="res://Assets/UI/crosshair.png" id="2_44dyf"]
@@ -7,6 +7,7 @@
 [ext_resource type="AudioStream" uid="uid://bospx2kusgb5b" path="res://Assets/Sounds player/Slide 2.mp3" id="5_c45ss"]
 [ext_resource type="AudioStream" uid="uid://csj6o2eqaq2m7" path="res://Assets/Sounds player/Slice dash.mp3" id="6_c45ss"]
 [ext_resource type="AudioStream" uid="uid://btbcnuce17xcj" path="res://Assets/Sounds player/Ground Pound.mp3" id="7_acd72"]
+[ext_resource type="PackedScene" uid="uid://bc255rk5akoia" path="res://Scenes/Settings/options.tscn" id="8_01vnt"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_s4odt"]
 
@@ -24,6 +25,8 @@ is_hemisphere = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_smarq"]
 albedo_color = Color(0.956863, 0.713726, 0.352941, 1)
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_acd72"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_44dyf"]
 radius = 1.5
@@ -986,6 +989,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_smarq")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.56449, 0)
 
 [node name="Camera3D" type="Camera3D" parent="Head"]
+attributes = SubResource("CameraAttributesPractical_acd72")
 
 [node name="target_ray" type="RayCast3D" parent="Head/Camera3D"]
 target_position = Vector3(0, 0, -20)
@@ -1322,29 +1326,7 @@ skin = SubResource("Skin_aqs28")
 mesh = SubResource("ArrayMesh_myc84")
 skin = SubResource("Skin_aqs28")
 
-[node name="Pause Menu" type="VBoxContainer" parent="."]
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -576.0
-offset_right = 576.0
-offset_bottom = 509.0
-grow_horizontal = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-
-[node name="Resume" type="Button" parent="Pause Menu"]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_font_sizes/font_size = 64
-text = "Resume"
-
-[node name="Quit" type="Button" parent="Pause Menu"]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_font_sizes/font_size = 64
-text = "Quit"
+[node name="options" parent="." instance=ExtResource("8_01vnt")]
+visible = false
 
 [connection signal="body_entered" from="dash_area" to="." method="_on_dash_area_body_entered"]
