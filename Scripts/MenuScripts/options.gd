@@ -10,6 +10,10 @@ func _on_brightness_slider_value_changed(value: float) -> void:
 	playerCam.attributes.exposure_multiplier = value
 
 func _ready():
+	if playerCam:
+		print("cam ready")
+	else:
+		print("no cam")
 	if get_tree().current_scene.name == "options":
 		visible = true
 	else:

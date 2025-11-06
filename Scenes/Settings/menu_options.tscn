@@ -1,0 +1,78 @@
+[gd_scene load_steps=5 format=3 uid="uid://blbeqedkuwg0f"]
+
+[ext_resource type="Script" uid="uid://b4ewh2k57it1k" path="res://Scripts/MenuScripts/menu_options.gd" id="1_ms42m"]
+[ext_resource type="PackedScene" uid="uid://cccvupibs1qf5" path="res://Scenes/PlayerScenes/player.tscn" id="2_1y6ku"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_yjkok"]
+font_size = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3hnfs"]
+bg_color = Color(0.48858464, 0.6692383, 0.1694774, 1)
+
+[node name="options" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_behavior_recursive = 2
+script = ExtResource("1_ms42m")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.158472, 0.158472, 0.158472, 1)
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 338.0
+offset_top = 536.0
+offset_right = 811.0
+offset_bottom = 628.0
+theme_override_font_sizes/font_size = 50
+text = "Return To Menu"
+
+[node name="Colorblind Options" type="Label" parent="."]
+layout_mode = 0
+offset_left = 108.0
+offset_top = 164.0
+offset_right = 247.0
+offset_bottom = 187.0
+text = "Colorblind Modes"
+label_settings = SubResource("LabelSettings_yjkok")
+
+[node name="Brightness" type="Label" parent="."]
+layout_mode = 0
+offset_left = 108.0
+offset_top = 298.0
+offset_right = 278.0
+offset_bottom = 326.0
+text = "Brightness"
+label_settings = SubResource("LabelSettings_yjkok")
+
+[node name="BrightnessSlider" type="HSlider" parent="."]
+layout_mode = 0
+offset_left = 240.0
+offset_top = 280.0
+offset_right = 448.0
+offset_bottom = 348.0
+theme_override_styles/grabber_area = SubResource("StyleBoxFlat_3hnfs")
+min_value = 0.5
+max_value = 2.0
+step = 0.1
+value = 1.0
+
+[node name="Player" parent="." instance=ExtResource("2_1y6ku")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.72500753, 0, -0.03414011)
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[connection signal="resized" from="Brightness" to="." method="_on_brightness_resized"]
+[connection signal="value_changed" from="BrightnessSlider" to="." method="_on_brightness_slider_value_changed"]
+
+[editable path="Player"]
