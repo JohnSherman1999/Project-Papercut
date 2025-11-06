@@ -9,7 +9,5 @@ func _on_quit_pressed() -> void:
 	get_tree().quit()
 	
 	
-
-
 func _on_options_pressed() -> void:
-	get_tree().change_scene_to_file("res://Scenes/Settings/options.tscn")
+	get_tree().change_scene_to_file("res://Scenes/Settings/menu_options.tscn")
