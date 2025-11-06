@@ -1,4 +1,4 @@
-[gd_scene load_steps=112 format=3 uid="uid://c80nr1o3ld0dy"]
+[gd_scene load_steps=113 format=3 uid="uid://c80nr1o3ld0dy"]
 
 [ext_resource type="PackedScene" uid="uid://cccvupibs1qf5" path="res://Scenes/PlayerScenes/player.tscn" id="1_2dhm0"]
 [ext_resource type="PackedScene" uid="uid://ka1eu4fn3hru" path="res://Scenes/EnvironmentalScenes/tree_body.tscn" id="1_nvshm"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://bm5isa31p30f" path="res://Scenes/EnemyScenes/basic_enemy.tscn" id="8_3ket0"]
 [ext_resource type="PackedScene" uid="uid://conx3yh8solmb" path="res://Scenes/EnemyScenes/crane_enemy.tscn" id="9_chonr"]
 [ext_resource type="Script" uid="uid://b1gj5yqker4hd" path="res://Scripts/ManagerScripts/room_manager.gd" id="10_chonr"]
+[ext_resource type="AudioStream" uid="uid://csof3e6kh7cjx" path="res://Scenes/Music/Cardio Cyberpunk Game Workout Club Techno by Infraction [No Copyright Music]  Dimensions.mp3" id="11_4v5nr"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_2dhm0"]
 sky_top_color = Color(0.701961, 0, 1, 1)
@@ -1505,3 +1506,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 36, 0)
 light_color = Color(0.44030207, 0.7641055, 0.6495422, 1)
 light_energy = 0.43
 shadow_enabled = true
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("11_4v5nr")
+volume_db = 18.641
+autoplay = true
