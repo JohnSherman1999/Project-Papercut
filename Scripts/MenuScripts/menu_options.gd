@@ -1,6 +1,6 @@
 extends Control
 
-@onready var playerCam = $"../Head/Camera3D"
+@onready var playerCam = $Player/Head/Camera3D
 var is_in_menu := false
 
 func _on_button_pressed() -> void:
