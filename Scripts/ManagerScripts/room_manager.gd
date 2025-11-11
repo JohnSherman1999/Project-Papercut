@@ -10,6 +10,11 @@ var room1_enemies: Array[Node3D] = []
 var room2_enemies: Array[Node3D] = []
 var room3_enemies: Array[Node3D] = []
 
+var bonus_room1_remaining: int = 0
+var room1_remaining: int = 0
+var room2_remaining: int = 0
+var room3_remaining: int = 0
+
 @onready var interact_label: Label = $InteractUI/Label  # CanvasLayer/Label child
 
 func _ready():
@@ -36,6 +41,7 @@ func _input(event: InputEvent) -> void:
 		# Open door (fade barriers out)
 		unlock_bonus_room1()
 		interact_label.visible = false
+		$BonusRoom1/InteractArea/CollisionShape3D.disabled = true
 		var tween = create_tween()
 		tween.tween_property(interact_label, "modulate:a", 0.0, 0.2)
 
@@ -59,27 +65,32 @@ func seal_bonus_room1(_initial_seal: bool = false) -> void:
 
 func spawn_bonus_room1_enemies() -> void:
 	var spawn_points = $BonusRoom1/SpawnPoints.get_children()
-	bonus_room1_enemies.clear()
+	bonus_room1_remaining = 0  # Reset counter
+	print("Spawning BonusRoom1 enemies - Points found: ", spawn_points.size())
 	for spawn_point in spawn_points:
+		var enemy_instance: Node3D
 		if "F_SpawnPoint" in spawn_point.name:
-			var crane = crane_enemy_scene.instantiate()
-			get_parent().add_child(crane)
-			crane.global_position = spawn_point.global_position
-			crane.tree_exited.connect(_on_bonus_room1_enemy_died)
-			bonus_room1_enemies.append(crane)
+			enemy_instance = crane_enemy_scene.instantiate()
+			print("Spawning crane at ", spawn_point.name)
 		elif "G_SpawnPoint" in spawn_point.name:
-			var enemy = basic_enemy_scene.instantiate()
-			get_parent().add_child(enemy)
-			enemy.global_position = spawn_point.global_position
-			enemy.tree_exited.connect(_on_bonus_room1_enemy_died)
-			bonus_room1_enemies.append(enemy)
+			enemy_instance = basic_enemy_scene.instantiate()
+			print("Spawning basic at ", spawn_point.name)
+		else:
+			continue
+		
+		get_parent().add_child(enemy_instance)
+		enemy_instance.global_position = spawn_point.global_position
+		enemy_instance.tree_exited.connect(_on_bonus_room1_enemy_died)
+		bonus_room1_remaining += 1  # Increment counter
+		print("BonusRoom1 remaining after spawn: ", bonus_room1_remaining)
+	
+	$BonusRoom1/DetectionArea/CollisionShape3D.disabled = true
+	print("BonusRoom1 DetectionArea disabled")
 
 func _on_bonus_room1_enemy_died() -> void:
-	var remaining = 0
-	for enemy in bonus_room1_enemies:
-		if is_instance_valid(enemy):
-			remaining += 1
-	if remaining == 0:
+	bonus_room1_remaining -= 1
+	print("BonusRoom1 enemy died - Remaining: ", bonus_room1_remaining)
+	if bonus_room1_remaining <= 0:
 		unlock_bonus_room1()
 
 func unlock_bonus_room1() -> void:
@@ -116,37 +127,46 @@ func seal_room1() -> void:
 
 func spawn_room1_enemies() -> void:
 	var spawn_points = $Room1/SpawnPoints.get_children()
-	room1_enemies.clear()
+	room1_remaining = 0  # Reset counter
+	print("Spawning Room1 enemies - Points found: ", spawn_points.size())
 	for spawn_point in spawn_points:
+		var enemy_instance: Node3D
 		if "F_SpawnPoint" in spawn_point.name:
-			var crane = crane_enemy_scene.instantiate()
-			get_parent().add_child(crane)
-			crane.global_position = spawn_point.global_position
-			crane.tree_exited.connect(_on_room1_enemy_died)
-			room1_enemies.append(crane)
+			enemy_instance = crane_enemy_scene.instantiate()
+			print("Spawning crane at ", spawn_point.name)
 		elif "G_SpawnPoint" in spawn_point.name:
-			var enemy = basic_enemy_scene.instantiate()
-			get_parent().add_child(enemy)
-			enemy.global_position = spawn_point.global_position
-			enemy.tree_exited.connect(_on_room1_enemy_died)
-			room1_enemies.append(enemy)
+			enemy_instance = basic_enemy_scene.instantiate()
+			print("Spawning basic at ", spawn_point.name)
+		else:
+			continue
+		
+		get_parent().add_child(enemy_instance)
+		enemy_instance.global_position = spawn_point.global_position
+		enemy_instance.tree_exited.connect(_on_room1_enemy_died)
+		room1_remaining += 1  # Increment counter
+		print("Room1 remaining after spawn: ", room1_remaining)
+	
+	$Room1/DetectionArea/CollisionShape3D.disabled = true
+	print("Room1 DetectionArea disabled")
 
 func _on_room1_enemy_died() -> void:
-	var remaining = 0
-	for enemy in room1_enemies:
-		if is_instance_valid(enemy):
-			remaining += 1
-	if remaining == 0:
+	room1_remaining -= 1
+	print("Room1 enemy died - Remaining: ", room1_remaining)
+	if room1_remaining <= 0:
 		unlock_room1()
 
 func unlock_room1() -> void:
-	var barriers = $Room1.find_children("*", "*", true, false).filter(func(child): return "Barrier" in child.name)
-	for barrier in barriers:
-		var tween = create_tween()
-		tween.tween_property(barrier, "modulate:a", 0.0, barrier_fade_time)
-		tween.tween_callback(func():
-			barrier.visible = false
-			barrier.get_node("CollisionShape3D").disabled = true)
+	var barrier_node = $Room1.get_node("Barrier")
+	if barrier_node:
+		var meshes = barrier_node.find_children("*", "MeshInstance3D", true, false)
+		var collisions = barrier_node.find_children("*", "CollisionShape3D", true, false)
+		print("Unlocking Room1 - Meshes found: ", meshes.size(), " Collisions found: ", collisions.size())
+		for mesh in meshes:
+			mesh.visible = false
+		for col in collisions:
+			col.disabled = true
+	else:
+		print("Barrier node not found for Room1")
 
 # ROOM2
 func _on_room2_detection_body_entered(body: Node3D) -> void:
@@ -169,37 +189,46 @@ func seal_room2() -> void:
 
 func spawn_room2_enemies() -> void:
 	var spawn_points = $Room2/SpawnPoints.get_children()
-	room2_enemies.clear()
+	room2_remaining = 0  # Reset counter
+	print("Spawning Room2 enemies - Points found: ", spawn_points.size())
 	for spawn_point in spawn_points:
+		var enemy_instance: Node3D
 		if "F_SpawnPoint" in spawn_point.name:
-			var crane = crane_enemy_scene.instantiate()
-			get_parent().add_child(crane)
-			crane.global_position = spawn_point.global_position
-			crane.tree_exited.connect(_on_room2_enemy_died)
-			room2_enemies.append(crane)
+			enemy_instance = crane_enemy_scene.instantiate()
+			print("Spawning crane at ", spawn_point.name)
 		elif "G_SpawnPoint" in spawn_point.name:
-			var enemy = basic_enemy_scene.instantiate()
-			get_parent().add_child(enemy)
-			enemy.global_position = spawn_point.global_position
-			enemy.tree_exited.connect(_on_room2_enemy_died)
-			room2_enemies.append(enemy)
+			enemy_instance = basic_enemy_scene.instantiate()
+			print("Spawning basic at ", spawn_point.name)
+		else:
+			continue
+		
+		get_parent().add_child(enemy_instance)
+		enemy_instance.global_position = spawn_point.global_position
+		enemy_instance.tree_exited.connect(_on_room2_enemy_died)
+		room2_remaining += 1  # Increment counter
+		print("Room2 remaining after spawn: ", room1_remaining)
+	
+	$Room2/DetectionArea/CollisionShape3D.disabled = true
+	print("Room2 DetectionArea disabled")
 
 func _on_room2_enemy_died() -> void:
-	var remaining = 0
-	for enemy in room2_enemies:
-		if is_instance_valid(enemy):
-			remaining += 1
-	if remaining == 0:
+	room2_remaining -= 1
+	print("Room2 enemy died - Remaining: ", room2_remaining)
+	if room2_remaining <= 0:
 		unlock_room2()
 
 func unlock_room2() -> void:
-	var barriers = $Room2.find_children("*", "*", true, false).filter(func(child): return "Barrier" in child.name)
-	for barrier in barriers:
-		var tween = create_tween()
-		tween.tween_property(barrier, "modulate:a", 0.0, barrier_fade_time)
-		tween.tween_callback(func():
-			barrier.visible = false
-			barrier.get_node("CollisionShape3D").disabled = true)
+	var barrier_node = $Room2.get_node("Barrier")
+	if barrier_node:
+		var meshes = barrier_node.find_children("*", "MeshInstance3D", true, false)
+		var collisions = barrier_node.find_children("*", "CollisionShape3D", true, false)
+		print("Unlocking Room2 - Meshes found: ", meshes.size(), " Collisions found: ", collisions.size())
+		for mesh in meshes:
+			mesh.visible = false
+		for col in collisions:
+			col.disabled = true
+	else:
+		print("Barrier node not found for Room2")
 
 # ROOM3
 func _on_room3_detection_body_entered(body: Node3D) -> void:
@@ -222,34 +251,43 @@ func seal_room3() -> void:
 
 func spawn_room3_enemies() -> void:
 	var spawn_points = $Room3/SpawnPoints.get_children()
-	room3_enemies.clear()
+	room3_remaining = 0  # Reset counter
+	print("Spawning Room3 enemies - Points found: ", spawn_points.size())
 	for spawn_point in spawn_points:
+		var enemy_instance: Node3D
 		if "F_SpawnPoint" in spawn_point.name:
-			var crane = crane_enemy_scene.instantiate()
-			get_parent().add_child(crane)
-			crane.global_position = spawn_point.global_position
-			crane.tree_exited.connect(_on_room3_enemy_died)
-			room3_enemies.append(crane)
+			enemy_instance = crane_enemy_scene.instantiate()
+			print("Spawning crane at ", spawn_point.name)
 		elif "G_SpawnPoint" in spawn_point.name:
-			var enemy = basic_enemy_scene.instantiate()
-			get_parent().add_child(enemy)
-			enemy.global_position = spawn_point.global_position
-			enemy.tree_exited.connect(_on_room3_enemy_died)
-			room3_enemies.append(enemy)
+			enemy_instance = basic_enemy_scene.instantiate()
+			print("Spawning basic at ", spawn_point.name)
+		else:
+			continue
+		
+		get_parent().add_child(enemy_instance)
+		enemy_instance.global_position = spawn_point.global_position
+		enemy_instance.tree_exited.connect(_on_room3_enemy_died)
+		room3_remaining += 1  # Increment counter
+		print("Room3 remaining after spawn: ", room3_remaining)
+	
+	$Room3/DetectionArea/CollisionShape3D.disabled = true
+	print("Room3 DetectionArea disabled")
 
 func _on_room3_enemy_died() -> void:
-	var remaining = 0
-	for enemy in room3_enemies:
-		if is_instance_valid(enemy):
-			remaining += 1
-	if remaining == 0:
+	room3_remaining -= 1
+	print("Room3 enemy died - Remaining: ", room3_remaining)
+	if room3_remaining <= 0:
 		unlock_room3()
 
 func unlock_room3() -> void:
-	var barriers = $Room3.find_children("*", "*", true, false).filter(func(child): return "Barrier" in child.name)
-	for barrier in barriers:
-		var tween = create_tween()
-		tween.tween_property(barrier, "modulate:a", 0.0, barrier_fade_time)
-		tween.tween_callback(func():
-			barrier.visible = false
-			barrier.get_node("CollisionShape3D").disabled = true)
+	var barrier_node = $Room3.get_node("Barrier")
+	if barrier_node:
+		var meshes = barrier_node.find_children("*", "MeshInstance3D", true, false)
+		var collisions = barrier_node.find_children("*", "CollisionShape3D", true, false)
+		print("Unlocking Room3 - Meshes found: ", meshes.size(), " Collisions found: ", collisions.size())
+		for mesh in meshes:
+			mesh.visible = false
+		for col in collisions:
+			col.disabled = true
+	else:
+		print("Barrier node not found for Room3")

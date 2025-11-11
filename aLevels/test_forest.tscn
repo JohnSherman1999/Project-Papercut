@@ -1,4 +1,4 @@
-[gd_scene load_steps=113 format=3 uid="uid://c80nr1o3ld0dy"]
+[gd_scene load_steps=114 format=3 uid="uid://c80nr1o3ld0dy"]
 
 [ext_resource type="PackedScene" uid="uid://cccvupibs1qf5" path="res://Scenes/PlayerScenes/player.tscn" id="1_2dhm0"]
 [ext_resource type="PackedScene" uid="uid://ka1eu4fn3hru" path="res://Scenes/EnvironmentalScenes/tree_body.tscn" id="1_nvshm"]
@@ -11,6 +11,8 @@
 [ext_resource type="PackedScene" uid="uid://conx3yh8solmb" path="res://Scenes/EnemyScenes/crane_enemy.tscn" id="9_chonr"]
 [ext_resource type="Script" uid="uid://b1gj5yqker4hd" path="res://Scripts/ManagerScripts/room_manager.gd" id="10_chonr"]
 [ext_resource type="AudioStream" uid="uid://csof3e6kh7cjx" path="res://Scenes/Music/Cardio Cyberpunk Game Workout Club Techno by Infraction [No Copyright Music]  Dimensions.mp3" id="11_4v5nr"]
+[ext_resource type="Material" uid="uid://8trvoyqnkhh1" path="res://Assets/mysteriousForce.tres" id="11_qidyj"]
+[ext_resource type="TorusMesh" uid="uid://25cyev0dlkik" path="res://Assets/mysteriousForceMesh.tres" id="12_ytukv"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_2dhm0"]
 sky_top_color = Color(0.701961, 0, 1, 1)
@@ -353,9 +355,6 @@ points = PackedVector3Array(5, 1, 1, 5, 1, -1, -5, 1, 1, 5, -1, 1, 5, -1, -1, -5
 [sub_resource type="BoxShape3D" id="BoxShape3D_3ket0"]
 size = Vector3(5, 20, 45)
 
-[sub_resource type="BoxMesh" id="BoxMesh_5rr4u"]
-size = Vector3(1, 20, 40)
-
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_dnbkq"]
 points = PackedVector3Array(-0.5, -10, -20, 0.5, -10, -20, -0.5, -10, 20, -0.5, 10, -20, 0.5, 10, -20, 0.5, -10, 20, -0.5, 10, 20, 0.5, 10, 20)
 
@@ -394,6 +393,7 @@ directional_shadow_max_distance = 150.0
 sky_mode = 1
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.19825745, -0.4940338, 0.23503876)
 navigation_mesh = SubResource("NavigationMesh_t1usa")
 
 [node name="Floor" type="StaticBody3D" parent="NavigationRegion3D"]
@@ -871,6 +871,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, -36)
 transform = Transform3D(1.0000002, 0, 0, 0, 1.0000002, 0, 0, 0, 1, 40, 0, -109)
 
 [node name="Boundary" type="StaticBody3D" parent="NavigationRegion3D"]
+visible = false
 
 [node name="Wall1" type="MeshInstance3D" parent="NavigationRegion3D/Boundary"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 10, 227)
@@ -1294,22 +1295,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 62, 0, 120)
 [node name="basic_enemy7" parent="Enemies_Ground" instance=ExtResource("8_3ket0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -61, 0, 58)
 
-[node name="basic_enemy8" parent="Enemies_Ground" instance=ExtResource("8_3ket0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -61, 0, -27)
-
-[node name="basic_enemy9" parent="Enemies_Ground" instance=ExtResource("8_3ket0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -75, 0, -11)
-
-[node name="basic_enemy10" parent="Enemies_Ground" instance=ExtResource("8_3ket0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -61, 0, 10)
-
 [node name="Enemies_Flying" type="Node3D" parent="."]
 
 [node name="crane_enemy" parent="Enemies_Flying" instance=ExtResource("9_chonr")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 148)
-
-[node name="crane_enemy6" parent="Enemies_Flying" instance=ExtResource("9_chonr")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -90, 0, -16)
 
 [node name="Pickups" type="Node3D" parent="."]
 
@@ -1320,6 +1309,7 @@ script = ExtResource("10_chonr")
 
 [node name="DetectionArea" type="Area3D" parent="RoomManager/BonusRoom1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 70.3278, 0, 117.15261)
+visible = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="RoomManager/BonusRoom1/DetectionArea"]
 transform = Transform3D(0.8958902, 0, 0.4442756, 0, 1, 0, -0.4442756, 0, 0.8958902, 0, 10, 0)
@@ -1329,13 +1319,14 @@ debug_color = Color(0.96980375, 0, 0.46209037, 0.41960785)
 [node name="Barrier" type="StaticBody3D" parent="RoomManager/BonusRoom1"]
 
 [node name="BorderWalll1" type="MeshInstance3D" parent="RoomManager/BonusRoom1/Barrier"]
-transform = Transform3D(0.89664876, 0, 0.44274256, 0, 1, 0, -0.44274256, 0, 0.89664876, 66.394, 10, 120.975)
-material_override = ExtResource("3_lqmmi")
-mesh = SubResource("BoxMesh_5rr4u")
+transform = Transform3D(-3.9186666e-08, -0.17929728, 0.4430712, 1, -8.742278e-09, 0, 1.9367256e-08, 0.08861424, 0.8964864, 66.394, 10, 120.975)
+material_override = ExtResource("11_qidyj")
+mesh = ExtResource("12_ytukv")
 skeleton = NodePath("")
 
 [node name="Col_border1" type="CollisionShape3D" parent="RoomManager/BonusRoom1/Barrier"]
 transform = Transform3D(0.89664876, 0, 0.44274256, 0, 1, 0, -0.44274256, 0, 0.89664876, 66.394, 10, 120.975)
+visible = false
 shape = SubResource("ConvexPolygonShape3D_dnbkq")
 
 [node name="SpawnPoints" type="Node3D" parent="RoomManager/BonusRoom1"]
@@ -1369,9 +1360,9 @@ debug_color = Color(0.96980375, 0, 0.46209037, 0.41960785)
 [node name="Barrier" type="StaticBody3D" parent="RoomManager/Room1"]
 
 [node name="BorderWalll2" type="MeshInstance3D" parent="RoomManager/Room1/Barrier"]
-transform = Transform3D(0.93866754, 0, -0.3448231, 0, 1, 0, 0.3448231, 0, 0.93866754, -39.821564, 10, 124.256676)
-material_override = ExtResource("3_lqmmi")
-mesh = SubResource("BoxMesh_5rr4u")
+transform = Transform3D(-4.1022833e-08, -0.1876986, -0.3452982, 1, -8.742278e-09, 0, -1.5093464e-08, -0.06905964, 0.938493, -39.821564, 10, 124.256676)
+material_override = ExtResource("11_qidyj")
+mesh = ExtResource("12_ytukv")
 skeleton = NodePath("")
 
 [node name="Col_border2" type="CollisionShape3D" parent="RoomManager/Room1/Barrier"]
@@ -1380,9 +1371,9 @@ shape = SubResource("ConvexPolygonShape3D_fwqni")
 disabled = true
 
 [node name="BorderWalll3" type="MeshInstance3D" parent="RoomManager/Room1/Barrier"]
-transform = Transform3D(-0.11238808, 0, 0.9936641, 0, 1, 0, -0.9936641, 0, -0.11238808, -63.159515, 10, 90.03445)
-material_override = ExtResource("3_lqmmi")
-mesh = SubResource("BoxMesh_5rr4u")
+transform = Transform3D(4.94827e-09, 0.022640644, 0.9935719, 1, -8.742278e-09, 0, 4.3430408e-08, 0.19871438, -0.11320321, -63.159515, 10, 90.03445)
+material_override = ExtResource("11_qidyj")
+mesh = ExtResource("12_ytukv")
 skeleton = NodePath("")
 
 [node name="Col_border3" type="CollisionShape3D" parent="RoomManager/Room1/Barrier"]
@@ -1414,9 +1405,10 @@ debug_color = Color(0.96980375, 0, 0.46209037, 0.41960785)
 [node name="Barrier" type="StaticBody3D" parent="RoomManager/Room2"]
 
 [node name="BorderWalll4" type="MeshInstance3D" parent="RoomManager/Room2/Barrier"]
-transform = Transform3D(0.0038222894, 0, 0.9999924, 0, 1, 0, -0.9999924, 0, 0.0038222894, -63.159515, 10, 32.039177)
-material_override = ExtResource("3_lqmmi")
-mesh = SubResource("BoxMesh_5rr4u")
+transform = Transform3D(-1.6707682e-10, -0.0007644547, 0.9999923, 0.99999964, -8.742278e-09, 0, 4.3711054e-08, 0.19999854, 0.0038222722, -63.159515, 10, 32.039177)
+visible = false
+material_override = ExtResource("11_qidyj")
+mesh = ExtResource("12_ytukv")
 skeleton = NodePath("")
 
 [node name="Col_border4" type="CollisionShape3D" parent="RoomManager/Room2/Barrier"]
@@ -1425,9 +1417,10 @@ shape = SubResource("ConvexPolygonShape3D_6evxh")
 disabled = true
 
 [node name="BorderWalll5" type="MeshInstance3D" parent="RoomManager/Room2/Barrier"]
-transform = Transform3D(0.7767941, 0, 0.6297541, 0, 1, 0, -0.6297541, 0, 0.7767941, -50.33635, 10, -28.238136)
-material_override = ExtResource("3_lqmmi")
-mesh = SubResource("BoxMesh_5rr4u")
+transform = Transform3D(-3.395475e-08, -0.15535888, 0.6297541, 0.99999964, -8.742278e-09, 0, 2.7527427e-08, 0.12595087, 0.7767941, -50.33635, 10, -28.238136)
+visible = false
+material_override = ExtResource("11_qidyj")
+mesh = ExtResource("12_ytukv")
 skeleton = NodePath("")
 
 [node name="Col_border5" type="CollisionShape3D" parent="RoomManager/Room2/Barrier"]
@@ -1462,9 +1455,10 @@ debug_color = Color(0.96980375, 0, 0.46209037, 0.41960785)
 [node name="Barrier" type="StaticBody3D" parent="RoomManager/Room3"]
 
 [node name="BorderWalll6" type="MeshInstance3D" parent="RoomManager/Room3/Barrier"]
-transform = Transform3D(0.7767941, 0, 0.6297541, 0, 1, 0, -0.6297541, 0, 0.7767941, -18.646929, 10, -50.60385)
-material_override = ExtResource("3_lqmmi")
-mesh = SubResource("BoxMesh_5rr4u")
+transform = Transform3D(-3.395475e-08, -0.15535888, 0.6297541, 0.99999964, -8.742278e-09, 0, 2.7527427e-08, 0.12595087, 0.7767941, -18.646929, 10, -50.60385)
+visible = false
+material_override = ExtResource("11_qidyj")
+mesh = ExtResource("12_ytukv")
 skeleton = NodePath("")
 
 [node name="Col_border6" type="CollisionShape3D" parent="RoomManager/Room3/Barrier"]
