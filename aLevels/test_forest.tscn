@@ -1361,6 +1361,7 @@ debug_color = Color(0.96980375, 0, 0.46209037, 0.41960785)
 
 [node name="BorderWalll2" type="MeshInstance3D" parent="RoomManager/Room1/Barrier"]
 transform = Transform3D(-4.1022833e-08, -0.1876986, -0.3452982, 1, -8.742278e-09, 0, -1.5093464e-08, -0.06905964, 0.938493, -39.821564, 10, 124.256676)
+visible = false
 material_override = ExtResource("11_qidyj")
 mesh = ExtResource("12_ytukv")
 skeleton = NodePath("")
@@ -1372,6 +1373,7 @@ disabled = true
 
 [node name="BorderWalll3" type="MeshInstance3D" parent="RoomManager/Room1/Barrier"]
 transform = Transform3D(4.94827e-09, 0.022640644, 0.9935719, 1, -8.742278e-09, 0, 4.3430408e-08, 0.19871438, -0.11320321, -63.159515, 10, 90.03445)
+visible = false
 material_override = ExtResource("11_qidyj")
 mesh = ExtResource("12_ytukv")
 skeleton = NodePath("")
@@ -1495,6 +1497,7 @@ shadow_enabled = true
 stream = ExtResource("11_4v5nr")
 volume_db = 18.641
 autoplay = true
+parameters/looping = true
 
 [connection signal="body_entered" from="RoomManager/BonusRoom1/DetectionArea" to="RoomManager" method="_on_bonus_detection_body_entered"]
 [connection signal="body_entered" from="RoomManager/BonusRoom1/InteractArea" to="RoomManager" method="_on_bonus_interact_body_entered"]

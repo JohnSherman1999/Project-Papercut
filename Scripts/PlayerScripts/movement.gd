@@ -11,11 +11,10 @@ const SENSITIVITY = 0.003
 var knockback_velocity: Vector3 = Vector3.ZERO
 var is_attacking := false
 
-
 # Health (from John's)
-var health: float = 100.0
-@export var max_health: float = 100.0
-
+var health: float = 9.0
+@export var max_health: float = 9.0
+var heart_list : Array[TextureRect]
 
 # Slide playground (integrated from John's with tweaks)
 var is_sliding = false
@@ -77,7 +76,6 @@ var hit_stop_timer = 0.0
 @onready var dash_area = $dash_area
 @onready var target_ray = $Head/Camera3D/target_ray
 @onready var pound_area = $pound_area  # New Area3D for AOE
-
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 @onready var options_menu = $options
@@ -85,6 +83,9 @@ var hit_stop_timer = 0.0
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	health = max_health  # Initialize health
+	var heart_parent = $HealthBar/HBoxContainer
+	for child in heart_parent.get_children():
+		heart_list.append(child)
 
 # Health function (from John's)
 func add_health(value: float) -> void:
@@ -366,9 +367,32 @@ func _attack() -> void:
 func take_damage(amount: float) -> void:
 	health -= amount
 	if health <= 0:
-		# Death logic (e.g., respawn)
+		get_tree().change_scene_to_file("res://Scenes/Settings/sample_death.tscn")
 		print("Player died")
+	elif health > 0:
+		update_heart_display()
 	print("Player health: ", health)
+	
+
+func update_heart_display():
+	if health == 8:
+		$HealthBar/HBoxContainer/Heart9/Heart.play("health_loss")
+	elif health == 7:
+		$HealthBar/HBoxContainer/Heart8/Heart.play("health_loss")
+	elif health == 6:
+		$HealthBar/HBoxContainer/Heart7/Heart.play("health_loss")
+	elif health == 5:
+		$HealthBar/HBoxContainer/Heart6/Heart.play("health_loss")
+	elif health == 4:
+		$HealthBar/HBoxContainer/Heart5/Heart.play("health_loss")
+	elif health == 3:
+		$HealthBar/HBoxContainer/Heart4/Heart.play("health_loss")
+	elif health == 2:
+		$HealthBar/HBoxContainer/Heart3/Heart.play("health_loss")
+	elif health == 1:
+		$HealthBar/HBoxContainer/Heart2/Heart.play("health_loss")
+	elif health <= 0:
+		$HealthBar/HBoxContainer/Heart/Heart.play("health_loss")
 
 func apply_knockback(dir: Vector3, force: float) -> void:
 	knockback_velocity += dir * force  # Simple add to current vel
