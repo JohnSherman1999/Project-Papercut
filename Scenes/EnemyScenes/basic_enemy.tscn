@@ -8,7 +8,7 @@
 [ext_resource type="AudioStream" uid="uid://demy70nymyhi6" path="res://Assets/Sounds Enemies/dog attack.mp3" id="5_pcfv6"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_yfw4q"]
-height = 2.2
+height = 1.3578125
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_rjn58"]
 radius = 12.0
@@ -1199,7 +1199,7 @@ collision_mask = 3
 script = ExtResource("1_rjn58")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.67890626, 0)
 shape = SubResource("CapsuleShape3D_yfw4q")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
