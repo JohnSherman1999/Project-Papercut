@@ -12,8 +12,8 @@ var knockback_velocity: Vector3 = Vector3.ZERO
 var is_attacking := false
 
 # Health (from John's)
-var health: float = 5.0
-@export var max_health: float = 5.0
+var health: float = 9.0
+@export var max_health: float = 9.0
 var heart_list : Array[TextureRect]
 
 # Slide playground (integrated from John's with tweaks)
@@ -375,7 +375,15 @@ func take_damage(amount: float) -> void:
 	
 
 func update_heart_display():
-	if health == 4:
+	if health == 8:
+		$HealthBar/HBoxContainer/Heart9/Heart.play("health_loss")
+	elif health == 7:
+		$HealthBar/HBoxContainer/Heart8/Heart.play("health_loss")
+	elif health == 6:
+		$HealthBar/HBoxContainer/Heart7/Heart.play("health_loss")
+	elif health == 5:
+		$HealthBar/HBoxContainer/Heart6/Heart.play("health_loss")
+	elif health == 4:
 		$HealthBar/HBoxContainer/Heart5/Heart.play("health_loss")
 	elif health == 3:
 		$HealthBar/HBoxContainer/Heart4/Heart.play("health_loss")
