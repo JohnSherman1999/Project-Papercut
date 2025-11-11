@@ -1275,7 +1275,7 @@ transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 
 shape = SubResource("ConvexPolygonShape3D_16y1f")
 
 [node name="Player" parent="." instance=ExtResource("1_2dhm0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 220)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 164.19228)
 
 [node name="Enemies_Ground" type="Node3D" parent="."]
 
@@ -1308,15 +1308,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -61, 0, 10)
 [node name="crane_enemy" parent="Enemies_Flying" instance=ExtResource("9_chonr")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 148)
 
-[node name="crane_enemy2" parent="Enemies_Flying" instance=ExtResource("9_chonr")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 73, 0, 85)
-
-[node name="crane_enemy3" parent="Enemies_Flying" instance=ExtResource("9_chonr")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 95, 0, 85)
-
-[node name="crane_enemy4" parent="Enemies_Flying" instance=ExtResource("9_chonr")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 95, 0, 116)
-
 [node name="crane_enemy6" parent="Enemies_Flying" instance=ExtResource("9_chonr")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -90, 0, -16)
 
@@ -1346,7 +1337,6 @@ skeleton = NodePath("")
 [node name="Col_border1" type="CollisionShape3D" parent="RoomManager/BonusRoom1/Barrier"]
 transform = Transform3D(0.89664876, 0, 0.44274256, 0, 1, 0, -0.44274256, 0, 0.89664876, 66.394, 10, 120.975)
 shape = SubResource("ConvexPolygonShape3D_dnbkq")
-disabled = true
 
 [node name="SpawnPoints" type="Node3D" parent="RoomManager/BonusRoom1"]
 
@@ -1511,3 +1501,10 @@ shadow_enabled = true
 stream = ExtResource("11_4v5nr")
 volume_db = 18.641
 autoplay = true
+
+[connection signal="body_entered" from="RoomManager/BonusRoom1/DetectionArea" to="RoomManager" method="_on_bonus_detection_body_entered"]
+[connection signal="body_entered" from="RoomManager/BonusRoom1/InteractArea" to="RoomManager" method="_on_bonus_interact_body_entered"]
+[connection signal="body_exited" from="RoomManager/BonusRoom1/InteractArea" to="RoomManager" method="_on_bonus_interact_body_exited"]
+[connection signal="body_entered" from="RoomManager/Room1/DetectionArea" to="RoomManager" method="_on_room1_detection_body_entered"]
+[connection signal="body_entered" from="RoomManager/Room2/DetectionArea" to="RoomManager" method="_on_room2_detection_body_entered"]
+[connection signal="body_entered" from="RoomManager/Room3/DetectionArea" to="RoomManager" method="_on_room3_detection_body_entered"]
