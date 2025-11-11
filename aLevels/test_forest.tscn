@@ -1497,6 +1497,7 @@ shadow_enabled = true
 stream = ExtResource("11_4v5nr")
 volume_db = 18.641
 autoplay = true
+parameters/looping = true
 
 [connection signal="body_entered" from="RoomManager/BonusRoom1/DetectionArea" to="RoomManager" method="_on_bonus_detection_body_entered"]
 [connection signal="body_entered" from="RoomManager/BonusRoom1/InteractArea" to="RoomManager" method="_on_bonus_interact_body_entered"]
