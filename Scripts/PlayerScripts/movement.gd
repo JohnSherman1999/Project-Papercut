@@ -90,6 +90,7 @@ func _ready():
 # Health function (from John's)
 func add_health(value: float) -> void:
 	health = clamp(health + value, 0.0, max_health)
+	update_heart_display()
 	print("Health increased to: ", health)
 
 func _unhandled_input(event):
@@ -372,27 +373,20 @@ func take_damage(amount: float) -> void:
 	elif health > 0:
 		update_heart_display()
 	print("Player health: ", health)
-	
 
 func update_heart_display():
-	if health == 8:
-		$HealthBar/HBoxContainer/Heart9/Heart.play("health_loss")
-	elif health == 7:
-		$HealthBar/HBoxContainer/Heart8/Heart.play("health_loss")
-	elif health == 6:
-		$HealthBar/HBoxContainer/Heart7/Heart.play("health_loss")
-	elif health == 5:
-		$HealthBar/HBoxContainer/Heart6/Heart.play("health_loss")
-	elif health == 4:
-		$HealthBar/HBoxContainer/Heart5/Heart.play("health_loss")
-	elif health == 3:
-		$HealthBar/HBoxContainer/Heart4/Heart.play("health_loss")
-	elif health == 2:
-		$HealthBar/HBoxContainer/Heart3/Heart.play("health_loss")
-	elif health == 1:
-		$HealthBar/HBoxContainer/Heart2/Heart.play("health_loss")
-	elif health <= 0:
-		$HealthBar/HBoxContainer/Heart/Heart.play("health_loss")
+	var hearts = $HealthBar/HBoxContainer.get_children()
+	for i in range(hearts.size()):
+		var container = hearts[i]
+		var sprite = container.get_node("Heart") as AnimatedSprite2D
+		if not sprite:
+			continue
+		var heart_index = i + 1
+		if heart_index <= health:
+			if sprite.animation != "idle":
+				sprite.play("idle")
+		elif heart_index>= health:
+			sprite.play("health_loss")
 
 func apply_knockback(dir: Vector3, force: float) -> void:
 	knockback_velocity += dir * force  # Simple add to current vel

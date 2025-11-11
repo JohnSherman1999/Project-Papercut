@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=4 uid="uid://cccvupibs1qf5"]
+[gd_scene load_steps=59 format=4 uid="uid://cccvupibs1qf5"]
 
 [ext_resource type="Script" uid="uid://dq0cghj0gcpmf" path="res://Scripts/PlayerScripts/movement.gd" id="1_vn1c7"]
 [ext_resource type="Texture2D" uid="uid://w2b2xll5icyq" path="res://Assets/UI/crosshair.png" id="2_44dyf"]
@@ -8,7 +8,9 @@
 [ext_resource type="AudioStream" uid="uid://csj6o2eqaq2m7" path="res://Assets/Sounds player/Slice dash.mp3" id="6_c45ss"]
 [ext_resource type="AudioStream" uid="uid://btbcnuce17xcj" path="res://Assets/Sounds player/Ground Pound.mp3" id="7_acd72"]
 [ext_resource type="PackedScene" uid="uid://bc255rk5akoia" path="res://Scenes/Settings/options.tscn" id="8_01vnt"]
-[ext_resource type="PackedScene" uid="uid://lumkya6gg4cp" path="res://Scenes/PlayerScenes/heart.tscn" id="9_touca"]
+[ext_resource type="Texture2D" uid="uid://b1tewkn2ejans" path="res://Assets/UI/Heartflash.png" id="9_ow3yf"]
+[ext_resource type="Texture2D" uid="uid://bldkydkxkhsu4" path="res://Assets/UI/Heart.png" id="10_j1pys"]
+[ext_resource type="Texture2D" uid="uid://tva0cdewbmgd" path="res://Assets/UI/Heart_Crumple.png" id="11_nyhdo"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_s4odt"]
 
@@ -972,6 +974,47 @@ blend_shape_mode = 0
 [sub_resource type="BoxShape3D" id="BoxShape3D_01vnt"]
 size = Vector3(2, 2, 2)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_2f148"]
+atlas = ExtResource("9_ow3yf")
+region = Rect2(0, 0, 612, 612)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1ojoy"]
+atlas = ExtResource("10_j1pys")
+region = Rect2(0, 0, 612, 612)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qbp1q"]
+atlas = ExtResource("11_nyhdo")
+region = Rect2(0, 0, 518, 408)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_seqbi"]
+atlas = ExtResource("10_j1pys")
+region = Rect2(0, 0, 612, 612)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_01vnt"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2f148")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1ojoy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qbp1q")
+}],
+"loop": false,
+"name": &"health_loss",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_seqbi")
+}],
+"loop": false,
+"name": &"idle",
+"speed": 5.0
+}]
+
 [node name="Player" type="CharacterBody3D" groups=["player"]]
 script = ExtResource("1_vn1c7")
 
@@ -1348,77 +1391,95 @@ shape = SubResource("BoxShape3D_01vnt")
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="Heart" type="TextureRect" parent="HealthBar/HBoxContainer"]
+[node name="Heart1" type="TextureRect" parent="HealthBar/HBoxContainer"]
 custom_minimum_size = Vector2(44.365, 98.59)
 layout_mode = 2
 
-[node name="Heart" parent="HealthBar/HBoxContainer/Heart" instance=ExtResource("9_touca")]
-position = Vector2(22.749998, 22.749998)
-scale = Vector2(0.075980395, 0.075980395)
+[node name="Heart" type="AnimatedSprite2D" parent="HealthBar/HBoxContainer/Heart1"]
+position = Vector2(24.25, 25.25)
+scale = Vector2(0.07761438, 0.07761438)
+sprite_frames = SubResource("SpriteFrames_01vnt")
+animation = &"idle"
 
 [node name="Heart2" type="TextureRect" parent="HealthBar/HBoxContainer"]
 custom_minimum_size = Vector2(44.365, 98.59)
 layout_mode = 2
 
-[node name="Heart" parent="HealthBar/HBoxContainer/Heart2" instance=ExtResource("9_touca")]
-position = Vector2(22.749998, 22.749998)
-scale = Vector2(0.075980395, 0.075980395)
+[node name="Heart" type="AnimatedSprite2D" parent="HealthBar/HBoxContainer/Heart2"]
+position = Vector2(24.25, 25.25)
+scale = Vector2(0.07761438, 0.07761438)
+sprite_frames = SubResource("SpriteFrames_01vnt")
+animation = &"idle"
 
 [node name="Heart3" type="TextureRect" parent="HealthBar/HBoxContainer"]
 custom_minimum_size = Vector2(44.365, 98.59)
 layout_mode = 2
 
-[node name="Heart" parent="HealthBar/HBoxContainer/Heart3" instance=ExtResource("9_touca")]
-position = Vector2(22.749998, 22.749998)
-scale = Vector2(0.075980395, 0.075980395)
+[node name="Heart" type="AnimatedSprite2D" parent="HealthBar/HBoxContainer/Heart3"]
+position = Vector2(24.25, 25.25)
+scale = Vector2(0.07761438, 0.07761438)
+sprite_frames = SubResource("SpriteFrames_01vnt")
+animation = &"idle"
 
 [node name="Heart4" type="TextureRect" parent="HealthBar/HBoxContainer"]
 custom_minimum_size = Vector2(44.365, 98.59)
 layout_mode = 2
 
-[node name="Heart" parent="HealthBar/HBoxContainer/Heart4" instance=ExtResource("9_touca")]
-position = Vector2(22.749998, 22.749998)
-scale = Vector2(0.075980395, 0.075980395)
+[node name="Heart" type="AnimatedSprite2D" parent="HealthBar/HBoxContainer/Heart4"]
+position = Vector2(24.25, 25.25)
+scale = Vector2(0.07761438, 0.07761438)
+sprite_frames = SubResource("SpriteFrames_01vnt")
+animation = &"idle"
 
 [node name="Heart5" type="TextureRect" parent="HealthBar/HBoxContainer"]
 custom_minimum_size = Vector2(44.365, 98.59)
 layout_mode = 2
 
-[node name="Heart" parent="HealthBar/HBoxContainer/Heart5" instance=ExtResource("9_touca")]
-position = Vector2(22.749998, 22.749998)
-scale = Vector2(0.075980395, 0.075980395)
+[node name="Heart" type="AnimatedSprite2D" parent="HealthBar/HBoxContainer/Heart5"]
+position = Vector2(24.25, 25.25)
+scale = Vector2(0.07761438, 0.07761438)
+sprite_frames = SubResource("SpriteFrames_01vnt")
+animation = &"idle"
 
 [node name="Heart6" type="TextureRect" parent="HealthBar/HBoxContainer"]
 custom_minimum_size = Vector2(44.365, 98.59)
 layout_mode = 2
 
-[node name="Heart" parent="HealthBar/HBoxContainer/Heart6" instance=ExtResource("9_touca")]
-position = Vector2(22.749998, 22.749998)
-scale = Vector2(0.075980395, 0.075980395)
+[node name="Heart" type="AnimatedSprite2D" parent="HealthBar/HBoxContainer/Heart6"]
+position = Vector2(24.25, 25.25)
+scale = Vector2(0.07761438, 0.07761438)
+sprite_frames = SubResource("SpriteFrames_01vnt")
+animation = &"idle"
 
 [node name="Heart7" type="TextureRect" parent="HealthBar/HBoxContainer"]
 custom_minimum_size = Vector2(44.365, 98.59)
 layout_mode = 2
 
-[node name="Heart" parent="HealthBar/HBoxContainer/Heart7" instance=ExtResource("9_touca")]
-position = Vector2(22.749998, 22.749998)
-scale = Vector2(0.075980395, 0.075980395)
+[node name="Heart" type="AnimatedSprite2D" parent="HealthBar/HBoxContainer/Heart7"]
+position = Vector2(24.25, 25.25)
+scale = Vector2(0.07761438, 0.07761438)
+sprite_frames = SubResource("SpriteFrames_01vnt")
+animation = &"idle"
 
 [node name="Heart8" type="TextureRect" parent="HealthBar/HBoxContainer"]
 custom_minimum_size = Vector2(44.365, 98.59)
 layout_mode = 2
 
-[node name="Heart" parent="HealthBar/HBoxContainer/Heart8" instance=ExtResource("9_touca")]
-position = Vector2(22.749998, 22.749998)
-scale = Vector2(0.075980395, 0.075980395)
+[node name="Heart" type="AnimatedSprite2D" parent="HealthBar/HBoxContainer/Heart8"]
+position = Vector2(24.25, 25.25)
+scale = Vector2(0.07761438, 0.07761438)
+sprite_frames = SubResource("SpriteFrames_01vnt")
+animation = &"idle"
 
 [node name="Heart9" type="TextureRect" parent="HealthBar/HBoxContainer"]
 custom_minimum_size = Vector2(44.365, 98.59)
 layout_mode = 2
 
-[node name="Heart" parent="HealthBar/HBoxContainer/Heart9" instance=ExtResource("9_touca")]
-position = Vector2(22.749998, 22.749998)
-scale = Vector2(0.075980395, 0.075980395)
+[node name="Heart" type="AnimatedSprite2D" parent="HealthBar/HBoxContainer/Heart9"]
+position = Vector2(24.25, 25.25)
+scale = Vector2(0.07761438, 0.07761438)
+sprite_frames = SubResource("SpriteFrames_01vnt")
+animation = &"idle"
 
 [connection signal="body_entered" from="dash_area" to="." method="_on_dash_area_body_entered"]
 [connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]

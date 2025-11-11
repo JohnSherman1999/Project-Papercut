@@ -17,6 +17,7 @@ var health: float
 var player: Node3D
 var knockback_velocity: Vector3 = Vector3.ZERO
 var player_in_range: bool = false  # Flag for detection
+var health_scene = preload("res://Scenes/Pickups/pickup.tscn")
 
 @onready var nav_agent: NavigationAgent3D = $NavigationAgent3D
 @onready var detection_area: Area3D = $detection_area  # Add in scene with CollisionShape3D
@@ -75,6 +76,7 @@ func take_damage(amount: float) -> void:
 		die()
 
 func die() -> void:
+	spawn_health()
 	queue_free()
 
 func apply_knockback(dir: Vector3, force: float) -> void:
@@ -94,3 +96,9 @@ func _on_detection_area_body_exited(body: Node3D) -> void:
 	if body == player:
 		player_in_range = false
 		animation_player.play("Idle")
+
+func spawn_health():
+	var health_pickup = health_scene.instantiate()
+	var root_node = get_tree().root
+	health_pickup.global_position = $".".global_position
+	root_node.add_child(health_pickup)
