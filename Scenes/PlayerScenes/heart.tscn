@@ -1,0 +1,44 @@
+[gd_scene load_steps=7 format=3 uid="uid://lumkya6gg4cp"]
+
+[ext_resource type="Texture2D" uid="uid://bldkydkxkhsu4" path="res://Assets/UI/Heart.png" id="1_m22lx"]
+[ext_resource type="Texture2D" uid="uid://tva0cdewbmgd" path="res://Assets/UI/Heart_Crumple.png" id="2_51yoh"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n6p53"]
+atlas = ExtResource("1_m22lx")
+region = Rect2(0, 0, 612, 612)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wpmyq"]
+atlas = ExtResource("2_51yoh")
+region = Rect2(0, 0, 521, 408)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m22lx"]
+atlas = ExtResource("1_m22lx")
+region = Rect2(0, 0, 612, 612)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ej4p8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n6p53")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wpmyq")
+}],
+"loop": false,
+"name": &"health_loss",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m22lx")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[node name="Heart" type="AnimatedSprite2D"]
+position = Vector2(3.8146973e-06, 0)
+scale = Vector2(0.15849674, 0.15849674)
+sprite_frames = SubResource("SpriteFrames_ej4p8")
+animation = &"health_loss"

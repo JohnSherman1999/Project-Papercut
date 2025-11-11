@@ -1,6 +1,6 @@
 extends Node3D
 
-@export var damage: float = 20.0  # Damage in AOE
+@export var damage: float = 1.0  # Damage in AOE
 @export var knockback_force: float = 10.0  # Small knockback
 @export var lifespan: float = 0.5  # Time before destroy (for FX)
 
