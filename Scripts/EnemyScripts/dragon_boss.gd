@@ -2,6 +2,8 @@
 extends CharacterBody3D
 class_name DragonBoss
 
+signal boss_defeated
+
 @export var max_health: float = 500.0  # High health for boss
 @export var speed: float = 4.0  # Slower chase
 @export var attack_range: float = 8.0  # General range for attack checks
@@ -18,10 +20,12 @@ class_name DragonBoss
 @export var slam_knockback: float = 15.0
 @export var slam_radius: float = 5.0
 @export var firebreath_damage: float = 3.0
-@export var firebreath_duration: float = 2.0
+@export var firebreath_startup: float = 1.2
+@export var firebreath_duration: float = 1.0
 @export var fireball_arc_height: float = 20.0
 @export var projectile_speed: float = 10.0
-@export var global_cooldown: float = 1.5  # Seconds between any attacks (tweak for balance)
+@export var global_cooldown: float = 2.5  # Seconds between any attacks (tweak for balance)
+@export var turn_speed: float = 2.5
 
 # Pathfinding (from basic_enemy.gd)
 @export var path_update_min_frames: int = 7
@@ -32,6 +36,7 @@ var path_update_interval: int = 0
 enum State {IDLE, CHASING, FIREBALL, FIREBREATH, SLAM, DEATH}
 var current_state: State = State.IDLE
 
+var is_dead: bool = false
 var health: float
 var player: Node3D
 var knockback_velocity: Vector3 = Vector3.ZERO
@@ -76,17 +81,17 @@ func _physics_process(delta: float) -> void:
 			path_update_interval = randi_range(path_update_min_frames, path_update_max_frames)
 		
 		# Check for attacks in priority (slam close, breath medium, fireball long)
-		if dist_to_player <= 5.0 and slam_timer.is_stopped() and global_cooldown_timer.is_stopped():
+		if dist_to_player <= 5.0 and slam_timer.is_stopped() and global_cooldown_timer.is_stopped() and is_dead == false:
 			current_state = State.SLAM
 			animation_player.play("Attack-Slam")
 			slam_attack()
 			global_cooldown_timer.start()
-		elif dist_to_player <= 10.0 and firebreath_timer.is_stopped() and global_cooldown_timer.is_stopped():
+		elif dist_to_player <= 10.0 and firebreath_timer.is_stopped() and global_cooldown_timer.is_stopped() and is_dead == false:
 			current_state = State.FIREBREATH
 			animation_player.play("Attack-FireBreath")
 			firebreath_attack()
 			global_cooldown_timer.start()
-		elif dist_to_player <= 20.0 and fireball_timer.is_stopped() and global_cooldown_timer.is_stopped():
+		elif dist_to_player <= 20.0 and fireball_timer.is_stopped() and global_cooldown_timer.is_stopped() and is_dead == false:
 			current_state = State.FIREBALL
 			animation_player.play("Attack-FireBall")
 			fireball_attack()
@@ -98,7 +103,8 @@ func _physics_process(delta: float) -> void:
 				var direction = (next_pos - global_position).normalized()
 				velocity.x = direction.x * speed
 				velocity.z = direction.z * speed
-				look_at(player.global_position, Vector3.UP)  # Face player
+			var target_y_rot = atan2(player.global_position.x - global_position.x, player.global_position.z - global_position.z)
+			rotation.y = lerp_angle(rotation.y, target_y_rot, delta * turn_speed)
 	else:
 		current_state = State.IDLE
 		velocity.x = 0
@@ -135,17 +141,19 @@ func fireball_attack() -> void:
 
 func firebreath_attack() -> void:
 	# Activate cone for duration
+	await get_tree().create_timer(firebreath_startup).timeout
+	$FireBreathArea/Flame.emitting = true
 	firebreath_area.monitoring = true
-	look_at(player.global_position, Vector3.UP)  # Aim
 	await get_tree().create_timer(firebreath_duration).timeout
 	firebreath_area.monitoring = false
 	firebreath_timer.start()
 	current_state = State.CHASING
 
+
 func slam_attack() -> void:
 # Jump up
 	velocity.y = sqrt(2 * gravity * slam_jump_height)
-	await get_tree().create_timer(0.5).timeout  # Peak time
+	await get_tree().create_timer(1.0).timeout  # Peak time
 	# Slam down
 	velocity.y = -slam_speed
 	slam_area.monitoring = true  # Damage on descent
@@ -176,16 +184,21 @@ func _on_slam_area_body_entered(body: Node3D) -> void:
 
 func take_damage(amount: float) -> void:
 	health -= amount
-	if health <= 0:
+	if health <= 0 and not is_dead:
+		is_dead = true
+		self.collision_layer = 1
+		player.apply_knockback((player.global_position - global_position), 5.0)
 		current_state = State.DEATH
 		animation_player.play("Death")
 		await animation_player.animation_finished
 		die()
 
 func apply_knockback(dir: Vector3, force: float) -> void:
-	knockback_velocity = dir * force * 0.2
+	if not is_dead:
+		knockback_velocity = dir * force * 0.2
 
 func die() -> void:
+	boss_defeated.emit()
 	queue_free()
 
 # Detection (from basic_enemy.gd)

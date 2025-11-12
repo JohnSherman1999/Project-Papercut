@@ -2,6 +2,7 @@ extends Node3D
 
 @export var basic_enemy_scene: PackedScene = preload("res://Scenes/EnemyScenes/basic_enemy.tscn")  # Adjust path
 @export var crane_enemy_scene: PackedScene = preload("res://Scenes/EnemyScenes/crane_enemy.tscn")  # Adjust path
+@export var dragon_boss_scene: PackedScene = preload("res://Scenes/EnemyScenes/dragon_boss.tscn")
 @export var barrier_fade_time: float = 0.5  # Tween duration for seal/unlock
 
 # Room enemy arrays
@@ -206,7 +207,7 @@ func spawn_room2_enemies() -> void:
 		enemy_instance.global_position = spawn_point.global_position
 		enemy_instance.tree_exited.connect(_on_room2_enemy_died)
 		room2_remaining += 1  # Increment counter
-		print("Room2 remaining after spawn: ", room1_remaining)
+		print("Room2 remaining after spawn: ", room2_remaining)
 	
 	$Room2/DetectionArea/CollisionShape3D.disabled = true
 	print("Room2 DetectionArea disabled")
@@ -252,23 +253,14 @@ func seal_room3() -> void:
 func spawn_room3_enemies() -> void:
 	var spawn_points = $Room3/SpawnPoints.get_children()
 	room3_remaining = 0  # Reset counter
-	print("Spawning Room3 enemies - Points found: ", spawn_points.size())
+	print("Spawning Room3 boss - Points found: ", spawn_points.size())
 	for spawn_point in spawn_points:
-		var enemy_instance: Node3D
-		if "F_SpawnPoint" in spawn_point.name:
-			enemy_instance = crane_enemy_scene.instantiate()
-			print("Spawning crane at ", spawn_point.name)
-		elif "G_SpawnPoint" in spawn_point.name:
-			enemy_instance = basic_enemy_scene.instantiate()
-			print("Spawning basic at ", spawn_point.name)
-		else:
-			continue
-		
-		get_parent().add_child(enemy_instance)
-		enemy_instance.global_position = spawn_point.global_position
-		enemy_instance.tree_exited.connect(_on_room3_enemy_died)
-		room3_remaining += 1  # Increment counter
-		print("Room3 remaining after spawn: ", room3_remaining)
+		var boss_instance = dragon_boss_scene.instantiate()
+		get_parent().add_child(boss_instance)
+		boss_instance.global_position = spawn_point.global_position
+		boss_instance.boss_defeated.connect(_on_room3_enemy_died)
+		room3_remaining += 1  # Increment (1 per spawn point; use 1 point for single boss)
+		print("Room3 boss spawned at ", spawn_point.name, " - Remaining: ", room3_remaining)
 	
 	$Room3/DetectionArea/CollisionShape3D.disabled = true
 	print("Room3 DetectionArea disabled")
@@ -277,17 +269,4 @@ func _on_room3_enemy_died() -> void:
 	room3_remaining -= 1
 	print("Room3 enemy died - Remaining: ", room3_remaining)
 	if room3_remaining <= 0:
-		unlock_room3()
-
-func unlock_room3() -> void:
-	var barrier_node = $Room3.get_node("Barrier")
-	if barrier_node:
-		var meshes = barrier_node.find_children("*", "MeshInstance3D", true, false)
-		var collisions = barrier_node.find_children("*", "CollisionShape3D", true, false)
-		print("Unlocking Room3 - Meshes found: ", meshes.size(), " Collisions found: ", collisions.size())
-		for mesh in meshes:
-			mesh.visible = false
-		for col in collisions:
-			col.disabled = true
-	else:
-		print("Barrier node not found for Room3")
+		get_tree().call_deferred("change_scene_to_file", "res://aLevels/City.tscn")

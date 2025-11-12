@@ -1,7 +1,8 @@
-[gd_scene load_steps=17 format=4 uid="uid://sistfd0avol0"]
+[gd_scene load_steps=27 format=4 uid="uid://sistfd0avol0"]
 
 [ext_resource type="Texture2D" uid="uid://d36mud43tg0fi" path="res://Assets/Enemies/Dragon_Model/Dragon Boss_Material.png" id="1_5lu0i"]
 [ext_resource type="Script" uid="uid://bhnimrnab7r7j" path="res://Scripts/EnemyScripts/dragon_boss.gd" id="1_40fgf"]
+[ext_resource type="Material" uid="uid://cjgoj12p3pb0g" path="res://Assets/source_files/materials/fire_billboard.material" id="3_sq1gs"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_omrt4"]
 resource_name = "Material.001"
@@ -2268,7 +2269,78 @@ _data = {
 }
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_sq1gs"]
-points = PackedVector3Array(0, 3.8, 0, 3.5, -8.5, 0, -3.5, -8.5, 0, 0, 0, 0.2, 0, 0, -1.615)
+points = PackedVector3Array(0, 3.8, 0, 1.5, -3, 0, -1.5, -3, 0, 0, 0, 0.2, 0, 0, -0.905)
+
+[sub_resource type="Gradient" id="Gradient_ycj4o"]
+colors = PackedColorArray(0.94902, 0, 0, 1, 1, 0.776471, 0.0823529, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_g5e81"]
+gradient = SubResource("Gradient_ycj4o")
+
+[sub_resource type="Curve" id="Curve_ajitg"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.231164, 1), 0.0, 0.0, 0, 0, Vector2(0.640411, 0.407905), -1.4431, -1.4431, 0, 0, Vector2(1, 0), -0.159099, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_h47cw"]
+curve = SubResource("Curve_ajitg")
+
+[sub_resource type="Curve" id="Curve_ephov"]
+_data = [Vector2(0.243682, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_0j0si"]
+curve = SubResource("Curve_ephov")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_2a1f0"]
+emission_shape = 1
+emission_sphere_radius = 0.2
+angle_max = 90.0
+direction = Vector3(0, 1, 0)
+initial_velocity_min = 0.5
+initial_velocity_max = 1.0
+gravity = Vector3(0, 0, 0)
+linear_accel_min = 22.089996
+linear_accel_max = 23.089996
+scale_min = 0.1
+scale_max = 0.25
+scale_curve = SubResource("CurveTexture_h47cw")
+color_ramp = SubResource("GradientTexture1D_g5e81")
+turbulence_enabled = true
+turbulence_noise_strength = 0.5
+turbulence_noise_scale = 1.0
+turbulence_influence_over_life = SubResource("CurveTexture_0j0si")
+sub_emitter_mode = 1
+sub_emitter_frequency = 40.0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_udcdq"]
+_surfaces = [{
+"aabb": AABB(-1.15811, -1.02635, -4.7252e-08, 2.17129, 2.09224, 1.00998e-05),
+"format": 34896613377,
+"index_count": 18,
+"index_data": PackedByteArray("BAABAAcAAAAHAAEAAQADAAIABAADAAEABAAGAAUABgAEAAcA"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("apP+/4cCAAAnQ/fuugIAAAAAzYBJAQAAFSTpJFoAAADqoQAAAAAAAPbrpTbZAAAA///keh8BAAAa8Oq7TgEAAA==")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_kh3j8"]
+resource_name = "particle_circle_particle_circle"
+_surfaces = [{
+"aabb": AABB(-1.15811, -1.02635, -4.7252e-08, 2.17129, 2.09224, 1.00998e-05),
+"attribute_data": PackedByteArray("AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8="),
+"format": 34896613399,
+"index_count": 18,
+"index_data": PackedByteArray("BAABAAcAAAAHAAEAAQADAAIABAADAAEABAAGAAUABgAEAAcA"),
+"material": ExtResource("3_sq1gs"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("apP+/4cC/n8nQ/fuugL+fwAAzYBJAf5/FSTpJFoA/n/qoQAAAAD+f/brpTbZAP5////keh8B/n8a8Oq7TgH+f/9/////f////3////9/////f////3////9/////f///")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_udcdq")
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_40fgf"]
 radius = 7.0
@@ -2282,7 +2354,7 @@ collision_mask = 3
 script = ExtResource("1_40fgf")
 
 [node name="Dragon Boss" type="Node3D" parent="."]
-transform = Transform3D(-2, 0, -1.7484555e-07, 0, 2, 0, 1.7484555e-07, 0, -2, 0, 0, 0)
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 
 [node name="metarig" type="Node3D" parent="Dragon Boss"]
 
@@ -2615,7 +2687,7 @@ mesh = SubResource("ArrayMesh_6003e")
 skin = SubResource("Skin_yer05")
 
 [node name="DragonBossCollision" type="CollisionShape3D" parent="."]
-transform = Transform3D(-2, 0, -1.7484555e-07, 0, 2, 0, 1.7484555e-07, 0, -2, 0, 0, 0)
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 shape = SubResource("ConvexPolygonShape3D_40fgf")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -2644,8 +2716,19 @@ one_shot = true
 monitoring = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="FireBreathArea"]
-transform = Transform3D(-1, -8.500728e-08, 2.0408445e-08, 0, 0.23344542, 0.97236985, -8.742278e-08, 0.9723699, -0.2334454, 0, 2.0784206, -6.5899796)
+transform = Transform3D(1, 0, 0, 0, 0.23344542, 0.97236985, 0, -0.9723699, 0.2334454, 0, 0.668, 6.59)
 shape = SubResource("ConvexPolygonShape3D_sq1gs")
+
+[node name="Flame" type="GPUParticles3D" parent="FireBreathArea"]
+transform = Transform3D(0.5, 0, 0, 0, -0.29871756, -0.19420521, 0, 1.2137824, -0.047794823, 0, 1.612, 3.59)
+emitting = false
+amount = 256
+sub_emitter = NodePath("../Smoke")
+one_shot = true
+preprocess = 0.5
+fixed_fps = 60
+process_material = SubResource("ParticleProcessMaterial_2a1f0")
+draw_pass_1 = SubResource("ArrayMesh_kh3j8")
 
 [node name="SlamArea" type="Area3D" parent="."]
 monitoring = false
