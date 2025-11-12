@@ -4,7 +4,7 @@ extends CharacterBody3D
 var speed
 const WALK_SPEED = 6.0
 const CROUCH_SPEED = 1.0
-const SPRINT_SPEED = 10.0
+const SPRINT_SPEED = 11.0
 const SLIDE_SPEED = 20.0  # Proto's value for great feel
 @export var JUMP_VELOCITY = 4.5
 const SENSITIVITY = 0.003

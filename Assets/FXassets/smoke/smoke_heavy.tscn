@@ -1,6 +1,6 @@
 [gd_scene load_steps=11 format=4 uid="uid://ce0l7sdpyg8kw"]
 
-[ext_resource type="Material" uid="uid://ks1kly3dfqvc" path="res://PolyBlocks/EffectBlocks/source_files/materials/smoke_billboard.material" id="1_13dyt"]
+[ext_resource type="Material" uid="uid://ks1kly3dfqvc" path="res://Assets/source_files/materials/smoke_billboard.material" id="1_13dyt"]
 
 [sub_resource type="Gradient" id="Gradient_oyxsh"]
 
@@ -25,7 +25,10 @@ curve = SubResource("Curve_quq64")
 emission_shape = 1
 emission_sphere_radius = 1.0
 angle_max = 90.0
-spread = 0.0
+direction = Vector3(0, 0, 1)
+spread = 20.74
+initial_velocity_min = 3.0
+initial_velocity_max = 10.0
 gravity = Vector3(0, 4, 0)
 scale_min = 0.4
 scale_max = 0.4
@@ -68,8 +71,9 @@ blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_udcdq")
 
 [node name="SmokeHeavy" type="GPUParticles3D"]
-amount = 640
+amount = 200
 lifetime = 2.0
+speed_scale = 1.2
 fixed_fps = 60
 process_material = SubResource("ParticleProcessMaterial_h8hb5")
 draw_pass_1 = SubResource("ArrayMesh_biwkl")
