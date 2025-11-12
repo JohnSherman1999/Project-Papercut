@@ -1275,7 +1275,7 @@ transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 
 shape = SubResource("ConvexPolygonShape3D_16y1f")
 
 [node name="Player" parent="." instance=ExtResource("1_2dhm0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -28.760303, 0, -45.55478)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.19702911, 0, 212.20834)
 
 [node name="Enemies_Ground" type="Node3D" parent="."]
 
