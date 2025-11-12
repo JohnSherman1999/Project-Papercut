@@ -8,11 +8,11 @@
 [ext_resource type="ArrayMesh" uid="uid://b4eu1ra75dcc1" path="res://Assets/grass.res" id="5_gyw5m"]
 [ext_resource type="ArrayMesh" uid="uid://bh5xp164w02ts" path="res://Assets/tree.res" id="6_vwc7n"]
 [ext_resource type="PackedScene" uid="uid://bm5isa31p30f" path="res://Scenes/EnemyScenes/basic_enemy.tscn" id="8_3ket0"]
-[ext_resource type="PackedScene" uid="uid://conx3yh8solmb" path="res://Scenes/EnemyScenes/crane_enemy.tscn" id="9_chonr"]
 [ext_resource type="Script" uid="uid://b1gj5yqker4hd" path="res://Scripts/ManagerScripts/room_manager.gd" id="10_chonr"]
 [ext_resource type="AudioStream" uid="uid://csof3e6kh7cjx" path="res://Scenes/Music/Cardio Cyberpunk Game Workout Club Techno by Infraction [No Copyright Music]  Dimensions.mp3" id="11_4v5nr"]
 [ext_resource type="Material" uid="uid://8trvoyqnkhh1" path="res://Assets/mysteriousForce.tres" id="11_qidyj"]
 [ext_resource type="TorusMesh" uid="uid://25cyev0dlkik" path="res://Assets/mysteriousForceMesh.tres" id="12_ytukv"]
+[ext_resource type="PackedScene" uid="uid://sistfd0avol0" path="res://Scenes/EnemyScenes/dragon_boss.tscn" id="13_qidyj"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_2dhm0"]
 sky_top_color = Color(0.701961, 0, 1, 1)
@@ -1276,7 +1276,7 @@ transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 
 shape = SubResource("ConvexPolygonShape3D_16y1f")
 
 [node name="Player" parent="." instance=ExtResource("1_2dhm0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 164.19228)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 210.99922)
 
 [node name="Enemies_Ground" type="Node3D" parent="."]
 
@@ -1294,13 +1294,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 62, 0, 120)
 
 [node name="basic_enemy7" parent="Enemies_Ground" instance=ExtResource("8_3ket0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -61, 0, 58)
-
-[node name="Enemies_Flying" type="Node3D" parent="."]
-
-[node name="crane_enemy" parent="Enemies_Flying" instance=ExtResource("9_chonr")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 148)
-
-[node name="Pickups" type="Node3D" parent="."]
 
 [node name="RoomManager" type="Node3D" parent="."]
 script = ExtResource("10_chonr")
@@ -1498,6 +1491,9 @@ stream = ExtResource("11_4v5nr")
 volume_db = 18.641
 autoplay = true
 parameters/looping = true
+
+[node name="DragonBoss" parent="." instance=ExtResource("13_qidyj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.657, 0, 152.86)
 
 [connection signal="body_entered" from="RoomManager/BonusRoom1/DetectionArea" to="RoomManager" method="_on_bonus_detection_body_entered"]
 [connection signal="body_entered" from="RoomManager/BonusRoom1/InteractArea" to="RoomManager" method="_on_bonus_interact_body_entered"]

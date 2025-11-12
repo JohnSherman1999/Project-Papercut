@@ -165,7 +165,7 @@ func _physics_process(delta: float) -> void:
 		pound_area.monitoring = true
 		await get_tree().physics_frame
 		for body in pound_area.get_overlapping_bodies():
-			if body is Enemy:
+			if body is Enemy or DragonBoss:
 				body.take_damage(POUND_DAMAGE)
 				var knock_dir = (body.global_position - global_position).normalized()
 				body.apply_knockback(knock_dir, POUND_KNOCKBACK)
@@ -284,7 +284,7 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("dash") and not is_dashing:
 		if target_ray.is_colliding():
 			var collider = target_ray.get_collider()
-			if collider and collider is Enemy:
+			if collider and collider is Enemy or DragonBoss:
 				$slice.play()  # Audio from John
 				is_dashing = true
 				dash_timer = DASH_DURATION
@@ -349,7 +349,7 @@ func _headbob(time) -> Vector3:
 	return pos
 
 func _on_dash_area_body_entered(body: Node3D) -> void:
-	if body is Enemy:
+	if body is Enemy or DragonBoss:
 		body.take_damage(DASH_DAMAGE)
 		is_dashing = false
 		dash_area.set_deferred("monitoring", false)
@@ -368,7 +368,7 @@ func _attack() -> void:
 func take_damage(amount: float) -> void:
 	health -= amount
 	if health <= 0:
-		get_tree().change_scene_to_file("res://Scenes/Settings/sample_death.tscn")
+		get_tree().call_deferred("change_scene_to_file", "res://Scenes/Settings/sample_death.tscn")
 		print("Player died")
 	elif health > 0:
 		update_heart_display()
@@ -394,6 +394,6 @@ func apply_knockback(dir: Vector3, force: float) -> void:
 
 
 func _on_area_3d_body_entered(body: Node3D) -> void:
-	if body is Enemy:
+	if body is Enemy or DragonBoss:
 		body.take_damage(DAMAGE)
 	print(body)

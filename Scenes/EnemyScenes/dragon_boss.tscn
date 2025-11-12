@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=4 uid="uid://dpdjaclwjqput"]
+[gd_scene load_steps=17 format=4 uid="uid://sistfd0avol0"]
 
 [ext_resource type="Texture2D" uid="uid://d36mud43tg0fi" path="res://Assets/Enemies/Dragon_Model/Dragon Boss_Material.png" id="1_5lu0i"]
 [ext_resource type="Script" uid="uid://bhnimrnab7r7j" path="res://Scripts/EnemyScripts/dragon_boss.gd" id="1_40fgf"]
@@ -171,6 +171,9 @@ bind/44/pose = Transform3D(-1, -7.4412405e-06, -1.228526e-06, -2.6148033e-12, -0
 bind/45/name = &"toe.R"
 bind/45/bone = -1
 bind/45/pose = Transform3D(-1, 7.4412405e-06, 1.228526e-06, 2.6148033e-12, -0.16289154, 0.986644, 7.541989e-06, 0.9866461, 0.16289224, -0.39861053, 0.39793882, 0.029172033)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_40fgf"]
+points = PackedVector3Array(-0.33898756, -0.052957058, -1.5355558, -0.9862571, 1.8882306, -1.0178416, 0.95517135, 2.0825, -1.081897, 0.37251475, -0.052957058, 0.6646285, -0.40379053, -0.052957058, 0.6646285, 0.24309888, 0.9179598, -2.441657, 0.3077118, 0.011871219, -1.664883, -0.20957167, 2.1473284, 0.7939558, -0.20957167, 1.4350786, -2.3119245, -0.20957167, 1.4350786, 1.5703244, -0.9862571, 2.0825, -1.081897, 0.17829591, 1.5647352, 1.6351907, -0.20957167, 0.3353666, -2.2474637, 0.95517135, 1.8236176, -1.0178416, 0.43712768, -0.052957058, 0.5997622, 0.24309888, 2.1473284, 0.7290894, 0.95517135, 2.017887, -0.823648, -0.20957167, 0.9179598, -2.441657, 0.17829591, 1.4350786, -2.3119245, 0.113682985, 1.370681, 1.6351907, 0.37251475, 0.011871219, -1.3413622, 0.24309888, 0.2059254, -2.05327, -0.9862571, 2.0825, -0.9529752, -0.20957167, 1.6295635, 1.5058635, 0.24309888, 1.1115832, -2.441657, -0.14495875, 1.370681, 1.6351907, 0.17829591, 0.3353666, -2.2474637, 0.17829591, 1.4350786, 1.6351907, -0.9862571, 1.9530588, -1.081897, -0.20957167, 1.1115832, -2.441657, 0.24309888, 1.6941764, 1.3761309, -0.41669998, 0.072647184, -0.48500273)
 
 [sub_resource type="Animation" id="Animation_45ijm"]
 resource_name = "Attack-FireBall"
@@ -2264,14 +2267,22 @@ _data = {
 &"T-Pose": SubResource("Animation_6bclp")
 }
 
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_40fgf"]
-points = PackedVector3Array(-0.416807, -0.02061508, 0.20191264, 0.4166202, -0.02061508, 0.20191264, -0.3906632, -0.02040349, 0.40584254, -0.36451942, -0.01998031, 0.6101718, -0.416807, 0.01958705, 0.2649672, -0.9538755, 2.0381572, -1.0539933, -0.416807, 0.008372771, -0.46854246, -0.2780581, 0.0049873292, -1.4734268, 0.4166202, 0.01958705, 0.2649672, 0.3643325, -0.01998031, 0.6101718, 0.3904764, -0.02040349, 0.40584254, 0.2778712, 0.0049873292, -1.4734268, 0.4166202, 0.008372771, -0.46854246, 0.95387536, 2.0381572, -1.0539933, -0.416807, 0.06000077, 0.3276229, -5.9604645e-08, 0.7901984, 1.2151775, -5.9604645e-08, 1.4048678, 1.6210423, -0.14005613, 1.4048678, 1.5284557, -0.14005613, 1.5100281, 1.5751481, -0.6444449, 1.5646183, -0.08422804, -0.7992536, 1.8013878, -0.56911075, -0.18711501, 2.14099, 0.6895888, -0.1648928, 1.374822, -2.2600143, -0.1861813, 1.0350082, -2.4092703, -0.1680674, 0.6761513, -2.2815645, -0.14976674, 0.31750602, -2.153859, -0.21400577, 0.16114086, -1.8138423, 0.4166202, 0.06000077, 0.3276229, 0.13986927, 1.5100281, 1.5751481, 0.13986927, 1.4048678, 1.5284557, 0.64425796, 1.5646183, -0.08422804, 0.21381897, 0.16114086, -1.8138423, 0.14957982, 0.31750602, -2.153859, 0.16788048, 0.6761513, -2.2815645, 0.18599445, 1.0350082, -2.4092703, 0.16470593, 1.374822, -2.2600143, 0.1869281, 2.14099, 0.6895888, -5.9604645e-08, 1.4361831, 1.6350102, -0.070028126, 1.4245456, 1.5835288, -5.9604645e-08, 1.5100281, 1.6677346, -5.9604645e-08, 1.8718473, 1.1792605)
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_sq1gs"]
+points = PackedVector3Array(0, 3.8, 0, 3.5, -8.5, 0, -3.5, -8.5, 0, 0, 0, 0.2, 0, 0, -1.615)
 
-[node name="DragonBoss" type="CharacterBody3D"]
+[sub_resource type="SphereShape3D" id="SphereShape3D_40fgf"]
+radius = 7.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_sq1gs"]
+radius = 30.0
+
+[node name="DragonBoss" type="CharacterBody3D" groups=["Enemy"]]
+collision_layer = 2
+collision_mask = 3
 script = ExtResource("1_40fgf")
 
 [node name="Dragon Boss" type="Node3D" parent="."]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+transform = Transform3D(-2, 0, -1.7484555e-07, 0, 2, 0, 1.7484555e-07, 0, -2, 0, 0, 0)
 
 [node name="metarig" type="Node3D" parent="Dragon Boss"]
 
@@ -2603,12 +2614,54 @@ bones/45/scale = Vector3(1, 0.99999994, 0.9999978)
 mesh = SubResource("ArrayMesh_6003e")
 skin = SubResource("Skin_yer05")
 
+[node name="DragonBossCollision" type="CollisionShape3D" parent="."]
+transform = Transform3D(-2, 0, -1.7484555e-07, 0, 2, 0, 1.7484555e-07, 0, -2, 0, 0, 0)
+shape = SubResource("ConvexPolygonShape3D_40fgf")
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 root_node = NodePath("../Dragon Boss")
 libraries = {
 &"": SubResource("AnimationLibrary_v1po3")
 }
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
-shape = SubResource("ConvexPolygonShape3D_40fgf")
+[node name="FireballTimer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
+[node name="FireBreathTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[node name="SlamTimer" type="Timer" parent="."]
+wait_time = 7.0
+one_shot = true
+
+[node name="GlobalCooldownTimer" type="Timer" parent="."]
+wait_time = 1.5
+one_shot = true
+
+[node name="FireBreathArea" type="Area3D" parent="."]
+monitoring = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="FireBreathArea"]
+transform = Transform3D(-1, -8.500728e-08, 2.0408445e-08, 0, 0.23344542, 0.97236985, -8.742278e-08, 0.9723699, -0.2334454, 0, 2.0784206, -6.5899796)
+shape = SubResource("ConvexPolygonShape3D_sq1gs")
+
+[node name="SlamArea" type="Area3D" parent="."]
+monitoring = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SlamArea"]
+shape = SubResource("SphereShape3D_40fgf")
+
+[node name="detection_area" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="detection_area"]
+shape = SubResource("SphereShape3D_sq1gs")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+path_desired_distance = 0.5
+avoidance_enabled = true
+
+[connection signal="body_entered" from="FireBreathArea" to="." method="_on_firebreath_area_body_entered"]
+[connection signal="body_entered" from="SlamArea" to="." method="_on_slam_area_body_entered"]
+[connection signal="body_entered" from="detection_area" to="." method="_on_detection_area_body_entered"]
