@@ -16,6 +16,11 @@ var health: float = 9.0
 @export var max_health: float = 9.0
 var heart_list : Array[TextureRect]
 
+# Invulnerability
+var invulnerable_timer: float = 0.0
+@export var INVULN_DURATION: float = 0.5  # Tweakable in Inspector
+var is_invulnerable: bool = false
+
 # Slide playground (integrated from John's with tweaks)
 var is_sliding = false
 var SLIDE_FRICTION = 1.0  # Lower friction (adjusted in downhill)
@@ -121,6 +126,11 @@ func _physics_process(delta: float) -> void:
 	#stop walk sound
 	if not is_on_floor():
 		$walking.stop()  # Stop walking sound
+
+	if is_invulnerable:
+		invulnerable_timer -= delta
+		if invulnerable_timer <= 0:
+			is_invulnerable = false
 
 	# Handle gravity (modified for wall-run, dash, pound)
 	if not is_on_floor() and not is_dashing:
@@ -364,15 +374,22 @@ func _attack() -> void:
 	is_attacking = false
 	$Area3D.monitoring = false
 
-# In movement.gd (add at bottom)
+# REPLACE take_damage() entirely
 func take_damage(amount: float) -> void:
+	if is_invulnerable:
+		return  # Ignore damage during iframe window
+	
 	health -= amount
 	if health <= 0:
 		get_tree().call_deferred("change_scene_to_file", "res://Scenes/Settings/sample_death.tscn")
 		print("Player died")
 	elif health > 0:
 		update_heart_display()
-	print("Player health: ", health)
+		print("Player health: ", health)
+	
+	# START INVULN TIMER
+	is_invulnerable = true
+	invulnerable_timer = INVULN_DURATION
 
 func update_heart_display():
 	var hearts = $HealthBar/HBoxContainer.get_children()
@@ -389,9 +406,8 @@ func update_heart_display():
 			sprite.play("health_loss")
 
 func apply_knockback(dir: Vector3, force: float) -> void:
-	knockback_velocity += dir * force  # Simple add to current vel
+	knockback_velocity += dir * force # Simple add to current vel
 	print("Player knocked back")
-
 
 func _on_area_3d_body_entered(body: Node3D) -> void:
 	if body is Enemy or DragonBoss:
