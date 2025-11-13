@@ -1,10 +1,11 @@
-[gd_scene load_steps=29 format=4 uid="uid://sistfd0avol0"]
+[gd_scene load_steps=34 format=4 uid="uid://sistfd0avol0"]
 
 [ext_resource type="Texture2D" uid="uid://d36mud43tg0fi" path="res://Assets/Enemies/Dragon_Model/Dragon Boss_Material.png" id="1_5lu0i"]
 [ext_resource type="Script" uid="uid://bhnimrnab7r7j" path="res://Scripts/EnemyScripts/dragon_boss.gd" id="1_40fgf"]
 [ext_resource type="Material" uid="uid://cjgoj12p3pb0g" path="res://Assets/source_files/materials/fire_billboard.material" id="3_sq1gs"]
 [ext_resource type="AudioStream" uid="uid://btbcnuce17xcj" path="res://Assets/Sounds player/Ground Pound.mp3" id="4_ajitg"]
 [ext_resource type="AudioStream" uid="uid://djlahq20y037n" path="res://Assets/Sounds Enemies/dragon roar.mp3" id="5_ephov"]
+[ext_resource type="PackedScene" uid="uid://dga70rvsj0y6c" path="res://Scenes/EnemyScenes/Health_Bar.tscn" id="6_ephov"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_omrt4"]
 resource_name = "Material.001"
@@ -2350,6 +2351,17 @@ radius = 7.0
 [sub_resource type="SphereShape3D" id="SphereShape3D_sq1gs"]
 radius = 30.0
 
+[sub_resource type="ViewportTexture" id="ViewportTexture_ephov"]
+viewport_path = NodePath("Sprite3D/SubViewport2")
+
+[sub_resource type="World3D" id="World3D_ephov"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2csvo"]
+bg_color = Color(0, 0, 0, 0.43529412)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yxq8g"]
+bg_color = Color(1, 0, 0, 1)
+
 [node name="DragonBoss" type="CharacterBody3D" groups=["Enemy"]]
 collision_layer = 2
 collision_mask = 3
@@ -2754,6 +2766,21 @@ volume_db = 54.224
 [node name="fire ball" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("5_ephov")
 volume_db = 27.961
+
+[node name="Sprite3D" parent="." instance=ExtResource("6_ephov")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
+texture = SubResource("ViewportTexture_ephov")
+
+[node name="SubViewport2" type="SubViewport" parent="Sprite3D"]
+world_3d = SubResource("World3D_ephov")
+size = Vector2i(512, 24)
+
+[node name="ProgressBar" type="ProgressBar" parent="Sprite3D/SubViewport2"]
+offset_right = 1150.0
+offset_bottom = 27.0
+theme_override_styles/background = SubResource("StyleBoxFlat_2csvo")
+theme_override_styles/fill = SubResource("StyleBoxFlat_yxq8g")
+value = 50.0
 
 [connection signal="body_entered" from="FireBreathArea" to="." method="_on_firebreath_area_body_entered"]
 [connection signal="body_entered" from="SlamArea" to="." method="_on_slam_area_body_entered"]
