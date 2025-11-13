@@ -76,8 +76,9 @@ func take_damage(amount: float) -> void:
 		die()
 
 func die() -> void:
-	spawn_health()
 	queue_free()
+	await get_tree().physics_frame
+	spawn_health()
 
 func apply_knockback(dir: Vector3, force: float) -> void:
 	knockback_velocity = dir * force
@@ -100,5 +101,5 @@ func _on_detection_area_body_exited(body: Node3D) -> void:
 func spawn_health():
 	var health_pickup = health_scene.instantiate()
 	var root_node = get_tree().root
-	health_pickup.global_position = $".".global_position
 	root_node.add_child(health_pickup)
+	health_pickup.global_position = $".".global_position

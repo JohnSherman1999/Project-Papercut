@@ -44,4 +44,4 @@ func spawn_herd_wave() -> void:
 
 
 func _on_finish_zone_body_entered(body: Node3D) -> void:
-	pass # Replace with function body.
+	get_tree().change_scene_to_file("res://Scenes/EnemyScenes/W.tscn")

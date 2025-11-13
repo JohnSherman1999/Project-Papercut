@@ -60,11 +60,11 @@ value = 1.0
 
 [node name="GameSpeed" type="Label" parent="."]
 layout_mode = 0
-offset_left = 248.0
+offset_left = 208.0
 offset_top = 320.0
-offset_right = 376.0
+offset_right = 336.0
 offset_bottom = 348.0
-text = "Game Speed"
+text = "Game Speed: 1.0x"
 label_settings = SubResource("LabelSettings_yjkok")
 
 [node name="GameSpeedSlider" type="HSlider" parent="."]
@@ -82,3 +82,4 @@ value = 1.0
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
 [connection signal="resized" from="Brightness" to="." method="_on_brightness_resized"]
 [connection signal="value_changed" from="BrightnessSlider" to="." method="_on_brightness_slider_value_changed"]
+[connection signal="changed" from="GameSpeedSlider" to="." method="_on_game_speed_changed"]

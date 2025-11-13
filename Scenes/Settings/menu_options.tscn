@@ -40,9 +40,9 @@ text = "Return To Menu"
 
 [node name="Brightness" type="Label" parent="."]
 layout_mode = 0
-offset_left = 108.0
+offset_left = 80.0
 offset_top = 200.0
-offset_right = 278.0
+offset_right = 250.00015
 offset_bottom = 228.0
 text = "Brightness"
 label_settings = SubResource("LabelSettings_yjkok")
@@ -61,11 +61,11 @@ value = 1.0
 
 [node name="GameSpeed" type="Label" parent="."]
 layout_mode = 0
-offset_left = 108.0
+offset_left = 48.0
 offset_top = 360.0
-offset_right = 278.0
+offset_right = 220.00006
 offset_bottom = 388.0
-text = "Game Speed"
+text = "Game Speed: 1.0x"
 label_settings = SubResource("LabelSettings_yjkok")
 
 [node name="GameSpeedSlider" type="HSlider" parent="."]
@@ -86,5 +86,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.72500753, 0, -0.03414011)
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
 [connection signal="resized" from="Brightness" to="." method="_on_brightness_resized"]
 [connection signal="value_changed" from="BrightnessSlider" to="." method="_on_brightness_slider_value_changed"]
+[connection signal="changed" from="GameSpeedSlider" to="." method="_on_game_speed_changed"]
 
 [editable path="Player"]

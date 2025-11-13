@@ -1,6 +1,8 @@
 #LINE 83 IS HIDING PLAYER MODEL AS IT CLIPS WITH SCREEN
 extends CharacterBody3D
 
+@export var GAMEPAD_SENSITIVITY: float = 5.0
+
 var speed
 const WALK_SPEED = 6.0
 const CROUCH_SPEED = 1.0
@@ -56,7 +58,7 @@ var dash_timer = 0.0
 var is_dashing = false
 @export var DAMAGE := 40.0
 @export var DASH_DAMAGE = 30.0  # Damage on hit
-@export var DASH_TARGET_OFFSET = Vector3(0, 1.5, -2.0)  # Go "through" enemy (adjust based on direction)
+@export var DASH_TARGET_OFFSET = Vector3(0, 0.5, -2.0)  # Go "through" enemy (adjust based on direction)
 @export var DASH_VERTICAL_OFFSET = 1.0  # Vertical adjustment to aim above enemy's base
 var dash_target: Vector3 = Vector3.ZERO  # For targeted dash
 var dash_direction: Vector3 = Vector3.ZERO
@@ -111,7 +113,7 @@ func _process(delta: float) -> void:
 	if hit_stop_timer > 0:
 		hit_stop_timer -= delta
 		if hit_stop_timer <= 0:
-			Engine.time_scale = 1.0
+			Engine.time_scale = Global.get_game_speed()
 
 	# Handle screenshake
 	if shake_timer > 0:
@@ -124,7 +126,12 @@ func _physics_process(delta: float) -> void:
 	# Input at top (proto style)
 	var input_dir = Input.get_vector("left", "right", "forward", "back")
 	direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
-
+	# NEW: Gamepad look (right stick) - smooth, delta-multiplied
+	var look_vector = Input.get_vector("look_left", "look_right", "look_up", "look_down")
+	rotate_y(-look_vector.x * GAMEPAD_SENSITIVITY * delta)
+	camera.rotate_x(-look_vector.y * GAMEPAD_SENSITIVITY * delta)
+	camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-40), deg_to_rad(60))
+	
 	#stop walk sound
 	if not is_on_floor():
 		$walking.stop()  # Stop walking sound

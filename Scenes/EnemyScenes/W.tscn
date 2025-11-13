@@ -9,8 +9,8 @@
 [node name="Node2D" type="Node2D"]
 
 [node name="Thank" type="Sprite2D" parent="."]
-position = Vector2(580, 320)
-scale = Vector2(2.9464285, 2.9409091)
+position = Vector2(577.25, 320)
+scale = Vector2(3.2, 3.2)
 texture = ExtResource("1_yl2yq")
 
 [node name="Control" type="Control" parent="."]
@@ -21,112 +21,121 @@ offset_bottom = 40.0
 
 [node name="Win" type="Label" parent="Control"]
 layout_mode = 0
-offset_left = 307.0
-offset_top = -11.0
-offset_right = 870.0
-offset_bottom = 155.0
+offset_left = 328.0
+offset_top = -8.0
+offset_right = 891.0
+offset_bottom = 158.0
 theme_override_font_sizes/font_size = 111
 text = "YOU WIN"
 
 [node name="thanks" type="Label" parent="Control"]
 layout_mode = 0
-offset_left = 346.0
-offset_top = 552.0
-offset_right = 774.0
-offset_bottom = 609.0
+offset_left = 360.0
+offset_top = 488.0
+offset_right = 788.0
+offset_bottom = 545.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 41
+theme_override_font_sizes/font_size = 24
 text = "Thank you for playing"
+horizontal_alignment = 1
 
 [node name="cred n link" type="Label" parent="Control"]
 layout_mode = 0
-offset_left = 235.0
-offset_top = 106.0
-offset_right = 869.0
-offset_bottom = 163.0
+offset_left = 256.0
+offset_top = 112.0
+offset_right = 890.0
+offset_bottom = 169.0
 theme_override_font_sizes/font_size = 41
 text = "credits and links to itch.io pages"
 
 [node name="sean title" type="Label" parent="Control"]
 layout_mode = 0
-offset_left = 204.0
-offset_top = 169.0
-offset_right = 562.0
-offset_bottom = 286.0
-theme_override_font_sizes/font_size = 41
+offset_left = 240.0
+offset_top = 176.0
+offset_right = 598.0
+offset_bottom = 293.0
+theme_override_font_sizes/font_size = 32
 text = "Lead Programmer
 Project Manger"
+horizontal_alignment = 1
 
 [node name="sean" type="Label" parent="Control"]
 layout_mode = 0
-offset_left = 227.0
-offset_top = 278.0
-offset_right = 585.0
-offset_bottom = 335.0
+offset_left = 240.0
+offset_top = 272.0
+offset_right = 598.0
+offset_bottom = 329.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 41
+theme_override_font_sizes/font_size = 32
 text = "Sean Lipscomb"
+horizontal_alignment = 1
 
 [node name="angel title" type="Label" parent="Control"]
 layout_mode = 0
-offset_left = 270.0
-offset_top = 316.0
-offset_right = 610.0
-offset_bottom = 433.0
-theme_override_font_sizes/font_size = 41
+offset_left = 312.0
+offset_top = 312.0
+offset_right = 652.0
+offset_bottom = 429.0
+theme_override_font_sizes/font_size = 32
 text = "Sound
 UI Design"
+horizontal_alignment = 1
 
 [node name="angel" type="Label" parent="Control"]
 layout_mode = 0
-offset_left = 253.0
-offset_top = 443.0
-offset_right = 549.0
-offset_bottom = 500.0
+offset_left = 336.0
+offset_top = 408.0
+offset_right = 632.0
+offset_bottom = 465.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 41
+theme_override_font_sizes/font_size = 32
 text = "Angel Oliva"
+horizontal_alignment = 1
 
 [node name="John title" type="Label" parent="Control"]
 layout_mode = 0
-offset_left = 599.0
-offset_top = 170.0
-offset_right = 1073.0
-offset_bottom = 287.0
-theme_override_font_sizes/font_size = 41
+offset_left = 568.0
+offset_top = 176.0
+offset_right = 897.0
+offset_bottom = 293.0
+theme_override_font_sizes/font_size = 32
 text = "Animation
 Programmer"
+horizontal_alignment = 1
 
 [node name="John" type="Label" parent="Control"]
 layout_mode = 0
-offset_left = 581.0
-offset_top = 289.0
-offset_right = 860.0
-offset_bottom = 346.0
+offset_left = 576.0
+offset_top = 272.0
+offset_right = 896.0
+offset_bottom = 329.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 41
+theme_override_font_sizes/font_size = 32
 text = "John Sherman"
+horizontal_alignment = 1
 
 [node name="cris title" type="Label" parent="Control"]
 layout_mode = 0
-offset_left = 588.0
-offset_top = 342.0
-offset_right = 875.0
-offset_bottom = 459.0
+offset_left = 528.0
+offset_top = 312.0
+offset_right = 848.0
+offset_bottom = 429.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_font_sizes/font_size = 41
+theme_override_font_sizes/font_size = 32
 text = "Level Design
 Asset Creation"
+horizontal_alignment = 1
 
 [node name="cris" type="Label" parent="Control"]
 layout_mode = 0
-offset_left = 586.0
-offset_top = 466.0
-offset_right = 865.0
-offset_bottom = 523.0
+offset_left = 544.0
+offset_top = 408.0
+offset_right = 823.0
+offset_bottom = 465.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 41
+theme_override_font_sizes/font_size = 32
 text = "Cris Lopez"
+horizontal_alignment = 1
 
 [node name="Main Menu" type="Button" parent="Control"]
 layout_mode = 0
@@ -139,12 +148,12 @@ text = "Main Menu"
 script = ExtResource("2_f0pl5")
 
 [node name="SeanQr" type="Sprite2D" parent="."]
-position = Vector2(112, 259)
+position = Vector2(176, 232)
 scale = Vector2(0.13183598, 0.121826194)
 texture = ExtResource("3_jwd3n")
 
 [node name="AngelQr" type="Sprite2D" parent="."]
-position = Vector2(115, 444)
+position = Vector2(304, 432)
 scale = Vector2(0.12890625, 0.1259766)
 texture = ExtResource("4_0qpa2")
 
