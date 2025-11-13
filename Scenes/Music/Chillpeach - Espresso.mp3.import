@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bl78bie6lrkew"
+path="res://.godot/imported/Chillpeach - Espresso.mp3-f4b1d38530b356fd4580754045252306.mp3str"
+
+[deps]
+
+source_file="res://Scenes/Music/Chillpeach - Espresso.mp3"
+dest_files=["res://.godot/imported/Chillpeach - Espresso.mp3-f4b1d38530b356fd4580754045252306.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
