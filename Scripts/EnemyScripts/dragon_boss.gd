@@ -42,7 +42,7 @@ var player: Node3D
 var knockback_velocity: Vector3 = Vector3.ZERO
 var player_in_range: bool = false
 
-@onready var progress_bar: ProgressBar = $SubViewport2/ProgressBar
+@onready var progress_bar: ProgressBar = $HealthBar/SubViewportContainer/SubViewport/HealthBarContainer/ProgressBar
 @onready var animation_player: AnimationPlayer = $AnimationPlayer  # Attach to mesh
 @onready var nav_agent: NavigationAgent3D = $NavigationAgent3D
 @onready var detection_area: Area3D = $detection_area
@@ -73,17 +73,12 @@ func _ready():
 		progress_bar.max_value = max_health
 		progress_bar.value = health
 	else:
-		push_error("ProgressBar not found! Check SubViewport2/ProgressBar")
+		print("ProgressBar not found! Check SubViewport2/ProgressBar")
 
 func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 		velocity.y -= gravity * delta
-	if get_viewport().get_camera_3d():
-		$Sprite3D.look_at(
-			get_viewport().get_camera_3d().global_position, 
-			Vector3.UP
-		)
-		$Sprite3D.rotate_y(PI)
+
 
 	# Detection and chase logic (adapted from basic_enemy.gd)
 	if player_in_range and player:

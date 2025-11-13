@@ -51,10 +51,12 @@ var wall_normal = Vector3.ZERO
 # Dash variables
 @export var DASH_SPEED = 20.0  # Forward boost speed for dash
 @export var DASH_DURATION = 1.0  # Max safety duration (prevent infinite dash)
+@export var ATTACK_DURATION = 0.6 # Same as above but for mouse 1 attack
 @export var DASH_COOLDOWN: float = 1.0  # 1s cooldown after dash ends (tweakable)
 var dash_cooldown_timer: float = 0.0
 @export var DASH_END_THRESHOLD = 1.0  # Distance to target to end dash
 var dash_timer = 0.0
+var attack_timer = 0.0
 var is_dashing = false
 @export var DAMAGE := 40.0
 @export var DASH_DAMAGE = 30.0  # Damage on hit
@@ -299,8 +301,13 @@ func _physics_process(delta: float) -> void:
 		velocity += -wall_normal * WALL_STICK_FORCE * delta
 
 	#handle main attack
-	if Input.is_action_just_pressed("attack") && !is_dashing:
+	if Input.is_action_just_pressed("attack") && !is_dashing && ! is_attacking:
 		_attack()
+		$slice.play()
+		attack_timer = ATTACK_DURATION
+	attack_timer -= delta
+	if attack_timer <= 0:
+		is_attacking = false
 
 	# Handle dash (with audio from John)
 	if Input.is_action_just_pressed("dash") and not is_dashing and dash_cooldown_timer <= 0:
@@ -386,8 +393,9 @@ func _attack() -> void:
 	is_attacking = true
 	$Area3D.monitoring = true
 	await get_tree().create_timer(0.5).timeout
-	is_attacking = false
 	$Area3D.monitoring = false
+
+
 
 # REPLACE take_damage() entirely
 func take_damage(amount: float) -> void:

@@ -236,6 +236,7 @@ func _on_room3_detection_body_entered(body: Node3D) -> void:
 	if body.is_in_group("player"):
 		seal_room3()
 		spawn_room3_enemies()
+		#$"../Control".visible = true
 
 func seal_room3() -> void:
 	var barrier_node = $Room3.get_node("Barrier")

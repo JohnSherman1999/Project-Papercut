@@ -1441,7 +1441,7 @@ transform = Transform3D(0.8680775, 0, -0.49642864, 0, 1, 0, 0.49642864, 0, 0.868
 transform = Transform3D(0.8680775, 0, -0.49642864, 0, 1, 0, 0.49642864, 0, 0.8680775, -47.49254, 4.544913, 110.68182)
 
 [node name="Player" parent="." instance=ExtResource("1_2dhm0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.19842911, 0, 209.80577)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.19842911, 0, 213.80577)
 
 [node name="Enemies_Ground" type="Node3D" parent="."]
 
@@ -1661,6 +1661,20 @@ stream = ExtResource("11_4v5nr")
 volume_db = 9.416
 autoplay = true
 parameters/looping = true
+
+[node name="Control" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ProgressBar" type="ProgressBar" parent="Control"]
+layout_mode = 0
+offset_left = 90.0
+offset_top = 600.0
+offset_right = 1075.0
+offset_bottom = 644.0
 
 [connection signal="body_entered" from="RoomManager/BonusRoom1/DetectionArea" to="RoomManager" method="_on_bonus_detection_body_entered"]
 [connection signal="body_entered" from="RoomManager/BonusRoom1/InteractArea" to="RoomManager" method="_on_bonus_interact_body_entered"]
