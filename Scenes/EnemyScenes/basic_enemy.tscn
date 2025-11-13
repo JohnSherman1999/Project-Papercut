@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=4 uid="uid://bm5isa31p30f"]
+[gd_scene load_steps=18 format=4 uid="uid://bm5isa31p30f"]
 
 [ext_resource type="Script" uid="uid://bjef1mca215lk" path="res://Scripts/EnemyScripts/basic_enemy.gd" id="1_rjn58"]
 [ext_resource type="Texture2D" uid="uid://bjma3qig8v5w0" path="res://Assets/Enemies/Wolf_Model/Wolf_Material.png" id="2_4wo5x"]
@@ -1192,6 +1192,9 @@ _data = {
 &"Run": SubResource("Animation_c8a6n")
 }
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_4wo5x"]
+size = Vector3(1, 1.174042, 1.25)
+
 [node name="basic_enemy" type="CharacterBody3D" groups=["Enemy"]]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
 collision_layer = 2
@@ -1517,5 +1520,12 @@ max_db = 6.0
 [node name="Wolf Attack" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("5_pcfv6")
 
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.3370909e-08, 0.58652097, -1.0376679)
+shape = SubResource("BoxShape3D_4wo5x")
+
 [connection signal="body_entered" from="detection_area" to="." method="_on_detection_area_body_entered"]
 [connection signal="body_exited" from="detection_area" to="." method="_on_detection_area_body_exited"]
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
