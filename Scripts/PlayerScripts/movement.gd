@@ -49,6 +49,8 @@ var wall_normal = Vector3.ZERO
 # Dash variables
 @export var DASH_SPEED = 20.0  # Forward boost speed for dash
 @export var DASH_DURATION = 1.0  # Max safety duration (prevent infinite dash)
+@export var DASH_COOLDOWN: float = 1.0  # 1s cooldown after dash ends (tweakable)
+var dash_cooldown_timer: float = 0.0
 @export var DASH_END_THRESHOLD = 1.0  # Distance to target to end dash
 var dash_timer = 0.0
 var is_dashing = false
@@ -126,6 +128,9 @@ func _physics_process(delta: float) -> void:
 	#stop walk sound
 	if not is_on_floor():
 		$walking.stop()  # Stop walking sound
+
+	if dash_cooldown_timer > 0:
+		dash_cooldown_timer -= delta
 
 	if is_invulnerable:
 		invulnerable_timer -= delta
@@ -291,7 +296,7 @@ func _physics_process(delta: float) -> void:
 		_attack()
 
 	# Handle dash (with audio from John)
-	if Input.is_action_just_pressed("dash") and not is_dashing:
+	if Input.is_action_just_pressed("dash") and not is_dashing and dash_cooldown_timer <= 0:
 		if target_ray.is_colliding():
 			var collider = target_ray.get_collider()
 			if collider and collider is Enemy or DragonBoss:
@@ -311,10 +316,12 @@ func _physics_process(delta: float) -> void:
 		if dist_to_target < DASH_END_THRESHOLD:
 			is_dashing = false
 			dash_area.set_deferred("monitoring", false)
+			dash_cooldown_timer = DASH_COOLDOWN  # NEW: Start cooldown
 		dash_timer -= delta
 		if dash_timer <= 0:
 			is_dashing = false
 			dash_area.set_deferred("monitoring", false)
+			dash_cooldown_timer = DASH_COOLDOWN  # NEW: Start cooldown
 
 	# Head bob
 	t_bob += delta * velocity.length() * float(is_on_floor())
@@ -363,6 +370,7 @@ func _on_dash_area_body_entered(body: Node3D) -> void:
 		body.take_damage(DASH_DAMAGE)
 		is_dashing = false
 		dash_area.set_deferred("monitoring", false)
+		dash_cooldown_timer = DASH_COOLDOWN  # NEW: Start cooldown on hit
 		Engine.time_scale = 0.1
 		hit_stop_timer = HIT_STOP_DURATION
 		shake_timer = SHAKE_DURATION

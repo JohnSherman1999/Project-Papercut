@@ -20,3 +20,13 @@ var current_level_id: int = 1  # 1=Forest, 2=City, etc.
 # Helper getter
 func get_current_level_id() -> int:
 	return current_level_id
+
+var game_speed: float = 1.0  # 0.1 = slow-mo, 1.0 = normal, 2.0 = fast
+
+func set_game_speed(speed: float) -> void:
+	game_speed = clamp(speed, 0.1, 2.0)
+	Engine.time_scale = game_speed
+	print("[Global] Game speed set to: ", game_speed, "x")
+
+func get_game_speed() -> float:
+	return game_speed
