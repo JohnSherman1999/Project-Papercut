@@ -1,8 +1,10 @@
-[gd_scene load_steps=27 format=4 uid="uid://sistfd0avol0"]
+[gd_scene load_steps=29 format=4 uid="uid://sistfd0avol0"]
 
 [ext_resource type="Texture2D" uid="uid://d36mud43tg0fi" path="res://Assets/Enemies/Dragon_Model/Dragon Boss_Material.png" id="1_5lu0i"]
 [ext_resource type="Script" uid="uid://bhnimrnab7r7j" path="res://Scripts/EnemyScripts/dragon_boss.gd" id="1_40fgf"]
 [ext_resource type="Material" uid="uid://cjgoj12p3pb0g" path="res://Assets/source_files/materials/fire_billboard.material" id="3_sq1gs"]
+[ext_resource type="AudioStream" uid="uid://btbcnuce17xcj" path="res://Assets/Sounds player/Ground Pound.mp3" id="4_ajitg"]
+[ext_resource type="AudioStream" uid="uid://djlahq20y037n" path="res://Assets/Sounds Enemies/dragon roar.mp3" id="5_ephov"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_omrt4"]
 resource_name = "Material.001"
@@ -2744,6 +2746,14 @@ shape = SubResource("SphereShape3D_sq1gs")
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
 path_desired_distance = 0.5
 avoidance_enabled = true
+
+[node name="Slam" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("4_ajitg")
+volume_db = 54.224
+
+[node name="fire ball" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("5_ephov")
+volume_db = 27.961
 
 [connection signal="body_entered" from="FireBreathArea" to="." method="_on_firebreath_area_body_entered"]
 [connection signal="body_entered" from="SlamArea" to="." method="_on_slam_area_body_entered"]

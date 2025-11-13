@@ -140,6 +140,7 @@ func update_path_to_player() -> void:
 # Detection Signals (connect in editor: DetectionArea body_entered/exited)
 func _on_detection_area_body_entered(body: Node3D) -> void:
 	if body == player:
+		$moo.play()
 		player_in_range = true
 		print("Bull aggro'd! 🐂")
 

@@ -1441,7 +1441,7 @@ transform = Transform3D(0.8680775, 0, -0.49642864, 0, 1, 0, 0.49642864, 0, 0.868
 transform = Transform3D(0.8680775, 0, -0.49642864, 0, 1, 0, 0.49642864, 0, 0.8680775, -47.49254, 4.544913, 110.68182)
 
 [node name="Player" parent="." instance=ExtResource("1_2dhm0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.389977, 0, -44.813488)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -63.7696, 0, -15.7916565)
 
 [node name="Enemies_Ground" type="Node3D" parent="."]
 
@@ -1658,7 +1658,7 @@ shadow_enabled = true
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("11_4v5nr")
-volume_db = 18.641
+volume_db = 9.416
 autoplay = true
 parameters/looping = true
 
