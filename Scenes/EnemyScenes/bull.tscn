@@ -1,9 +1,10 @@
-[gd_scene load_steps=42 format=4 uid="uid://52hgyvtsn262"]
+[gd_scene load_steps=43 format=4 uid="uid://52hgyvtsn262"]
 
 [ext_resource type="Script" uid="uid://1lct4sg01gig" path="res://Scripts/EnemyScripts/bull.gd" id="1_jc0js"]
 [ext_resource type="Texture2D" uid="uid://bibppqk5mjpid" path="res://Assets/Enemies/Bull_Model/Bull_Material.png" id="1_qupn7"]
 [ext_resource type="PackedScene" uid="uid://ce0l7sdpyg8kw" path="res://Assets/FXassets/smoke/smoke_heavy.tscn" id="2_jb5dp"]
 [ext_resource type="AudioStream" uid="uid://bhbbjn322lmco" path="res://Assets/Sounds Enemies/bull call 1.mp3" id="4_p27xr"]
+[ext_resource type="AudioStream" uid="uid://d2qfk7bsfp7yv" path="res://Assets/Sounds Enemies/bulls running.mp3" id="5_6r67p"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hekdf"]
 resource_name = "Material.001"
@@ -1112,6 +1113,10 @@ draw_pass_1 = SubResource("ArrayMesh_u7mm7")
 
 [node name="moo" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("4_p27xr")
+
+[node name="gallop" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("5_6r67p")
+autoplay = true
 
 [connection signal="body_entered" from="DamageArea" to="." method="_on_damage_area_body_entered"]
 [connection signal="body_entered" from="DetectionArea" to="." method="_on_detection_area_body_entered"]
