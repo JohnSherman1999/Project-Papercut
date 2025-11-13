@@ -10,6 +10,7 @@ extends Node
 @onready var spawn_zone: Node3D = $SpawnZone # <-- Marker3D (or any Node3D) placed behind the player
 
 func _ready() -> void:
+	Global.set_current_level("res://aLevels/City.tscn", 2)
 	if not bull_scene:
 		push_error("BullManager: bull_scene is not assigned!")
 		return
