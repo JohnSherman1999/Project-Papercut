@@ -1098,6 +1098,7 @@ volume_db = 20.515
 
 [node name="GroundPound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("7_acd72")
+volume_db = -10.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 root_node = NodePath("../FirstPerson")
