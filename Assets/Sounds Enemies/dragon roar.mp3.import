@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://djlahq20y037n"
+path="res://.godot/imported/dragon roar.mp3-627f697dba50d122a61ae05faa731feb.mp3str"
+
+[deps]
+
+source_file="res://Assets/Sounds Enemies/dragon roar.mp3"
+dest_files=["res://.godot/imported/dragon roar.mp3-627f697dba50d122a61ae05faa731feb.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

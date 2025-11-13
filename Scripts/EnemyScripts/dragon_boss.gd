@@ -142,6 +142,7 @@ func fireball_attack() -> void:
 func firebreath_attack() -> void:
 	# Activate cone for duration
 	await get_tree().create_timer(firebreath_startup).timeout
+	$"fire ball".play()
 	$FireBreathArea/Flame.emitting = true
 	firebreath_area.monitoring = true
 	await get_tree().create_timer(firebreath_duration).timeout
@@ -163,6 +164,7 @@ func slam_attack() -> void:
 	# Impact AOE (capture while monitoring is on)
 	var bodies = slam_area.get_overlapping_bodies()
 	slam_area.monitoring = false
+	$Slam.play()
 	for body in bodies:
 		print(bodies.size())
 		if body != self && body is CharacterBody3D:
