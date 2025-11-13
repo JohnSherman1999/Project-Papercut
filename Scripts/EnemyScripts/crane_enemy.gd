@@ -7,6 +7,7 @@ class_name CraneEnemy
 @export var stop_distance: float = 10.0  # Distance to stop and prepare attack
 @export var projectile_speed: float = 10.0  # Horizontal speed for arc
 @export var projectile_gravity: float = 9.5  # Match world gravity for arc
+@export var disable_attacks_in_level: int = 2  # Disable attacks in level 2+
 
 enum State {IDLE, CHASING, ATTACKING}
 var current_state: State = State.IDLE
@@ -15,6 +16,7 @@ var current_state: State = State.IDLE
 @onready var attack_timer: Timer = $AttackTimer  # Add Timer, wait_time=1.0
 var projectile_scene = preload("res://Scenes/EnemyScenes/fire_attack_crane.tscn")  # Your particle FX scene
 var tether_length = 0
+var current_level: int = 1  # Default to level 1
 
 func _ready():
 	super._ready()
@@ -22,6 +24,18 @@ func _ready():
 	if not animation_player.is_playing():
 		animation_player.play("Flying")  # Default flying anim
 	crane.global_position = global_position + Vector3(0, base_tether_length, 0)
+	
+	# NEW: Get current level from Global
+	if Global.has_method("get_current_level_id"):
+		current_level = Global.get_current_level_id()
+		print("using global level")
+	else:
+		current_level = 2  # Fallback
+		print("using default")
+	print("Crane level: ", current_level, " | Attacks disabled: ", _attacks_disabled())
+
+func _attacks_disabled() -> bool:
+	return current_level >= disable_attacks_in_level
 
 func _physics_process(delta: float) -> void:
 	# Grounded movement (capsule handles nav)
@@ -91,7 +105,7 @@ func start_attack() -> void:
 	var projectile = projectile_scene.instantiate() as RigidBody3D
 	get_parent().add_child(projectile)
 	projectile.global_position = global_position + Vector3(0, tether_length, 0)
-	
+
 	# Calculate parabolic initial velocity (arc to player's feet)
 	var target = player.global_position
 	var dist = global_position.distance_to(target)
@@ -101,11 +115,17 @@ func start_attack() -> void:
 	var horiz_vel = horiz_dir * projectile_speed
 	var vert_vel = (target.y - global_position.y * projectile_gravity * time * time) / time
 	projectile.linear_velocity = horiz_vel + Vector3(0, vert_vel, 0)
-	
+
 	attack_timer.start()  # Restart cooldown
 
 func _on_attack_timer_timeout() -> void:
 	if player_in_range and global_position.distance_to(player.global_position) <= stop_distance:
+		if _attacks_disabled():
+			# Still face player but NO attack (stepping stone mode)
+			look_at(Vector3(player.global_position.x, global_position.y, player.global_position.z), Vector3.UP)
+			return  # Silent - no projectile, no anim, no sound
+		
+		# Original attack behavior
 		start_attack()
 		animation_player.play("Attack")
 		$"crane attack".play()

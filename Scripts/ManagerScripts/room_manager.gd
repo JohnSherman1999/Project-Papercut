@@ -269,4 +269,5 @@ func _on_room3_enemy_died() -> void:
 	room3_remaining -= 1
 	print("Room3 enemy died - Remaining: ", room3_remaining)
 	if room3_remaining <= 0:
+		Global.set_current_level("res://aLevels/City.tscn", 2)
 		get_tree().call_deferred("change_scene_to_file", "res://aLevels/City.tscn")
