@@ -1,7 +1,7 @@
 #LINE 83 IS HIDING PLAYER MODEL AS IT CLIPS WITH SCREEN
 extends CharacterBody3D
 
-@export var GAMEPAD_SENSITIVITY: float = 5.0
+@export var GAMEPAD_SENSITIVITY: float = 3.5
 
 var speed
 const WALK_SPEED = 6.0
