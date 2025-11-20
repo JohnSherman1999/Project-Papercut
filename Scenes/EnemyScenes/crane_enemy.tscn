@@ -4,20 +4,6 @@
 [ext_resource type="AudioStream" uid="uid://cih4v88w3j262" path="res://Assets/Sounds Enemies/Crane attack.mp3" id="2_vq3ar"]
 [ext_resource type="Texture2D" uid="uid://bm4e7t0vrjmnq" path="res://Assets/Enemies/Crane_model/Crane_PapelOrigami Base Color.png" id="3_2v3cu"]
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_x0hfl"]
-radius = 1.5
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_rjn58"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ec5py"]
-albedo_color = Color(0.793285, 0.498145, 0.235341, 1)
-
-[sub_resource type="SphereShape3D" id="SphereShape3D_rjn58"]
-radius = 12.0
-
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_yfw4q"]
-height = 2.2
-
 [sub_resource type="Animation" id="Animation_py5qp"]
 resource_name = "Attack"
 length = 1.0416666
@@ -88,7 +74,6 @@ tracks/8/keys = PackedFloat32Array(0, 1, -0.34987867, 1.1167465e-07, -4.17088e-0
 [sub_resource type="Animation" id="Animation_c854j"]
 resource_name = "Flying"
 length = 1.6666666
-loop_mode = 1
 tracks/0/type = "position_3d"
 tracks/0/imported = true
 tracks/0/enabled = true
@@ -159,6 +144,20 @@ _data = {
 &"Flying": SubResource("Animation_c854j")
 }
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_x0hfl"]
+radius = 1.5
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_rjn58"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ec5py"]
+albedo_color = Color(0.793285, 0.498145, 0.235341, 1)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_rjn58"]
+radius = 12.0
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_yfw4q"]
+height = 2.2
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8t2jo"]
 resource_name = "PapelOrigami"
 cull_mode = 2
@@ -214,6 +213,12 @@ collision_mask = 3
 axis_lock_linear_y = true
 script = ExtResource("1_x0hfl")
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../Crane")
+libraries = {
+&"": SubResource("AnimationLibrary_fi3v7")
+}
+
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.80176, 0)
 shape = SubResource("SphereShape3D_x0hfl")
@@ -243,17 +248,11 @@ shape = SubResource("CapsuleShape3D_yfw4q")
 
 [node name="AttackTimer" type="Timer" parent="."]
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-root_node = NodePath("")
-libraries = {
-&"": SubResource("AnimationLibrary_fi3v7")
-}
-
 [node name="crane attack" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("2_vq3ar")
 
 [node name="Crane" type="Node3D" parent="."]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 4.319652, 0)
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 4.2959733, 0)
 
 [node name="Armature" type="Node3D" parent="Crane"]
 transform = Transform3D(0.34359932, 0, 0, 0, 0.34359932, 0, 0, 0, 0.34359932, 0, 0, 0)

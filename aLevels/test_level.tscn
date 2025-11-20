@@ -165,8 +165,8 @@ shape = SubResource("ConvexPolygonShape3D_1885q")
 [node name="Player" parent="." instance=ExtResource("1_s4odt")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.0774, 0, -12.1268)
 
-[node name="crane_enemy" parent="." instance=ExtResource("3_b0ydt")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.55891, 0.14556313, 19.844591)
-
 [node name="Area3D" parent="." instance=ExtResource("2_1885q")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.292, 0.47604907, -17.495298)
+
+[node name="crane_enemy" parent="." instance=ExtResource("3_b0ydt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.240423, 0, 19.017498)

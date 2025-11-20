@@ -7,6 +7,9 @@ class_name Enemy
 @export var detection_range: float = 20.0
 @export var gravity = 9.5  # Match player's gravity
 @export var damage = 1.0
+@export var attack_cooldown = 1.0
+
+
 
 # Pathfinding variables
 @export var path_update_min_frames: int = 7  # Min frames between path updates (scalable)
@@ -106,8 +109,15 @@ func spawn_health():
 	root_node.add_child(health_pickup)
 	health_pickup.global_position = $".".global_position
 
+func _on_attack_finished():
+	attack_area.monitorable = false
+	await get_tree().create_timer(1).timeout
+	attack_area.monitorable = true
+	animation_player.play("Run")
+
 
 func _on_area_3d_body_entered(body: Node3D) -> void:
 	if body.is_in_group("player") && body.has_method("take_damage"):
 		body.take_damage(damage)
-	
+		animation_player.play("Bite")
+		_on_attack_finished()

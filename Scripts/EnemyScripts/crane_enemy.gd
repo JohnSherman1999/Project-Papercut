@@ -2,7 +2,7 @@
 extends Enemy
 class_name CraneEnemy
 
-@export var min_height: float = 2.0  # Extra height above player if higher
+@export var min_height: float = 0.5  # Extra height above player if higher
 @export var base_tether_length: float = 3.0  # Base tether length from root
 @export var stop_distance: float = 10.0  # Distance to stop and prepare attack
 @export var projectile_speed: float = 10.0  # Horizontal speed for arc
@@ -86,7 +86,7 @@ func _physics_process(delta: float) -> void:
 	# Tether crane to root (adjust height if player higher)
 	tether_length = base_tether_length
 	if player and player.global_position.y + min_height > base_tether_length:
-		tether_length = player.global_position.y + min_height
+		tether_length = player.global_position.y
 	crane.global_position = global_position + Vector3(0, tether_length, 0)
 	
 	# Animation control
