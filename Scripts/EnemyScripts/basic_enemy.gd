@@ -121,3 +121,4 @@ func _on_area_3d_body_entered(body: Node3D) -> void:
 		body.take_damage(damage)
 		animation_player.play("Bite")
 		_on_attack_finished()
+		$"Wolf Attack".play()
