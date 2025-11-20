@@ -6,6 +6,7 @@ class_name Enemy
 @export var attack_range: float = 0.2
 @export var detection_range: float = 20.0
 @export var gravity = 9.5  # Match player's gravity
+@export var damage = 1.0
 
 # Pathfinding variables
 @export var path_update_min_frames: int = 7  # Min frames between path updates (scalable)
@@ -19,6 +20,7 @@ var knockback_velocity: Vector3 = Vector3.ZERO
 var player_in_range: bool = false  # Flag for detection
 var health_scene = preload("res://Scenes/Pickups/pickup.tscn")
 
+@onready var attack_area: Area3D = $Area3D
 @onready var nav_agent: NavigationAgent3D = $NavigationAgent3D
 @onready var detection_area: Area3D = $detection_area  # Add in scene with CollisionShape3D
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
@@ -76,8 +78,9 @@ func take_damage(amount: float) -> void:
 		die()
 
 func die() -> void:
-	spawn_health()
 	queue_free()
+	await get_tree().physics_frame
+	spawn_health()
 
 func apply_knockback(dir: Vector3, force: float) -> void:
 	knockback_velocity = dir * force
@@ -100,5 +103,11 @@ func _on_detection_area_body_exited(body: Node3D) -> void:
 func spawn_health():
 	var health_pickup = health_scene.instantiate()
 	var root_node = get_tree().root
-	health_pickup.global_position = $".".global_position
 	root_node.add_child(health_pickup)
+	health_pickup.global_position = $".".global_position
+
+
+func _on_area_3d_body_entered(body: Node3D) -> void:
+	if body.is_in_group("player") && body.has_method("take_damage"):
+		body.take_damage(damage)
+	

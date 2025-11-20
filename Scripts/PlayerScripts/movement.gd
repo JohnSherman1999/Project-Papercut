@@ -1,6 +1,8 @@
 #LINE 83 IS HIDING PLAYER MODEL AS IT CLIPS WITH SCREEN
 extends CharacterBody3D
 
+@export var GAMEPAD_SENSITIVITY: float = 3.5
+
 var speed
 const WALK_SPEED = 6.0
 const CROUCH_SPEED = 1.0
@@ -49,12 +51,16 @@ var wall_normal = Vector3.ZERO
 # Dash variables
 @export var DASH_SPEED = 20.0  # Forward boost speed for dash
 @export var DASH_DURATION = 1.0  # Max safety duration (prevent infinite dash)
+@export var ATTACK_DURATION = 0.6 # Same as above but for mouse 1 attack
+@export var DASH_COOLDOWN: float = 1.0  # 1s cooldown after dash ends (tweakable)
+var dash_cooldown_timer: float = 0.0
 @export var DASH_END_THRESHOLD = 1.0  # Distance to target to end dash
 var dash_timer = 0.0
+var attack_timer = 0.0
 var is_dashing = false
 @export var DAMAGE := 40.0
 @export var DASH_DAMAGE = 30.0  # Damage on hit
-@export var DASH_TARGET_OFFSET = Vector3(0, 1.5, -2.0)  # Go "through" enemy (adjust based on direction)
+@export var DASH_TARGET_OFFSET = Vector3(0, 0.5, -2.0)  # Go "through" enemy (adjust based on direction)
 @export var DASH_VERTICAL_OFFSET = 1.0  # Vertical adjustment to aim above enemy's base
 var dash_target: Vector3 = Vector3.ZERO  # For targeted dash
 var dash_direction: Vector3 = Vector3.ZERO
@@ -109,7 +115,7 @@ func _process(delta: float) -> void:
 	if hit_stop_timer > 0:
 		hit_stop_timer -= delta
 		if hit_stop_timer <= 0:
-			Engine.time_scale = 1.0
+			Engine.time_scale = Global.get_game_speed()
 
 	# Handle screenshake
 	if shake_timer > 0:
@@ -122,10 +128,18 @@ func _physics_process(delta: float) -> void:
 	# Input at top (proto style)
 	var input_dir = Input.get_vector("left", "right", "forward", "back")
 	direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
-
+	# NEW: Gamepad look (right stick) - smooth, delta-multiplied
+	var look_vector = Input.get_vector("look_left", "look_right", "look_up", "look_down")
+	rotate_y(-look_vector.x * GAMEPAD_SENSITIVITY * delta)
+	camera.rotate_x(-look_vector.y * GAMEPAD_SENSITIVITY * delta)
+	camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-40), deg_to_rad(60))
+	
 	#stop walk sound
 	if not is_on_floor():
 		$walking.stop()  # Stop walking sound
+
+	if dash_cooldown_timer > 0:
+		dash_cooldown_timer -= delta
 
 	if is_invulnerable:
 		invulnerable_timer -= delta
@@ -287,11 +301,16 @@ func _physics_process(delta: float) -> void:
 		velocity += -wall_normal * WALL_STICK_FORCE * delta
 
 	#handle main attack
-	if Input.is_action_just_pressed("attack") && !is_dashing:
+	if Input.is_action_just_pressed("attack") && !is_dashing && ! is_attacking:
 		_attack()
+		$slice.play()
+		attack_timer = ATTACK_DURATION
+	attack_timer -= delta
+	if attack_timer <= 0:
+		is_attacking = false
 
 	# Handle dash (with audio from John)
-	if Input.is_action_just_pressed("dash") and not is_dashing:
+	if Input.is_action_just_pressed("dash") and not is_dashing and dash_cooldown_timer <= 0:
 		if target_ray.is_colliding():
 			var collider = target_ray.get_collider()
 			if collider and collider is Enemy or DragonBoss:
@@ -311,10 +330,12 @@ func _physics_process(delta: float) -> void:
 		if dist_to_target < DASH_END_THRESHOLD:
 			is_dashing = false
 			dash_area.set_deferred("monitoring", false)
+			dash_cooldown_timer = DASH_COOLDOWN  # NEW: Start cooldown
 		dash_timer -= delta
 		if dash_timer <= 0:
 			is_dashing = false
 			dash_area.set_deferred("monitoring", false)
+			dash_cooldown_timer = DASH_COOLDOWN  # NEW: Start cooldown
 
 	# Head bob
 	t_bob += delta * velocity.length() * float(is_on_floor())
@@ -363,6 +384,7 @@ func _on_dash_area_body_entered(body: Node3D) -> void:
 		body.take_damage(DASH_DAMAGE)
 		is_dashing = false
 		dash_area.set_deferred("monitoring", false)
+		dash_cooldown_timer = DASH_COOLDOWN  # NEW: Start cooldown on hit
 		Engine.time_scale = 0.1
 		hit_stop_timer = HIT_STOP_DURATION
 		shake_timer = SHAKE_DURATION
@@ -371,8 +393,9 @@ func _attack() -> void:
 	is_attacking = true
 	$Area3D.monitoring = true
 	await get_tree().create_timer(0.5).timeout
-	is_attacking = false
 	$Area3D.monitoring = false
+
+
 
 # REPLACE take_damage() entirely
 func take_damage(amount: float) -> void:

@@ -42,6 +42,7 @@ var player: Node3D
 var knockback_velocity: Vector3 = Vector3.ZERO
 var player_in_range: bool = false
 
+@onready var progress_bar: ProgressBar = $HealthBar/SubViewportContainer/SubViewport/HealthBarContainer/ProgressBar
 @onready var animation_player: AnimationPlayer = $AnimationPlayer  # Attach to mesh
 @onready var nav_agent: NavigationAgent3D = $NavigationAgent3D
 @onready var detection_area: Area3D = $detection_area
@@ -67,9 +68,17 @@ func _ready():
 	slam_timer.start(randf_range(0, slam_cooldown))
 	animation_player.play("Idle")
 
+	await get_tree().process_frame
+	if progress_bar:
+		progress_bar.max_value = max_health
+		progress_bar.value = health
+	else:
+		print("ProgressBar not found! Check SubViewport2/ProgressBar")
+
 func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 		velocity.y -= gravity * delta
+
 
 	# Detection and chase logic (adapted from basic_enemy.gd)
 	if player_in_range and player:
@@ -116,6 +125,7 @@ func _physics_process(delta: float) -> void:
 		knockback_velocity *= 0.9
 	else:
 		knockback_velocity = Vector3.ZERO
+	
 	
 	move_and_slide()
 
@@ -186,6 +196,10 @@ func _on_slam_area_body_entered(body: Node3D) -> void:
 
 func take_damage(amount: float) -> void:
 	health -= amount
+
+	if progress_bar:
+		progress_bar.value = health
+
 	if health <= 0 and not is_dead:
 		is_dead = true
 		self.collision_layer = 1

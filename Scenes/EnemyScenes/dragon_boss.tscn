@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=4 uid="uid://sistfd0avol0"]
+[gd_scene load_steps=31 format=4 uid="uid://sistfd0avol0"]
 
 [ext_resource type="Texture2D" uid="uid://d36mud43tg0fi" path="res://Assets/Enemies/Dragon_Model/Dragon Boss_Material.png" id="1_5lu0i"]
 [ext_resource type="Script" uid="uid://bhnimrnab7r7j" path="res://Scripts/EnemyScripts/dragon_boss.gd" id="1_40fgf"]
@@ -2350,6 +2350,12 @@ radius = 7.0
 [sub_resource type="SphereShape3D" id="SphereShape3D_sq1gs"]
 radius = 30.0
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2csvo"]
+bg_color = Color(0, 0, 0, 0.43529412)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yxq8g"]
+bg_color = Color(1, 0, 0, 1)
+
 [node name="DragonBoss" type="CharacterBody3D" groups=["Enemy"]]
 collision_layer = 2
 collision_mask = 3
@@ -2754,6 +2760,36 @@ volume_db = 54.224
 [node name="fire ball" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("5_ephov")
 volume_db = 27.961
+
+[node name="HealthBar" type="Node3D" parent="."]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 6, 0)
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="HealthBar"]
+offset_left = 328.0
+offset_top = 598.0
+offset_right = 840.0
+offset_bottom = 638.0
+
+[node name="SubViewport" type="SubViewport" parent="HealthBar/SubViewportContainer"]
+handle_input_locally = false
+size = Vector2i(512, 24)
+size_2d_override_stretch = true
+render_target_update_mode = 4
+
+[node name="HealthBarContainer" type="Control" parent="HealthBar/SubViewportContainer/SubViewport"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ProgressBar" type="ProgressBar" parent="HealthBar/SubViewportContainer/SubViewport/HealthBarContainer"]
+layout_mode = 0
+offset_right = 1150.0
+offset_bottom = 27.0
+theme_override_styles/background = SubResource("StyleBoxFlat_2csvo")
+theme_override_styles/fill = SubResource("StyleBoxFlat_yxq8g")
+step = 1.0
+value = 50.0
 
 [connection signal="body_entered" from="FireBreathArea" to="." method="_on_firebreath_area_body_entered"]
 [connection signal="body_entered" from="SlamArea" to="." method="_on_slam_area_body_entered"]

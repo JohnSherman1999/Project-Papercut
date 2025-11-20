@@ -41,3 +41,7 @@ func spawn_herd_wave() -> void:
 			randf_range(-spawn_spread, spawn_spread)
 		)
 		bull.global_position = spawn_zone.global_position + offset
+
+
+func _on_finish_zone_body_entered(body: Node3D) -> void:
+	get_tree().change_scene_to_file("res://Scenes/EnemyScenes/W.tscn")
