@@ -2784,12 +2784,13 @@ offset_bottom = 40.0
 
 [node name="ProgressBar" type="ProgressBar" parent="HealthBar/SubViewportContainer/SubViewport/HealthBarContainer"]
 layout_mode = 0
-offset_right = 1150.0
+offset_right = 512.0
 offset_bottom = 27.0
 theme_override_styles/background = SubResource("StyleBoxFlat_2csvo")
 theme_override_styles/fill = SubResource("StyleBoxFlat_yxq8g")
 step = 1.0
 value = 50.0
+show_percentage = false
 
 [connection signal="body_entered" from="FireBreathArea" to="." method="_on_firebreath_area_body_entered"]
 [connection signal="body_entered" from="SlamArea" to="." method="_on_slam_area_body_entered"]

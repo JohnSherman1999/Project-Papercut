@@ -1113,6 +1113,7 @@ draw_pass_1 = SubResource("ArrayMesh_u7mm7")
 
 [node name="moo" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("4_p27xr")
+volume_db = -10.0
 
 [node name="gallop" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("5_6r67p")

@@ -56,12 +56,52 @@ flat = true
 [node name="Label" type="Label" parent="."]
 modulate = Color(0.000113828, 0.000113828, 0.000113828, 1)
 offset_left = 40.0
-offset_top = -56.0
+offset_top = -64.0
 offset_right = 1087.0
-offset_bottom = 266.0
+offset_bottom = 258.0
 theme_override_fonts/font = ExtResource("3_akhsr")
 theme_override_font_sizes/font_size = 200
 text = "Paper Cuts"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Controls" type="Label" parent="."]
+modulate = Color(0.000113828, 0.000113828, 0.000113828, 1)
+offset_left = 8.0
+offset_top = 160.0
+offset_right = 368.0
+offset_bottom = 652.0
+theme_override_constants/line_spacing = 0
+theme_override_fonts/font = ExtResource("3_akhsr")
+theme_override_font_sizes/font_size = 32
+text = "Keyboard Controls:
+wasd - move
+mouse - aim
+space - jump
+left click - attack
+e - interact
+right click - dash attack
+c - crouch/slam
+shift - run"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Controls2" type="Label" parent="."]
+modulate = Color(0.000113828, 0.000113828, 0.000113828, 1)
+offset_left = 784.0
+offset_top = 168.0
+offset_right = 1144.0
+offset_bottom = 641.0
+theme_override_fonts/font = ExtResource("3_akhsr")
+theme_override_font_sizes/font_size = 32
+text = "Gamepad Controls:
+left stick - move
+right stick - aim
+a - jump
+x - attack/interact
+right trigger - dash attack
+b - crouch/slam
+left trigger - run"
 horizontal_alignment = 1
 vertical_alignment = 1
 

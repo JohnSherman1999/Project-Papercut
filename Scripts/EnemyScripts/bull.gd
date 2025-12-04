@@ -137,7 +137,7 @@ func update_path_to_player() -> void:
 	if nav_agent and player:
 		nav_agent.target_position = player.global_position
 
-# Detection Signals (connect in editor: DetectionArea body_entered/exited)
+# Detection Signals
 func _on_detection_area_body_entered(body: Node3D) -> void:
 	if body == player:
 		$moo.play()
