@@ -2,7 +2,7 @@
 extends Node
 
 @export var bull_scene: PackedScene = preload("res://Scenes/EnemyScenes/bull.tscn") # Drag Bull.tscn here in the Inspector
-@export var bull_count: int = 30 # How many bulls in the wave
+@export var bull_count: int = 15 # How many bulls in the wave
 @export var spawn_delay_min: float = 0.05
 @export var spawn_delay_max: float = 0.1
 @export var spawn_spread: float = 3.0 # Random X/Z offset around the spawn point
